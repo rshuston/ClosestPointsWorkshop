@@ -12,6 +12,8 @@
 		4E05313A1DD640EA006E9B8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E0531391DD640EA006E9B8F /* Assets.xcassets */; };
 		4E05313D1DD640EA006E9B8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E05313B1DD640EA006E9B8F /* Main.storyboard */; };
 		4E0531481DD640EA006E9B8F /* ClosestPointsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0531471DD640EA006E9B8F /* ClosestPointsTests.swift */; };
+		4E3E618B1DE2020B002A75C7 /* PlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3E618A1DE2020B002A75C7 /* PlotView.swift */; };
+		4E3E618C1DE2020B002A75C7 /* PlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3E618A1DE2020B002A75C7 /* PlotView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,7 @@
 		4E0531431DD640EA006E9B8F /* ClosestPointsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClosestPointsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E0531471DD640EA006E9B8F /* ClosestPointsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosestPointsTests.swift; sourceTree = "<group>"; };
 		4E0531491DD640EA006E9B8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E3E618A1DE2020B002A75C7 /* PlotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlotView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +80,7 @@
 			children = (
 				4E0531351DD640EA006E9B8F /* AppDelegate.swift */,
 				4E0531371DD640EA006E9B8F /* ViewController.swift */,
+				4E3E618A1DE2020B002A75C7 /* PlotView.swift */,
 				4E0531391DD640EA006E9B8F /* Assets.xcassets */,
 				4E05313B1DD640EA006E9B8F /* Main.storyboard */,
 				4E05313E1DD640EA006E9B8F /* Info.plist */,
@@ -196,6 +200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E0531381DD640EA006E9B8F /* ViewController.swift in Sources */,
+				4E3E618B1DE2020B002A75C7 /* PlotView.swift in Sources */,
 				4E0531361DD640EA006E9B8F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -205,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E0531481DD640EA006E9B8F /* ClosestPointsTests.swift in Sources */,
+				4E3E618C1DE2020B002A75C7 /* PlotView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +401,7 @@
 				4E05314E1DD640EA006E9B8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4E05314F1DD640EA006E9B8F /* Build configuration list for PBXNativeTarget "ClosestPointsTests" */ = {
 			isa = XCConfigurationList;
@@ -403,6 +410,7 @@
 				4E0531511DD640EA006E9B8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
