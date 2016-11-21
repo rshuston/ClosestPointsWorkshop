@@ -722,14 +722,6 @@
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aNo-6x-C2D">
-                                            <rect key="frame" x="138" y="102" width="138" height="22"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="zcD-Em-bEm">
-                                                <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JkB-LA-9DJ">
                                             <rect key="frame" x="136" y="58" width="143" height="26"/>
                                             <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="GN4-1q-dPX" id="3TI-eC-NYh">
@@ -744,18 +736,31 @@
                                                 </menu>
                                             </popUpButtonCell>
                                         </popUpButton>
+                                        <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lH0-7J-0tc">
+                                            <rect key="frame" x="138" y="100" width="141" height="26"/>
+                                            <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="8y1-XD-ig8">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                <objectValues>
+                                                    <string>Item 1</string>
+                                                    <string>Item 2</string>
+                                                    <string>Item 3</string>
+                                                </objectValues>
+                                            </comboBoxCell>
+                                        </comboBox>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="JkB-LA-9DJ" firstAttribute="top" secondItem="lH0-7J-0tc" secondAttribute="bottom" constant="22" id="0HX-He-t62"/>
                                         <constraint firstItem="2LD-NY-p96" firstAttribute="leading" secondItem="OHs-yZ-aGD" secondAttribute="leading" constant="20" id="2KI-So-3Td"/>
-                                        <constraint firstAttribute="trailing" secondItem="aNo-6x-C2D" secondAttribute="trailing" constant="20" id="7In-Z7-di7"/>
+                                        <constraint firstItem="lH0-7J-0tc" firstAttribute="leading" secondItem="2LD-NY-p96" secondAttribute="trailing" constant="8" id="7kI-ch-ip4"/>
                                         <constraint firstItem="hcy-CO-1MJ" firstAttribute="top" secondItem="2LD-NY-p96" secondAttribute="bottom" constant="25" id="9aF-ap-V2h"/>
-                                        <constraint firstItem="aNo-6x-C2D" firstAttribute="top" secondItem="OHs-yZ-aGD" secondAttribute="top" constant="20" id="KQ7-sa-oTz"/>
                                         <constraint firstAttribute="trailing" secondItem="JkB-LA-9DJ" secondAttribute="trailing" constant="20" id="OT6-Yj-cUj"/>
-                                        <constraint firstItem="JkB-LA-9DJ" firstAttribute="top" secondItem="aNo-6x-C2D" secondAttribute="bottom" constant="20" id="Sir-09-yZ0"/>
+                                        <constraint firstItem="lH0-7J-0tc" firstAttribute="top" secondItem="OHs-yZ-aGD" secondAttribute="top" constant="20" id="RMz-pb-RFb"/>
                                         <constraint firstItem="JkB-LA-9DJ" firstAttribute="leading" secondItem="hcy-CO-1MJ" secondAttribute="trailing" constant="8" id="WWA-dp-rqd"/>
                                         <constraint firstItem="ji7-Mf-roE" firstAttribute="leading" secondItem="OHs-yZ-aGD" secondAttribute="leading" constant="20" id="Xdh-sJ-hCc"/>
-                                        <constraint firstItem="aNo-6x-C2D" firstAttribute="leading" secondItem="2LD-NY-p96" secondAttribute="trailing" constant="8" id="btF-j8-SAC"/>
                                         <constraint firstItem="hcy-CO-1MJ" firstAttribute="leading" secondItem="OHs-yZ-aGD" secondAttribute="leading" constant="21" id="bz1-g2-Mbc"/>
+                                        <constraint firstAttribute="trailing" secondItem="lH0-7J-0tc" secondAttribute="trailing" constant="20" id="lQR-gV-Ruk"/>
                                         <constraint firstAttribute="bottom" secondItem="ji7-Mf-roE" secondAttribute="bottom" constant="20" id="pYa-S8-jka"/>
                                         <constraint firstItem="2LD-NY-p96" firstAttribute="top" secondItem="OHs-yZ-aGD" secondAttribute="top" constant="22" id="vV0-09-j9P"/>
                                     </constraints>
