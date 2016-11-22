@@ -724,14 +724,17 @@
                                         </textField>
                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JkB-LA-9DJ">
                                             <rect key="frame" x="136" y="58" width="143" height="26"/>
-                                            <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="GN4-1q-dPX" id="3TI-eC-NYh">
+                                            <popUpButtonCell key="cell" type="push" title="Uniform" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="GN4-1q-dPX" id="3TI-eC-NYh">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
                                                 <menu key="menu" id="TrT-Cj-wPM">
                                                     <items>
-                                                        <menuItem title="Item 1" state="on" id="GN4-1q-dPX"/>
-                                                        <menuItem title="Item 2" id="5FR-Af-aim"/>
-                                                        <menuItem title="Item 3" id="Q44-OS-N81"/>
+                                                        <menuItem title="Uniform" state="on" id="GN4-1q-dPX">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
+                                                        <menuItem title="Clustered" id="5FR-Af-aim">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
                                                     </items>
                                                 </menu>
                                             </popUpButtonCell>
@@ -743,9 +746,11 @@
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 <objectValues>
-                                                    <string>Item 1</string>
-                                                    <string>Item 2</string>
-                                                    <string>Item 3</string>
+                                                    <string>3</string>
+                                                    <string>10</string>
+                                                    <string>25</string>
+                                                    <string>50</string>
+                                                    <string>100</string>
                                                 </objectValues>
                                             </comboBoxCell>
                                         </comboBox>
@@ -776,8 +781,8 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GKx-ce-V8e">
-                                            <rect key="frame" x="214" y="13" width="68" height="32"/>
-                                            <buttonCell key="cell" type="push" title="Step" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rkY-9u-hAq">
+                                            <rect key="frame" x="197" y="13" width="85" height="32"/>
+                                            <buttonCell key="cell" type="push" title="Control" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rkY-9u-hAq">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
@@ -800,28 +805,46 @@
                                         </textField>
                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m1m-Ki-6qY">
                                             <rect key="frame" x="121" y="100" width="158" height="26"/>
-                                            <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4Tv-jI-mBg" id="7GZ-oJ-zXe">
+                                            <popUpButtonCell key="cell" type="push" title="Naive Combination" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4Tv-jI-mBg" id="7GZ-oJ-zXe">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
                                                 <menu key="menu" id="vA0-k9-6sm">
                                                     <items>
-                                                        <menuItem title="Item 1" state="on" id="4Tv-jI-mBg"/>
-                                                        <menuItem title="Item 2" id="zqt-Wq-4M5"/>
-                                                        <menuItem title="Item 3" id="Mxl-AG-scy"/>
+                                                        <menuItem title="Naive Combination" state="on" id="4Tv-jI-mBg">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
+                                                        <menuItem title="Sorted Search" id="zqt-Wq-4M5">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
+                                                        <menuItem title="Divide and Conquer" id="Mxl-AG-scy">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
+                                                        <menuItem title="Plane Sweep" id="Tv6-7r-8bV">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
                                                     </items>
                                                 </menu>
                                             </popUpButtonCell>
                                         </popUpButton>
                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z4F-Fd-lSn">
                                             <rect key="frame" x="121" y="58" width="158" height="26"/>
-                                            <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4A5-XG-Bmt" id="11X-um-99E">
+                                            <popUpButtonCell key="cell" type="push" title="Live" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4A5-XG-Bmt" id="11X-um-99E">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
                                                 <menu key="menu" id="fyC-oP-pCJ">
                                                     <items>
-                                                        <menuItem title="Item 1" state="on" id="4A5-XG-Bmt"/>
-                                                        <menuItem title="Item 2" id="nlJ-cJ-Sg9"/>
-                                                        <menuItem title="Item 3" id="v6b-Pf-fbN"/>
+                                                        <menuItem title="Live" state="on" id="4A5-XG-Bmt">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
+                                                        <menuItem title="Fast Animation" id="nlJ-cJ-Sg9">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
+                                                        <menuItem title="Slow Animation" id="v6b-Pf-fbN">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
+                                                        <menuItem title="Single Step" id="GC5-L3-SOw">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
                                                     </items>
                                                 </menu>
                                             </popUpButtonCell>
