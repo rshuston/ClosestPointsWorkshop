@@ -37,6 +37,7 @@
 		4E0531471DD640EA006E9B8F /* ClosestPointsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosestPointsTests.swift; sourceTree = "<group>"; };
 		4E0531491DD640EA006E9B8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E3E618A1DE2020B002A75C7 /* PlotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlotView.swift; sourceTree = "<group>"; };
+		4E6F312B1DE5427E00221A9A /* User Stories.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "User Stories.txt"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +61,7 @@
 		4E0531291DD640EA006E9B8F = {
 			isa = PBXGroup;
 			children = (
+				4E6F312B1DE5427E00221A9A /* User Stories.txt */,
 				4E0531341DD640EA006E9B8F /* ClosestPoints */,
 				4E0531461DD640EA006E9B8F /* ClosestPointsTests */,
 				4E0531331DD640EA006E9B8F /* Products */,

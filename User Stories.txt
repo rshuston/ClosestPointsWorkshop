@@ -1,0 +1,28 @@
+As a ..., I want to ..., so that I can ...
+
+As a nerd, I want to evaluate the closest-points solution using the four methods:
+1) Naive Combination
+2) Sorted Search
+3) Plane Sweep
+4) Divide and Conquer,
+so that I can compare the performance of the methods.
+
+As a nerd, I want to measure the execution time of a closest-points solution method, so that I can assess its performance.
+
+As a nerd, I want to generate test points for the closest-points solution using two methods:
+1) Uniform random
+2) Clustered random,
+so that I can better exercise the behavior of the solution process.
+
+As a nerd, I want to be able to manually position the points being evaluated by the closest-points algorithm, so that I have better control of the data set.
+
+As a nerd, I want to have the ability to set the number of points being evaluated by the closest-points algorithm, so that I have better control of the data set.
+
+As a nerd, I want to have control over the closest-point solution operations via the four strategies:
+1) Live
+2) Fast Animation
+3) Slow Animation
+4) Single Step
+so that I have the ability to both use and explore the solution operations.
+
+As a nerd, I want to trace the execution paths of the closes-points solution, so that I can visually monitor the intermediate results of the solution process.

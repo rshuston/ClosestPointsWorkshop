@@ -705,6 +705,9 @@
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <action selector="pushButtonSelected:" target="XfG-lQ-9wD" id="mmD-8E-AHx"/>
+                                            </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2LD-NY-p96">
                                             <rect key="frame" x="18" y="105" width="114" height="17"/>
@@ -738,10 +741,16 @@
                                                     </items>
                                                 </menu>
                                             </popUpButtonCell>
+                                            <connections>
+                                                <action selector="popUpButtonSelected:" target="XfG-lQ-9wD" id="K51-tv-qzp"/>
+                                            </connections>
                                         </popUpButton>
                                         <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lH0-7J-0tc">
                                             <rect key="frame" x="138" y="100" width="141" height="26"/>
                                             <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="8y1-XD-ig8">
+                                                <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="b5W-NJ-1Mi">
+                                                    <real key="minimum" value="2"/>
+                                                </numberFormatter>
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -753,6 +762,9 @@
                                                     <string>100</string>
                                                 </objectValues>
                                             </comboBoxCell>
+                                            <connections>
+                                                <outlet property="delegate" destination="XfG-lQ-9wD" id="B89-nr-LL3"/>
+                                            </connections>
                                         </comboBox>
                                     </subviews>
                                     <constraints>
@@ -786,6 +798,9 @@
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <action selector="pushButtonSelected:" target="XfG-lQ-9wD" id="zFf-oj-xsm"/>
+                                            </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1MV-RT-3bs">
                                             <rect key="frame" x="26" y="106" width="91" height="17"/>
@@ -816,15 +831,18 @@
                                                         <menuItem title="Sorted Search" id="zqt-Wq-4M5">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
                                                         </menuItem>
-                                                        <menuItem title="Divide and Conquer" id="Mxl-AG-scy">
+                                                        <menuItem title="Plane Sweep" id="Mxl-AG-scy">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
                                                         </menuItem>
-                                                        <menuItem title="Plane Sweep" id="Tv6-7r-8bV">
+                                                        <menuItem title="Divide and Conquer" id="Tv6-7r-8bV">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
                                                         </menuItem>
                                                     </items>
                                                 </menu>
                                             </popUpButtonCell>
+                                            <connections>
+                                                <action selector="popUpButtonSelected:" target="XfG-lQ-9wD" id="xh5-dW-56y"/>
+                                            </connections>
                                         </popUpButton>
                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z4F-Fd-lSn">
                                             <rect key="frame" x="121" y="58" width="158" height="26"/>
@@ -848,6 +866,9 @@
                                                     </items>
                                                 </menu>
                                             </popUpButtonCell>
+                                            <connections>
+                                                <action selector="popUpButtonSelected:" target="XfG-lQ-9wD" id="jJY-ca-UdD"/>
+                                            </connections>
                                         </popUpButton>
                                     </subviews>
                                     <constraints>
@@ -884,6 +905,14 @@
                             <constraint firstItem="dx0-aF-o0i" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="xEY-SO-smY"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="o_ControlButton" destination="GKx-ce-V8e" id="bmh-VU-shT"/>
+                        <outlet property="o_GenerateButton" destination="ji7-Mf-roE" id="Xat-JH-4YT"/>
+                        <outlet property="o_NumberOfPointsBox" destination="lH0-7J-0tc" id="HDq-Ly-gBP"/>
+                        <outlet property="o_PointDistributionPopUp" destination="JkB-LA-9DJ" id="oAT-PN-6vj"/>
+                        <outlet property="o_SolutionTypePopUp" destination="m1m-Ki-6qY" id="SAm-OG-mfz"/>
+                        <outlet property="o_SolverOptionsPopUp" destination="z4F-Fd-lSn" id="9wh-LA-aIT"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
