@@ -100,7 +100,6 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         }
     }
 
-    // SPIKE:
     func constrainNumberOfPoints() {
         var value = o_NumberOfPointsBox.integerValue
         if value < minNumberOfPoints {

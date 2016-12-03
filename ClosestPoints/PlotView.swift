@@ -17,19 +17,17 @@ class PlotView: NSView {
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
 
-        // Drawing code here.
-        let borderRect = NSInsetRect(self.bounds, 1, 1)
-        NSFrameRect(borderRect)
+        NSFrameRect(bounds)
 
         if let vc = appViewController() {
-            let border: CGFloat = 8
+            let radius: CGFloat = 4
             let points = vc.pointCollection.points
             let dimension = CGFloat(vc.pointCollection.maxDimension)
             for index in 0..<points.count {
                 let pt = points[index]
-                pt.p.x = pt.p.x * bounds.size.width / dimension
-                pt.p.y = pt.p.y * bounds.size.height / dimension
-                let r = NSRect(x: pt.p.x - border/2, y: pt.p.y - border, width: border, height: border)
+                let x = pt.p.x * (bounds.size.width - 4 * radius) / dimension
+                let y = pt.p.y * (bounds.size.height - 4 * radius) / dimension
+                let r = NSRect(x: x + radius, y: y + radius, width: 2 * radius, height: 2 * radius)
                 let path = NSBezierPath(ovalIn: r)
                 path.fill()
             }
