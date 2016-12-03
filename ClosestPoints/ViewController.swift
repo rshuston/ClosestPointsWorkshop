@@ -10,41 +10,47 @@ import Cocoa
 
 class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate {
 
+    // Plotting
+    @IBOutlet weak var o_PlotView: PlotView!
+
+    // Definition
     @IBOutlet weak var o_NumberOfPointsBox: NSComboBox!
     @IBOutlet weak var o_PointDistributionPopUp: NSPopUpButton!
+
+    // Control
     @IBOutlet weak var o_SolutionTypePopUp: NSPopUpButton!
     @IBOutlet weak var o_SolverOptionsPopUp: NSPopUpButton!
     @IBOutlet weak var o_GenerateButton: NSButton!
     @IBOutlet weak var o_ControlButton: NSButton!
+
+    let minNumberOfPoints = 3
+    let maxNumberOfPoints = 100
+
+    let pointCollection = PointCollection()
 
     // MARK: - IBAction methods
 
     @IBAction func popUpButtonSelected(_ sender: NSPopUpButton) {
         switch sender {
         case o_PointDistributionPopUp:
-            print("Point Distribution")
             break
         case o_SolutionTypePopUp:
-            print("Solution Type")
             break
         case o_SolverOptionsPopUp:
-            print("Solver Options")
             break
         default:
             break
         }
 
-        let title = sender.titleOfSelectedItem
-        print("... \(title)")
+        // let title = sender.titleOfSelectedItem
     }
 
     @IBAction func pushButtonSelected(_ sender: NSButton) {
         switch sender {
         case o_GenerateButton:
-            print("Generate")
+            updatePoints()
             break
         case o_ControlButton:
-            print("Control")
             break
         default:
             break
@@ -57,7 +63,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        o_NumberOfPointsBox.integerValue = 2
+        o_NumberOfPointsBox.integerValue = minNumberOfPoints
     }
 
     override var representedObject: Any? {
@@ -72,12 +78,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         // Called when value is directly entered into combo box
         if let comboBox: NSComboBox = (obj.object as? NSComboBox) {
             if comboBox == o_NumberOfPointsBox {
-                var value = o_NumberOfPointsBox.integerValue
-                if value < 2 {
-                    value = 2
-                    o_NumberOfPointsBox.integerValue = value
-                    print("Number of points = \(value)")
-                }
+                constrainNumberOfPoints()
             }
         }
     }
@@ -93,11 +94,31 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
                     o_NumberOfPointsBox.deselectItem(at: index)
                     if let value = Int(stringValue) {
                         o_NumberOfPointsBox.integerValue = value
-                        print("Number of points = \(value)")
                     }
                 }
             }
         }
+    }
+
+    // SPIKE:
+    func constrainNumberOfPoints() {
+        var value = o_NumberOfPointsBox.integerValue
+        if value < minNumberOfPoints {
+            value = minNumberOfPoints
+        }
+        if value > maxNumberOfPoints {
+            value = maxNumberOfPoints
+        }
+        o_NumberOfPointsBox.integerValue = value
+    }
+
+    func updatePoints() {
+        constrainNumberOfPoints()
+
+        pointCollection.clear()
+        pointCollection.generateRandomPoints(numberOfPoints: o_NumberOfPointsBox.integerValue)
+        
+        o_PlotView.needsDisplay = true
     }
 
 }
