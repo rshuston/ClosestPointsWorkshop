@@ -21,7 +21,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
 
     // Control
     @IBOutlet weak var o_SolutionTypePopUp: NSPopUpButton!
-    @IBOutlet weak var o_SolverOptionsPopUp: NSPopUpButton!
+    @IBOutlet weak var o_SolverOptionPopUp: NSPopUpButton!
     @IBOutlet weak var o_GenerateButton: NSButton!
     @IBOutlet weak var o_ControlButton: NSButton!
 
@@ -32,21 +32,59 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
 
     let pointCollection = PointCollection()
     let definitionManager = DefinitionManager()
+    let controlManager = ControlManager()
 
     // MARK: - IBAction methods
 
     @IBAction func popUpButtonSelected(_ sender: NSPopUpButton) {
         switch sender {
         case o_PointDistributionPopUp:
-            if sender.indexOfSelectedItem == 1 {
-                definitionManager.distribution = DefinitionManager.PointDistribution.Clustered
-            } else {
-                definitionManager.distribution = DefinitionManager.PointDistribution.Uniform
+            switch sender.titleOfSelectedItem {
+            case "Uniform"?:
+                definitionManager.pointDistribution = DefinitionManager.PointDistribution.Uniform
+                break
+            case "Clustered"?:
+                definitionManager.pointDistribution = DefinitionManager.PointDistribution.Clustered
+                break
+            default:
+                break
             }
             break
         case o_SolutionTypePopUp:
+            switch sender.titleOfSelectedItem {
+            case "Naive Combination"?:
+                controlManager.solutionType = ControlManager.SolutionType.NaiveCombination
+                break
+            case "Sorted Search"?:
+                controlManager.solutionType = ControlManager.SolutionType.SortedSearch
+                break
+            case "Plane Sweep"?:
+                controlManager.solutionType = ControlManager.SolutionType.PlaneSweep
+                break
+            case "Divide and Conquer"?:
+                controlManager.solutionType = ControlManager.SolutionType.DivideAndConquer
+                break
+            default:
+                break
+            }
             break
-        case o_SolverOptionsPopUp:
+        case o_SolverOptionPopUp:
+            switch sender.titleOfSelectedItem {
+            case "Live"?:
+                controlManager.solverOption = ControlManager.SolverOption.Live
+                break
+            case "Fast Animation"?:
+                controlManager.solverOption = ControlManager.SolverOption.FastAnimation
+                break
+            case "Slow Animation"?:
+                controlManager.solverOption = ControlManager.SolverOption.SlowAnimation
+                break
+            case "Single Step"?:
+                controlManager.solverOption = ControlManager.SolverOption.SingleStep
+                break
+            default:
+                break
+            }
             break
         default:
             break
@@ -76,7 +114,10 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         o_NumberOfPointsBox.integerValue = minNumberOfPoints
 
         definitionManager.numberOfPoints = o_NumberOfPointsBox.integerValue
-        definitionManager.distribution = DefinitionManager.PointDistribution.Uniform
+        definitionManager.pointDistribution = DefinitionManager.PointDistribution.Uniform
+
+        controlManager.solutionType = ControlManager.SolutionType.NaiveCombination
+        controlManager.solverOption = ControlManager.SolverOption.Live
     }
 
     override var representedObject: Any? {
@@ -130,7 +171,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         constrainNumberOfPoints()
 
         pointCollection.clear()
-        switch definitionManager.distribution {
+        switch definitionManager.pointDistribution {
         case DefinitionManager.PointDistribution.Uniform:
             pointCollection.generateUniformRandomPoints(numberOfPoints: definitionManager.numberOfPoints)
             break

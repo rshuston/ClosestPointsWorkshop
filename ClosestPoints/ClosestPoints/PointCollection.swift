@@ -35,21 +35,22 @@ class PointCollection: NSObject {
     }
 
     func generateUniformRandomPoints(numberOfPoints: Int) {
-        if numberOfPoints > 0 {
-            for _ in 1...numberOfPoints {
-                let x = CGFloat(u_distribution.nextInt())
-                let y = CGFloat(u_distribution.nextInt())
-                let p = Point(x: x, y: y)
-                points.append(p)
-            }
+        _generateRandomPoints(numberOfPoints: numberOfPoints) {
+            return CGFloat(u_distribution.nextInt())
         }
     }
 
     func generateClusteredRandomPoints(numberOfPoints: Int) {
+        _generateRandomPoints(numberOfPoints: numberOfPoints) {
+            return CGFloat(g_distribution.nextInt())
+        }
+    }
+
+    private func _generateRandomPoints(numberOfPoints: Int, usingRandom: () -> CGFloat) {
         if numberOfPoints > 0 {
             for _ in 1...numberOfPoints {
-                let x = CGFloat(g_distribution.nextInt())
-                let y = CGFloat(g_distribution.nextInt())
+                let x = usingRandom()
+                let y = usingRandom()
                 let p = Point(x: x, y: y)
                 points.append(p)
             }

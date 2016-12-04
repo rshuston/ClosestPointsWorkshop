@@ -801,7 +801,7 @@
                                             </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1MV-RT-3bs">
-                                            <rect key="frame" x="26" y="106" width="91" height="17"/>
+                                            <rect key="frame" x="18" y="106" width="91" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Solution Type:" id="lwr-BU-boJ">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -809,15 +809,15 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Lj-oi-cP1">
-                                            <rect key="frame" x="20" y="63" width="97" height="17"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Solver Options:" id="KXb-ye-DKO">
+                                            <rect key="frame" x="18" y="63" width="91" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Solver Option:" id="KXb-ye-DKO">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m1m-Ki-6qY">
-                                            <rect key="frame" x="121" y="100" width="158" height="26"/>
+                                            <rect key="frame" x="113" y="100" width="166" height="26"/>
                                             <popUpButtonCell key="cell" type="push" title="Naive Combination" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4Tv-jI-mBg" id="7GZ-oJ-zXe">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -843,7 +843,7 @@
                                             </connections>
                                         </popUpButton>
                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z4F-Fd-lSn">
-                                            <rect key="frame" x="121" y="58" width="158" height="26"/>
+                                            <rect key="frame" x="113" y="58" width="166" height="26"/>
                                             <popUpButtonCell key="cell" type="push" title="Live" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4A5-XG-Bmt" id="11X-um-99E">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -872,11 +872,11 @@
                                     <constraints>
                                         <constraint firstItem="m1m-Ki-6qY" firstAttribute="top" secondItem="hJA-Cw-d7e" secondAttribute="top" constant="20" id="4cd-74-OMn"/>
                                         <constraint firstItem="1MV-RT-3bs" firstAttribute="top" secondItem="hJA-Cw-d7e" secondAttribute="top" constant="21" id="5vN-4b-RcO"/>
-                                        <constraint firstItem="1MV-RT-3bs" firstAttribute="leading" secondItem="hJA-Cw-d7e" secondAttribute="leading" constant="28" id="6it-MQ-SMi"/>
+                                        <constraint firstItem="1MV-RT-3bs" firstAttribute="leading" secondItem="hJA-Cw-d7e" secondAttribute="leading" constant="20" id="6it-MQ-SMi"/>
                                         <constraint firstAttribute="trailing" secondItem="z4F-Fd-lSn" secondAttribute="trailing" constant="20" id="APS-dt-aIL"/>
                                         <constraint firstItem="9Lj-oi-cP1" firstAttribute="top" secondItem="1MV-RT-3bs" secondAttribute="bottom" constant="26" id="BR5-9A-l3q"/>
                                         <constraint firstAttribute="trailing" secondItem="m1m-Ki-6qY" secondAttribute="trailing" constant="20" id="KrL-Dp-r6V"/>
-                                        <constraint firstItem="9Lj-oi-cP1" firstAttribute="leading" secondItem="hJA-Cw-d7e" secondAttribute="leading" constant="22" id="N7g-pZ-TZA"/>
+                                        <constraint firstItem="9Lj-oi-cP1" firstAttribute="leading" secondItem="hJA-Cw-d7e" secondAttribute="leading" constant="20" id="N7g-pZ-TZA"/>
                                         <constraint firstItem="z4F-Fd-lSn" firstAttribute="leading" secondItem="9Lj-oi-cP1" secondAttribute="trailing" constant="8" id="NxX-HD-4R1"/>
                                         <constraint firstItem="z4F-Fd-lSn" firstAttribute="top" secondItem="m1m-Ki-6qY" secondAttribute="bottom" constant="21" id="SAy-50-ANl"/>
                                         <constraint firstAttribute="trailing" secondItem="GKx-ce-V8e" secondAttribute="trailing" constant="20" id="cbj-Wq-rx8"/>
@@ -910,7 +910,7 @@
                         <outlet property="o_PlotView" destination="ZrH-qu-neQ" id="bh2-Uo-y3E"/>
                         <outlet property="o_PointDistributionPopUp" destination="JkB-LA-9DJ" id="oAT-PN-6vj"/>
                         <outlet property="o_SolutionTypePopUp" destination="m1m-Ki-6qY" id="SAm-OG-mfz"/>
-                        <outlet property="o_SolverOptionsPopUp" destination="z4F-Fd-lSn" id="9wh-LA-aIT"/>
+                        <outlet property="o_SolverOptionPopUp" destination="z4F-Fd-lSn" id="7OZ-WN-Ouf"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

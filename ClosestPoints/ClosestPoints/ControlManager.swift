@@ -10,4 +10,21 @@ import Cocoa
 
 class ControlManager: NSObject {
 
+    enum SolutionType {
+        case NaiveCombination
+        case SortedSearch
+        case PlaneSweep
+        case DivideAndConquer
+    }
+
+    enum SolverOption {
+        case Live
+        case FastAnimation
+        case SlowAnimation
+        case SingleStep
+    }
+
+    var solutionType = SolutionType.NaiveCombination
+    var solverOption = SolverOption.Live
+    
 }

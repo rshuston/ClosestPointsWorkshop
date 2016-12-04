@@ -16,6 +16,6 @@ class DefinitionManager: NSObject {
     }
 
     var numberOfPoints = 0
-    var distribution = PointDistribution.Uniform
+    var pointDistribution = PointDistribution.Uniform
 
 }
