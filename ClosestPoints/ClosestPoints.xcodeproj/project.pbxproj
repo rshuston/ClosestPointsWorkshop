@@ -64,6 +64,7 @@
 		4EDEDF091DF2426600BDA336 /* PointTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointTests.swift; sourceTree = "<group>"; };
 		4EDEDF0B1DF243D600BDA336 /* PointCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointCollection.swift; sourceTree = "<group>"; };
 		4EDEDF0E1DF243EF00BDA336 /* PointCollectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointCollectionTests.swift; sourceTree = "<group>"; };
+		4EF7D81C1DF3B94F00B01927 /* Notes.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notes.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +88,7 @@
 		4E0531291DD640EA006E9B8F = {
 			isa = PBXGroup;
 			children = (
+				4EF7D81C1DF3B94F00B01927 /* Notes.txt */,
 				4E6F312B1DE5427E00221A9A /* User Stories.txt */,
 				4E0531341DD640EA006E9B8F /* ClosestPoints */,
 				4E0531461DD640EA006E9B8F /* ClosestPointsTests */,
