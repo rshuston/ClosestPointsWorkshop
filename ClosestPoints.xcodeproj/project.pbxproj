@@ -12,6 +12,15 @@
 		4E05313A1DD640EA006E9B8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E0531391DD640EA006E9B8F /* Assets.xcassets */; };
 		4E05313D1DD640EA006E9B8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E05313B1DD640EA006E9B8F /* Main.storyboard */; };
 		4E0531481DD640EA006E9B8F /* ClosestPointsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0531471DD640EA006E9B8F /* ClosestPointsTests.swift */; };
+		4E397FF41DF314B90053BBAA /* DefinitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E397FF31DF314B90053BBAA /* DefinitionManager.swift */; };
+		4E397FF61DF314CF0053BBAA /* ControlManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E397FF51DF314CF0053BBAA /* ControlManager.swift */; };
+		4E397FF81DF314EC0053BBAA /* SolutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E397FF71DF314EC0053BBAA /* SolutionEngine.swift */; };
+		4E397FFA1DF3150E0053BBAA /* DefinitionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E397FF91DF3150E0053BBAA /* DefinitionManagerTests.swift */; };
+		4E397FFC1DF315220053BBAA /* ControlManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E397FFB1DF315220053BBAA /* ControlManagerTests.swift */; };
+		4E397FFE1DF315340053BBAA /* SolutionEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E397FFD1DF315340053BBAA /* SolutionEngineTests.swift */; };
+		4E397FFF1DF3153B0053BBAA /* DefinitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E397FF31DF314B90053BBAA /* DefinitionManager.swift */; };
+		4E3980001DF315410053BBAA /* ControlManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E397FF51DF314CF0053BBAA /* ControlManager.swift */; };
+		4E3980011DF315440053BBAA /* SolutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E397FF71DF314EC0053BBAA /* SolutionEngine.swift */; };
 		4E3E618B1DE2020B002A75C7 /* PlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3E618A1DE2020B002A75C7 /* PlotView.swift */; };
 		4E3E618C1DE2020B002A75C7 /* PlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3E618A1DE2020B002A75C7 /* PlotView.swift */; };
 		4E3EAFC61DF283D500A6F7B5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0531371DD640EA006E9B8F /* ViewController.swift */; };
@@ -43,6 +52,12 @@
 		4E0531431DD640EA006E9B8F /* ClosestPointsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClosestPointsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E0531471DD640EA006E9B8F /* ClosestPointsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosestPointsTests.swift; sourceTree = "<group>"; };
 		4E0531491DD640EA006E9B8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E397FF31DF314B90053BBAA /* DefinitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefinitionManager.swift; sourceTree = "<group>"; };
+		4E397FF51DF314CF0053BBAA /* ControlManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlManager.swift; sourceTree = "<group>"; };
+		4E397FF71DF314EC0053BBAA /* SolutionEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolutionEngine.swift; sourceTree = "<group>"; };
+		4E397FF91DF3150E0053BBAA /* DefinitionManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefinitionManagerTests.swift; sourceTree = "<group>"; };
+		4E397FFB1DF315220053BBAA /* ControlManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlManagerTests.swift; sourceTree = "<group>"; };
+		4E397FFD1DF315340053BBAA /* SolutionEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolutionEngineTests.swift; sourceTree = "<group>"; };
 		4E3E618A1DE2020B002A75C7 /* PlotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlotView.swift; sourceTree = "<group>"; };
 		4E6F312B1DE5427E00221A9A /* User Stories.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "User Stories.txt"; sourceTree = "<group>"; };
 		4EDEDF061DF241F100BDA336 /* Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
@@ -96,6 +111,9 @@
 				4E3E618A1DE2020B002A75C7 /* PlotView.swift */,
 				4EDEDF061DF241F100BDA336 /* Point.swift */,
 				4EDEDF0B1DF243D600BDA336 /* PointCollection.swift */,
+				4E397FF31DF314B90053BBAA /* DefinitionManager.swift */,
+				4E397FF51DF314CF0053BBAA /* ControlManager.swift */,
+				4E397FF71DF314EC0053BBAA /* SolutionEngine.swift */,
 				4E0531391DD640EA006E9B8F /* Assets.xcassets */,
 				4E05313B1DD640EA006E9B8F /* Main.storyboard */,
 				4E05313E1DD640EA006E9B8F /* Info.plist */,
@@ -109,6 +127,9 @@
 				4E0531471DD640EA006E9B8F /* ClosestPointsTests.swift */,
 				4EDEDF091DF2426600BDA336 /* PointTests.swift */,
 				4EDEDF0E1DF243EF00BDA336 /* PointCollectionTests.swift */,
+				4E397FF91DF3150E0053BBAA /* DefinitionManagerTests.swift */,
+				4E397FFB1DF315220053BBAA /* ControlManagerTests.swift */,
+				4E397FFD1DF315340053BBAA /* SolutionEngineTests.swift */,
 				4E0531491DD640EA006E9B8F /* Info.plist */,
 			);
 			path = ClosestPointsTests;
@@ -218,8 +239,11 @@
 			files = (
 				4EDEDF071DF241F100BDA336 /* Point.swift in Sources */,
 				4EDEDF0C1DF243D600BDA336 /* PointCollection.swift in Sources */,
+				4E397FF81DF314EC0053BBAA /* SolutionEngine.swift in Sources */,
+				4E397FF61DF314CF0053BBAA /* ControlManager.swift in Sources */,
 				4E0531381DD640EA006E9B8F /* ViewController.swift in Sources */,
 				4E3E618B1DE2020B002A75C7 /* PlotView.swift in Sources */,
+				4E397FF41DF314B90053BBAA /* DefinitionManager.swift in Sources */,
 				4E0531361DD640EA006E9B8F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,9 +256,15 @@
 				4EDEDF0D1DF243D600BDA336 /* PointCollection.swift in Sources */,
 				4E0531481DD640EA006E9B8F /* ClosestPointsTests.swift in Sources */,
 				4E3E618C1DE2020B002A75C7 /* PlotView.swift in Sources */,
+				4E3980011DF315440053BBAA /* SolutionEngine.swift in Sources */,
+				4E397FFC1DF315220053BBAA /* ControlManagerTests.swift in Sources */,
 				4E3EAFC61DF283D500A6F7B5 /* ViewController.swift in Sources */,
+				4E397FFE1DF315340053BBAA /* SolutionEngineTests.swift in Sources */,
 				4EDEDF0F1DF243EF00BDA336 /* PointCollectionTests.swift in Sources */,
+				4E397FFF1DF3153B0053BBAA /* DefinitionManager.swift in Sources */,
+				4E397FFA1DF3150E0053BBAA /* DefinitionManagerTests.swift in Sources */,
 				4EDEDF081DF241F100BDA336 /* Point.swift in Sources */,
+				4E3980001DF315410053BBAA /* ControlManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

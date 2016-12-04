@@ -10,6 +10,8 @@ import Cocoa
 
 class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate {
 
+    // MARK: - IBOutlet references
+
     // Plotting
     @IBOutlet weak var o_PlotView: PlotView!
 
@@ -23,10 +25,13 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
     @IBOutlet weak var o_GenerateButton: NSButton!
     @IBOutlet weak var o_ControlButton: NSButton!
 
+    // MARK: - Composition
+
     let minNumberOfPoints = 3
     let maxNumberOfPoints = 100
 
     let pointCollection = PointCollection()
+    let definitionManager = DefinitionManager()
 
     // MARK: - IBAction methods
 
@@ -64,6 +69,9 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
 
         // Do any additional setup after loading the view.
         o_NumberOfPointsBox.integerValue = minNumberOfPoints
+
+        definitionManager.numberOfPoints = o_NumberOfPointsBox.integerValue
+        definitionManager.distribution = DefinitionManager.PointDistribution.Uniform
     }
 
     override var representedObject: Any? {
@@ -94,6 +102,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
                     o_NumberOfPointsBox.deselectItem(at: index)
                     if let value = Int(stringValue) {
                         o_NumberOfPointsBox.integerValue = value
+                        definitionManager.numberOfPoints = o_NumberOfPointsBox.integerValue
                     }
                 }
             }
@@ -109,14 +118,15 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
             value = maxNumberOfPoints
         }
         o_NumberOfPointsBox.integerValue = value
+        definitionManager.numberOfPoints = o_NumberOfPointsBox.integerValue
     }
 
     func updatePoints() {
         constrainNumberOfPoints()
 
         pointCollection.clear()
-        pointCollection.generateRandomPoints(numberOfPoints: o_NumberOfPointsBox.integerValue)
-        
+        pointCollection.generateRandomPoints(numberOfPoints: definitionManager.numberOfPoints)
+
         o_PlotView.needsDisplay = true
     }
 
