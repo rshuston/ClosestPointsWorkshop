@@ -7,18 +7,26 @@
 //
 
 import Cocoa
+import GameKit
 
 class PointCollection: NSObject {
 
-    let maxDimension: UInt32 = 1024
+    let maxDimension: UInt32 = 128
+
+    let u_distribution: GKRandomDistribution
+    let g_distribution: GKGaussianDistribution
 
     var points: [Point]
 
     override init() {
+        u_distribution = GKRandomDistribution(lowestValue: 0, highestValue: Int(maxDimension))
+        g_distribution = GKGaussianDistribution(lowestValue: 0, highestValue: Int(maxDimension))
+
         points = []
     }
 
-    init(withPoints: [Point]) {
+    convenience init(withPoints: [Point]) {
+        self.init()
         self.points = withPoints
     }
 
@@ -26,11 +34,22 @@ class PointCollection: NSObject {
         points = []
     }
 
-    func generateRandomPoints(numberOfPoints: Int) {
+    func generateUniformRandomPoints(numberOfPoints: Int) {
         if numberOfPoints > 0 {
             for _ in 1...numberOfPoints {
-                let x = CGFloat(arc4random_uniform(maxDimension))
-                let y = CGFloat(arc4random_uniform(maxDimension))
+                let x = CGFloat(u_distribution.nextInt())
+                let y = CGFloat(u_distribution.nextInt())
+                let p = Point(x: x, y: y)
+                points.append(p)
+            }
+        }
+    }
+
+    func generateClusteredRandomPoints(numberOfPoints: Int) {
+        if numberOfPoints > 0 {
+            for _ in 1...numberOfPoints {
+                let x = CGFloat(g_distribution.nextInt())
+                let y = CGFloat(g_distribution.nextInt())
                 let p = Point(x: x, y: y)
                 points.append(p)
             }

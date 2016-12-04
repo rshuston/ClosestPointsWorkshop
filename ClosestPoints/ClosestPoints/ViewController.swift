@@ -38,6 +38,11 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
     @IBAction func popUpButtonSelected(_ sender: NSPopUpButton) {
         switch sender {
         case o_PointDistributionPopUp:
+            if sender.indexOfSelectedItem == 1 {
+                definitionManager.distribution = DefinitionManager.PointDistribution.Clustered
+            } else {
+                definitionManager.distribution = DefinitionManager.PointDistribution.Uniform
+            }
             break
         case o_SolutionTypePopUp:
             break
@@ -125,7 +130,14 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         constrainNumberOfPoints()
 
         pointCollection.clear()
-        pointCollection.generateRandomPoints(numberOfPoints: definitionManager.numberOfPoints)
+        switch definitionManager.distribution {
+        case DefinitionManager.PointDistribution.Uniform:
+            pointCollection.generateUniformRandomPoints(numberOfPoints: definitionManager.numberOfPoints)
+            break
+        case DefinitionManager.PointDistribution.Clustered:
+            pointCollection.generateClusteredRandomPoints(numberOfPoints: definitionManager.numberOfPoints)
+            break
+        }
 
         o_PlotView.needsDisplay = true
     }

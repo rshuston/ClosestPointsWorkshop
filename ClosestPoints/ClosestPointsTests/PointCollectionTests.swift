@@ -42,12 +42,20 @@ class PointCollectionTests: XCTestCase {
         XCTAssertEqual(subject.points.count, 0)
     }
 
-    func test_PointCollection_generateRandomPoints_PopulatesList() {
+    func test_PointCollection_generateUniformRandomPoints_PopulatesList() {
         let subject = PointCollection()
 
-        subject.generateRandomPoints(numberOfPoints: 10)
+        subject.generateUniformRandomPoints(numberOfPoints: 10)
 
         XCTAssertEqual(subject.points.count, 10)
     }
-    
+
+    func test_PointCollection_generateClusteredRandomPoints_PopulatesList() {
+        let subject = PointCollection()
+
+        subject.generateClusteredRandomPoints(numberOfPoints: 10)
+
+        XCTAssertEqual(subject.points.count, 10)
+    }
+
 }

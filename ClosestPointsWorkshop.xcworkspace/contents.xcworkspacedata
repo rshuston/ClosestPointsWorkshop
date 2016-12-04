@@ -4,4 +4,10 @@
    <FileRef
       location = "group:ClosestPoints/ClosestPoints.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:PDLTestBench/PDLTestBench.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:PDLToolBox/PDLToolBox.xcodeproj">
+   </FileRef>
 </Workspace>
