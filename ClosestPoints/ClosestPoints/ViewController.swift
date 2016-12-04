@@ -132,7 +132,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         // Called when value is directly entered into combo box
         if let comboBox: NSComboBox = (obj.object as? NSComboBox) {
             if comboBox == o_NumberOfPointsBox {
-                constrainNumberOfPoints()
+                constrainNumberOfPointsBox()
             }
         }
     }
@@ -155,7 +155,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         }
     }
 
-    func constrainNumberOfPoints() {
+    func constrainNumberOfPointsBox() {
         var value = o_NumberOfPointsBox.integerValue
         if value < minNumberOfPoints {
             value = minNumberOfPoints
@@ -168,7 +168,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
     }
 
     func updatePoints() {
-        constrainNumberOfPoints()
+        constrainNumberOfPointsBox()
 
         pointCollection.clear()
         switch definitionManager.pointDistribution {

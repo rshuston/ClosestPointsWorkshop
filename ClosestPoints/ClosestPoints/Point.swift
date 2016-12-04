@@ -10,11 +10,24 @@ import Cocoa
 
 class Point: NSObject {
 
-    var p: NSPoint
+    var x: CGFloat
+    var y: CGFloat
+
+    var xBackRef: AnyObject?
+    var yBackRef: AnyObject?
 
     init(x: CGFloat, y: CGFloat)
     {
-        p = NSPoint(x: x, y: y)
+        self.x = x
+        self.y = y
+    }
+
+    convenience init(withNSPoint: NSPoint) {
+        self.init(x: withNSPoint.x, y: withNSPoint.y)
+    }
+
+    func getAsNSPoint() -> NSPoint {
+        return NSPoint(x: x, y: y)
     }
     
 }

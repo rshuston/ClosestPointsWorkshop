@@ -24,11 +24,11 @@ class PointCollectionTests: XCTestCase {
 
         XCTAssertEqual(subject.points.count, 2)
 
-        XCTAssertEqual(subject.points[0].p.x, 1)
-        XCTAssertEqual(subject.points[0].p.y, 2)
+        XCTAssertEqual(subject.points[0].x, 1)
+        XCTAssertEqual(subject.points[0].y, 2)
 
-        XCTAssertEqual(subject.points[1].p.x, 3)
-        XCTAssertEqual(subject.points[1].p.y, 4)
+        XCTAssertEqual(subject.points[1].x, 3)
+        XCTAssertEqual(subject.points[1].y, 4)
     }
 
     func test_PointCollection_clear_RemovesPointsFromList() {

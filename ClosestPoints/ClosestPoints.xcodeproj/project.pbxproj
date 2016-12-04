@@ -21,6 +21,7 @@
 		4E3E618B1DE2020B002A75C7 /* PlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3E618A1DE2020B002A75C7 /* PlotView.swift */; };
 		4E8DCA351DF3BE74003139E1 /* PDLTestBench.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DCA341DF3BE74003139E1 /* PDLTestBench.framework */; };
 		4E8DCA371DF3BE79003139E1 /* PDLToolBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DCA361DF3BE79003139E1 /* PDLToolBox.framework */; };
+		4EB647571DF4B085004F10F7 /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB647561DF4B085004F10F7 /* AppUtils.swift */; };
 		4EDEDF071DF241F100BDA336 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDEDF061DF241F100BDA336 /* Point.swift */; };
 		4EDEDF0A1DF2426600BDA336 /* PointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDEDF091DF2426600BDA336 /* PointTests.swift */; };
 		4EDEDF0C1DF243D600BDA336 /* PointCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDEDF0B1DF243D600BDA336 /* PointCollection.swift */; };
@@ -57,6 +58,7 @@
 		4E6F312B1DE5427E00221A9A /* User Stories.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "User Stories.txt"; sourceTree = "<group>"; };
 		4E8DCA341DF3BE74003139E1 /* PDLTestBench.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDLTestBench.framework; path = "../../../../Library/Developer/Xcode/DerivedData/ClosestPointsWorkshop-bjbkadvdhujgxxhiwklajocqyepz/Build/Products/Debug/PDLTestBench.framework"; sourceTree = "<group>"; };
 		4E8DCA361DF3BE79003139E1 /* PDLToolBox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDLToolBox.framework; path = "../../../../Library/Developer/Xcode/DerivedData/ClosestPointsWorkshop-bjbkadvdhujgxxhiwklajocqyepz/Build/Products/Debug/PDLToolBox.framework"; sourceTree = "<group>"; };
+		4EB647561DF4B085004F10F7 /* AppUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtils.swift; sourceTree = "<group>"; };
 		4EDEDF061DF241F100BDA336 /* Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		4EDEDF091DF2426600BDA336 /* PointTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointTests.swift; sourceTree = "<group>"; };
 		4EDEDF0B1DF243D600BDA336 /* PointCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointCollection.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			children = (
 				4E0531351DD640EA006E9B8F /* AppDelegate.swift */,
 				4E0531371DD640EA006E9B8F /* ViewController.swift */,
+				4EB647561DF4B085004F10F7 /* AppUtils.swift */,
 				4E3E618A1DE2020B002A75C7 /* PlotView.swift */,
 				4EDEDF061DF241F100BDA336 /* Point.swift */,
 				4EDEDF0B1DF243D600BDA336 /* PointCollection.swift */,
@@ -248,6 +251,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EB647571DF4B085004F10F7 /* AppUtils.swift in Sources */,
 				4EDEDF071DF241F100BDA336 /* Point.swift in Sources */,
 				4EDEDF0C1DF243D600BDA336 /* PointCollection.swift in Sources */,
 				4E397FF81DF314EC0053BBAA /* SolutionEngine.swift in Sources */,
@@ -334,7 +338,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -377,7 +381,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
