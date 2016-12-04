@@ -13,9 +13,6 @@ class Point: NSObject {
     var x: CGFloat
     var y: CGFloat
 
-    var xBackRef: AnyObject?
-    var yBackRef: AnyObject?
-
     init(x: CGFloat, y: CGFloat)
     {
         self.x = x

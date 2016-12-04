@@ -11,7 +11,7 @@ import GameKit
 
 class PointCollection: NSObject {
 
-    let maxDimension: UInt32 = 128
+    let maxDimension: UInt32 = 1024
 
     let u_distribution: GKRandomDistribution
     let g_distribution: GKGaussianDistribution
