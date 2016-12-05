@@ -33,6 +33,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
     let pointCollection = PointCollection()
     let definitionManager = DefinitionManager()
     let controlManager = ControlManager()
+    let solutionEngine = SolutionEngine()
 
     // MARK: - IBAction methods
 
@@ -90,15 +91,17 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
             break
         }
 
-        // let title = sender.titleOfSelectedItem
+        activateButtons()
     }
 
     @IBAction func pushButtonSelected(_ sender: NSButton) {
         switch sender {
         case o_GenerateButton:
             updatePoints()
+            activateButtons()
             break
         case o_ControlButton:
+            solutionEngine.findClosestPoints()
             break
         default:
             break
@@ -118,6 +121,11 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
 
         controlManager.solutionType = ControlManager.SolutionType.NaiveCombination
         controlManager.solverOption = ControlManager.SolverOption.Live
+
+        activateButtons()
+
+        // SPIKE: ... for now
+        o_ControlButton.title = "Run"
     }
 
     override var representedObject: Any? {
@@ -133,6 +141,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         if let comboBox: NSComboBox = (obj.object as? NSComboBox) {
             if comboBox == o_NumberOfPointsBox {
                 constrainNumberOfPointsBox()
+                activateButtons()
             }
         }
     }
@@ -148,7 +157,8 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
                     o_NumberOfPointsBox.deselectItem(at: index)
                     if let value = Int(stringValue) {
                         o_NumberOfPointsBox.integerValue = value
-                        definitionManager.numberOfPoints = o_NumberOfPointsBox.integerValue
+                        definitionManager.numberOfPoints = value
+                        activateButtons()
                     }
                 }
             }
@@ -165,6 +175,10 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         }
         o_NumberOfPointsBox.integerValue = value
         definitionManager.numberOfPoints = o_NumberOfPointsBox.integerValue
+    }
+
+    func activateButtons() {
+        o_ControlButton.isEnabled = (pointCollection.points.count > 0)
     }
 
     func updatePoints() {

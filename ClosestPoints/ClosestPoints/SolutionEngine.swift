@@ -10,4 +10,8 @@ import Cocoa
 
 class SolutionEngine: NSObject {
 
+    func findClosestPoints() {
+        print("Find Closest Points ...")
+    }
+
 }
