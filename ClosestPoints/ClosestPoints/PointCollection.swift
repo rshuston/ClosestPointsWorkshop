@@ -9,14 +9,24 @@
 import Cocoa
 import GameKit
 
-class PointCollection: NSObject {
+protocol PointCollectionDataSource {
 
-    let maxDimension: UInt32 = 1024
+    var points: [Point] { get }
+    var maxDimension: UInt32 { get }
+
+}
+
+class PointCollection: NSObject, PointCollectionDataSource {
 
     let u_distribution: GKRandomDistribution
     let g_distribution: GKGaussianDistribution
 
+    // MARK: - PointCollectionDataSource
+
+    let maxDimension: UInt32 = 1024
     var points: [Point]
+
+    // MARK: - Initializers
 
     override init() {
         u_distribution = GKRandomDistribution(lowestValue: 0, highestValue: Int(maxDimension))
@@ -29,6 +39,8 @@ class PointCollection: NSObject {
         self.init()
         self.points = withPoints
     }
+
+    // MARK: - Behavior
 
     func clear() {
         points = []

@@ -15,6 +15,10 @@ class AppUtils: NSObject {
     }
 
     class func appViewController() -> ViewController? {
+        // Important Note:
+        // Access to the contentViewController doesn't resolve until the app has finished
+        // loading. If you try accessing it in a viewDidLoad() method, it will resolve to
+        // nil.
         return NSApplication.shared().mainWindow?.contentViewController as? ViewController
     }
 

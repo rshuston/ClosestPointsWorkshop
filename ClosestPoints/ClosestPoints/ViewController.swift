@@ -97,11 +97,14 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
     @IBAction func pushButtonSelected(_ sender: NSButton) {
         switch sender {
         case o_GenerateButton:
-            updatePoints()
+            generatePoints()
             activateButtons()
             break
         case o_ControlButton:
+            deactivateButtons()
             solutionEngine.findClosestPoints()
+            triggerPlotViewRedraw()
+            activateButtons()
             break
         default:
             break
@@ -113,7 +116,8 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        o_PlotView.pointDataSource = pointCollection
+
         o_NumberOfPointsBox.integerValue = minNumberOfPoints
 
         definitionManager.numberOfPoints = o_NumberOfPointsBox.integerValue
@@ -122,10 +126,11 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         controlManager.solutionType = ControlManager.SolutionType.NaiveCombination
         controlManager.solverOption = ControlManager.SolverOption.Live
 
-        activateButtons()
-
         // SPIKE: ... for now
         o_ControlButton.title = "Run"
+
+        generatePoints()
+        activateButtons()
     }
 
     override var representedObject: Any? {
@@ -165,6 +170,22 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         }
     }
 
+    // MARK: - Behavior methods
+
+    func activateButtons() {
+        o_GenerateButton.isEnabled = true
+        o_ControlButton.isEnabled = (pointCollection.points.count > 0)
+    }
+
+    func deactivateButtons() {
+        o_GenerateButton.isEnabled = false
+        o_ControlButton.isEnabled = false
+    }
+
+    func triggerPlotViewRedraw() {
+        o_PlotView.needsDisplay = true
+    }
+
     func constrainNumberOfPointsBox() {
         var value = o_NumberOfPointsBox.integerValue
         if value < minNumberOfPoints {
@@ -177,11 +198,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         definitionManager.numberOfPoints = o_NumberOfPointsBox.integerValue
     }
 
-    func activateButtons() {
-        o_ControlButton.isEnabled = (pointCollection.points.count > 0)
-    }
-
-    func updatePoints() {
+    func generatePoints() {
         constrainNumberOfPointsBox()
 
         pointCollection.clear()
@@ -194,7 +211,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
             break
         }
 
-        o_PlotView.needsDisplay = true
+        triggerPlotViewRedraw()
     }
 
 }

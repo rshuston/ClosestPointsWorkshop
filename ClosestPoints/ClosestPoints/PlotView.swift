@@ -10,15 +10,17 @@ import Cocoa
 
 class PlotView: NSView {
 
+    var pointDataSource: PointCollectionDataSource?
+
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
 
         NSFrameRect(bounds)
 
-        if let vc = AppUtils.appViewController() {
+        if let pds = pointDataSource {
             let radius: CGFloat = 4
-            let points = vc.pointCollection.points
-            let dimension = CGFloat(vc.pointCollection.maxDimension)
+            let points = pds.points
+            let dimension = CGFloat(pds.maxDimension)
             for index in 0..<points.count {
                 let pt = points[index]
                 let x = pt.x * (bounds.size.width - 4 * radius) / dimension

@@ -11,7 +11,7 @@ import Cocoa
 class SolutionEngine: NSObject {
 
     func findClosestPoints() {
-        print("Find Closest Points ...")
+        print("It is pitch black. You are likely to be eaten by a grue.")
     }
 
 }

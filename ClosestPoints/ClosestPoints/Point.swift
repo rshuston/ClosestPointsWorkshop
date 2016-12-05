@@ -13,10 +13,13 @@ class Point: NSObject {
     var x: CGFloat
     var y: CGFloat
 
+    var highlighted: Bool
+
     init(x: CGFloat, y: CGFloat)
     {
         self.x = x
         self.y = y
+        self.highlighted = false
     }
 
     convenience init(withNSPoint: NSPoint) {

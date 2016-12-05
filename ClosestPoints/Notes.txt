@@ -1,1 +1,5 @@
 General notes...
+
+func findClosestPoints_NaiveCombination(points: [Point]) -> [Point] {
+    return [firsPoint, secondPoint]
+}
