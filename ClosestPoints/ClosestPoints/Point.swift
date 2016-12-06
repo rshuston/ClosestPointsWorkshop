@@ -13,6 +13,7 @@ class Point: NSObject {
     var x: CGFloat
     var y: CGFloat
 
+    // Note: Not sure if we still need this
     var highlighted: Bool
 
     init(x: CGFloat, y: CGFloat)

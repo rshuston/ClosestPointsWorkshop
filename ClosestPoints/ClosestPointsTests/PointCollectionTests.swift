@@ -128,7 +128,7 @@ class PointCollectionTests: XCTestCase {
         var count = -1
 
         override func nextInt() -> Int {
-            count = count + 1
+            count += 1
             return count
         }
 

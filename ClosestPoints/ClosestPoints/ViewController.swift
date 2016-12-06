@@ -227,10 +227,17 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
     func findClosestPoints() {
         deactivateButtons()
 
-        solutionEngine.findClosestPoints_NaiveCombination(points: pointCollection.points, completion: { (closestPoints: (Point, Point)?) in
-            pointCollection.closestPoints = closestPoints
-            triggerPlotViewRedraw()
-            activateButtons()
+        // Note: This needs to be put into its own thread
+        solutionEngine.findClosestPoints_NaiveCombination(points: pointCollection.points, monitor: {
+            (closestPoints: (Point, Point)?) -> Void in
+            self.pointCollection.closestPoints = closestPoints
+            self.pointCollection.closestPointsColor = NSColor.red
+            self.triggerPlotViewRedraw()
+        }, completion: { (closestPoints: (Point, Point)?) in
+            self.pointCollection.closestPoints = closestPoints
+            self.pointCollection.closestPointsColor = NSColor.blue
+            self.triggerPlotViewRedraw()
+            self.activateButtons()
         })
     }
 

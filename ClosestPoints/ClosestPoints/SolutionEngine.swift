@@ -10,11 +10,14 @@ import Cocoa
 
 class SolutionEngine: NSObject {
 
-    func findClosestPoints_NaiveCombination(points: [Point], completion: (((Point, Point)?) -> Void)) {
+    func findClosestPoints_NaiveCombination(points: [Point],
+                                            monitor: (((Point, Point)?) -> Void)?,
+                                            completion: (((Point, Point)?) -> Void)) {
         var closestPoints: (Point, Point)?
         
         if points.count == 2 {
             closestPoints = (points[0], points[1])
+            monitor?(closestPoints)
         } else if points.count > 2 {
             var smallestDist_sq: CGFloat = CGFloat.greatestFiniteMagnitude
             for ptA in points {
@@ -24,8 +27,9 @@ class SolutionEngine: NSObject {
                         let dy = ptB.y - ptA.y
                         let dist_sq = dx * dx + dy * dy
                         if dist_sq < smallestDist_sq {
-                            closestPoints = (ptA, ptB)
                             smallestDist_sq = dist_sq
+                            closestPoints = (ptA, ptB)
+                            monitor?(closestPoints)
                         }
                     }
                 }

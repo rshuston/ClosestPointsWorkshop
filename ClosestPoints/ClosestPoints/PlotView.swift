@@ -32,7 +32,8 @@ class PlotView: NSView {
                 var rect: NSRect
                 var path: NSBezierPath
 
-                NSColor.red.set()
+                let color = pds.closestPointsColor ?? NSColor.black
+                color.set()
 
                 let p1 = closestPoints.0.getAsNSPoint()
                 let p2 = closestPoints.1.getAsNSPoint()

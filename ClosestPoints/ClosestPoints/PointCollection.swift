@@ -14,6 +14,7 @@ protocol PointCollectionDataSource {
     var maxDimension: UInt32 { get }
     var points: [Point] { get }
     var closestPoints: (Point, Point)? { get }
+    var closestPointsColor: NSColor? { get }
 
 }
 
@@ -24,6 +25,7 @@ class PointCollection: NSObject, PointCollectionDataSource {
     let maxDimension: UInt32 = 1024
     var points: [Point]
     var closestPoints: (Point, Point)?
+    var closestPointsColor: NSColor?
 
     // MARK: GKRandomDistribution Factories
     
