@@ -844,12 +844,12 @@
                                         </popUpButton>
                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z4F-Fd-lSn">
                                             <rect key="frame" x="113" y="58" width="166" height="26"/>
-                                            <popUpButtonCell key="cell" type="push" title="Distinct" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="JVc-S4-fTm" id="11X-um-99E">
+                                            <popUpButtonCell key="cell" type="push" title="One Shot" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="JVc-S4-fTm" id="11X-um-99E">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
                                                 <menu key="menu" id="fyC-oP-pCJ">
                                                     <items>
-                                                        <menuItem title="Distinct" state="on" id="JVc-S4-fTm">
+                                                        <menuItem title="One Shot" state="on" id="JVc-S4-fTm">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
                                                         </menuItem>
                                                         <menuItem title="Single Step" id="GC5-L3-SOw">

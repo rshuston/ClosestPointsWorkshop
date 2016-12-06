@@ -71,8 +71,8 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
             break
         case o_SolverOptionPopUp:
             switch sender.titleOfSelectedItem {
-            case "Distinct"?:
-                controlManager.solverOption = ControlManager.SolverOption.Distinct
+            case "One Shot"?:
+                controlManager.solverOption = ControlManager.SolverOption.OneShot
                 break
             case "Single Step"?:
                 controlManager.solverOption = ControlManager.SolverOption.SingleStep
@@ -127,7 +127,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         definitionManager.pointDistribution = DefinitionManager.PointDistribution.Uniform
 
         controlManager.solutionType = ControlManager.SolutionType.NaiveCombination
-        controlManager.solverOption = ControlManager.SolverOption.Distinct
+        controlManager.solverOption = ControlManager.SolverOption.OneShot
 
         // SPIKE: ... for now
         o_ControlButton.title = "Solve"

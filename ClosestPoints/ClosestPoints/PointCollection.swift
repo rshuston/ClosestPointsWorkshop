@@ -19,21 +19,27 @@ protocol PointCollectionDataSource {
 
 class PointCollection: NSObject, PointCollectionDataSource {
 
-    let u_distribution: GKRandomDistribution
-    let g_distribution: GKGaussianDistribution
-
     // MARK: - PointCollectionDataSource
 
     let maxDimension: UInt32 = 1024
     var points: [Point]
     var closestPoints: (Point, Point)?
 
+    // MARK: GKRandomDistribution Factories
+    
+    var uniformDistributionFactory: (Int, Int) -> GKRandomDistribution = {
+        (lowestValue: Int, highestValue: Int) -> GKRandomDistribution in
+        return GKRandomDistribution(lowestValue: lowestValue, highestValue: highestValue)
+    }
+
+    var gaussianDistributionFactory: (Int, Int) -> GKRandomDistribution = {
+        (lowestValue: Int, highestValue: Int) -> GKRandomDistribution in
+        return GKGaussianDistribution(lowestValue: lowestValue, highestValue: highestValue)
+    }
+
     // MARK: - Initializers
 
     override init() {
-        u_distribution = GKRandomDistribution(lowestValue: 0, highestValue: Int(maxDimension))
-        g_distribution = GKGaussianDistribution(lowestValue: 0, highestValue: Int(maxDimension))
-
         points = []
         closestPoints = nil
     }
@@ -51,14 +57,14 @@ class PointCollection: NSObject, PointCollectionDataSource {
     }
 
     func generateUniformRandomPoints(numberOfPoints: Int, maxX: CGFloat, maxY: CGFloat, margin: CGFloat) {
-        let xDistribution = GKRandomDistribution(lowestValue: Int(margin), highestValue: Int(maxX - margin))
-        let yDistribution = GKRandomDistribution(lowestValue: Int(margin), highestValue: Int(maxY - margin))
+        let xDistribution = uniformDistributionFactory(Int(margin), Int(maxX - margin))
+        let yDistribution = uniformDistributionFactory(Int(margin), Int(maxY - margin))
         _generateRandomPoints(numberOfPoints: numberOfPoints, xDist: xDistribution, yDist: yDistribution)
     }
 
     func generateClusteredRandomPoints(numberOfPoints: Int, maxX: CGFloat, maxY: CGFloat, margin: CGFloat) {
-        let xDistribution = GKGaussianDistribution(lowestValue: Int(margin), highestValue: Int(maxX - margin))
-        let yDistribution = GKGaussianDistribution(lowestValue: Int(margin), highestValue: Int(maxY - margin))
+        let xDistribution = gaussianDistributionFactory(Int(margin), Int(maxX - margin))
+        let yDistribution = gaussianDistributionFactory(Int(margin), Int(maxY - margin))
         _generateRandomPoints(numberOfPoints: numberOfPoints, xDist: xDistribution, yDist: yDistribution)
     }
 

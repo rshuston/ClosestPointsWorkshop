@@ -7,9 +7,26 @@
 //
 
 import XCTest
+
+import GameKit
+
 @testable import ClosestPoints
 
 class PointCollectionTests: XCTestCase {
+
+    var mockGKRandomDistribution: MockGKRandomDistribution!
+
+    override func setUp() {
+        mockGKRandomDistribution = MockGKRandomDistribution(lowestValue: 0, highestValue: 10)
+
+        super.setUp()
+    }
+
+    override func tearDown() {
+        mockGKRandomDistribution = nil
+        
+        super.tearDown()
+    }
 
     func test_PointCollection_DefaultInitializesWithEmptyList() {
         let subject = PointCollection()
@@ -59,17 +76,62 @@ class PointCollectionTests: XCTestCase {
     func test_PointCollection_generateUniformRandomPoints_PopulatesList() {
         let subject = PointCollection()
 
-        subject.generateUniformRandomPoints(numberOfPoints: 10, maxX: 100, maxY: 100, margin: 8)
+        mockGKRandomDistribution.count = 0
 
-        XCTAssertEqual(subject.points.count, 10)
+        subject.uniformDistributionFactory = { (lowestValue: Int, highestValue: Int) -> GKRandomDistribution in
+                return self.mockGKRandomDistribution
+            }
+        
+        subject.generateUniformRandomPoints(numberOfPoints: 5, maxX: 100, maxY: 100, margin: 8)
+
+        XCTAssertEqual(subject.points.count, 5)
+
+        XCTAssertEqual(subject.points[0].x, 1)
+        XCTAssertEqual(subject.points[0].y, 2)
+        XCTAssertEqual(subject.points[1].x, 3)
+        XCTAssertEqual(subject.points[1].y, 4)
+        XCTAssertEqual(subject.points[2].x, 5)
+        XCTAssertEqual(subject.points[2].y, 6)
+        XCTAssertEqual(subject.points[3].x, 7)
+        XCTAssertEqual(subject.points[3].y, 8)
+        XCTAssertEqual(subject.points[4].x, 9)
+        XCTAssertEqual(subject.points[4].y, 10)
     }
 
     func test_PointCollection_generateClusteredRandomPoints_PopulatesList() {
         let subject = PointCollection()
 
-        subject.generateClusteredRandomPoints(numberOfPoints: 10, maxX: 100, maxY: 100, margin: 8)
+        mockGKRandomDistribution.count = 0
 
-        XCTAssertEqual(subject.points.count, 10)
+        subject.gaussianDistributionFactory = { (lowestValue: Int, highestValue: Int) -> GKRandomDistribution in
+            return self.mockGKRandomDistribution
+        }
+
+        subject.generateClusteredRandomPoints(numberOfPoints: 5, maxX: 100, maxY: 100, margin: 8)
+
+        XCTAssertEqual(subject.points.count, 5)
+
+        XCTAssertEqual(subject.points[0].x, 1)
+        XCTAssertEqual(subject.points[0].y, 2)
+        XCTAssertEqual(subject.points[1].x, 3)
+        XCTAssertEqual(subject.points[1].y, 4)
+        XCTAssertEqual(subject.points[2].x, 5)
+        XCTAssertEqual(subject.points[2].y, 6)
+        XCTAssertEqual(subject.points[3].x, 7)
+        XCTAssertEqual(subject.points[3].y, 8)
+        XCTAssertEqual(subject.points[4].x, 9)
+        XCTAssertEqual(subject.points[4].y, 10)
+    }
+
+    class MockGKRandomDistribution: GKRandomDistribution {
+
+        var count = -1
+
+        override func nextInt() -> Int {
+            count = count + 1
+            return count
+        }
+
     }
 
 }

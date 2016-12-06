@@ -7,6 +7,7 @@
 //
 
 import XCTest
+
 @testable import ClosestPoints
 
 class PointTests: XCTestCase {
