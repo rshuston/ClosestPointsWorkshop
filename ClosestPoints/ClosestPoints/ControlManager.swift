@@ -18,10 +18,11 @@ class ControlManager: NSObject {
     }
 
     enum SolverOption {
-        case Live
-        case FastAnimation
-        case SlowAnimation
+        case Distinct
         case SingleStep
+        case SlowAnimation
+        case FastAnimation
+        case Live
     }
 
     var solutionType = SolutionType.NaiveCombination

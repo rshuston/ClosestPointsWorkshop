@@ -71,17 +71,20 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
             break
         case o_SolverOptionPopUp:
             switch sender.titleOfSelectedItem {
-            case "Live"?:
-                controlManager.solverOption = ControlManager.SolverOption.Live
+            case "Distinct"?:
+                controlManager.solverOption = ControlManager.SolverOption.Distinct
                 break
-            case "Fast Animation"?:
-                controlManager.solverOption = ControlManager.SolverOption.FastAnimation
+            case "Single Step"?:
+                controlManager.solverOption = ControlManager.SolverOption.SingleStep
                 break
             case "Slow Animation"?:
                 controlManager.solverOption = ControlManager.SolverOption.SlowAnimation
                 break
-            case "Single Step"?:
-                controlManager.solverOption = ControlManager.SolverOption.SingleStep
+            case "Fast Animation"?:
+                controlManager.solverOption = ControlManager.SolverOption.FastAnimation
+                break
+            case "Live"?:
+                controlManager.solverOption = ControlManager.SolverOption.Live
                 break
             default:
                 break
@@ -124,7 +127,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         definitionManager.pointDistribution = DefinitionManager.PointDistribution.Uniform
 
         controlManager.solutionType = ControlManager.SolutionType.NaiveCombination
-        controlManager.solverOption = ControlManager.SolverOption.Live
+        controlManager.solverOption = ControlManager.SolverOption.Distinct
 
         // SPIKE: ... for now
         o_ControlButton.title = "Solve"
@@ -225,4 +228,3 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
     }
 
 }
-
