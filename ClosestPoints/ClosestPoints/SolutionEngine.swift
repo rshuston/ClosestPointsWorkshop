@@ -10,7 +10,7 @@ import Cocoa
 
 class SolutionEngine: NSObject {
 
-    func findClosestPoints_NaiveCombination(points: [Point]) -> (Point, Point)? {
+    func findClosestPoints_NaiveCombination(points: [Point], completion: (((Point, Point)?) -> Void)) {
         var closestPoints: (Point, Point)?
         
         if points.count == 2 {
@@ -32,7 +32,7 @@ class SolutionEngine: NSObject {
             }
         }
 
-        return closestPoints
+        completion(closestPoints)
     }
 
 }

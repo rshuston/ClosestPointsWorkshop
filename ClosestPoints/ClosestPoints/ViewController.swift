@@ -101,13 +101,9 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         switch sender {
         case o_GenerateButton:
             generatePoints()
-            activateButtons()
             break
         case o_ControlButton:
-            deactivateButtons()
             findClosestPoints()
-            triggerPlotViewRedraw()
-            activateButtons()
             break
         default:
             break
@@ -202,9 +198,12 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
     }
 
     func generatePoints() {
+        deactivateButtons()
+
         constrainNumberOfPointsBox()
 
         pointCollection.clear()
+
         switch definitionManager.pointDistribution {
         case DefinitionManager.PointDistribution.Uniform:
             pointCollection.generateUniformRandomPoints(numberOfPoints: definitionManager.numberOfPoints,
@@ -221,10 +220,18 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         }
 
         triggerPlotViewRedraw()
+
+        activateButtons()
     }
 
     func findClosestPoints() {
-        pointCollection.closestPoints = solutionEngine.findClosestPoints_NaiveCombination(points: pointCollection.points)
+        deactivateButtons()
+
+        solutionEngine.findClosestPoints_NaiveCombination(points: pointCollection.points, completion: { (closestPoints: (Point, Point)?) in
+            pointCollection.closestPoints = closestPoints
+            triggerPlotViewRedraw()
+            activateButtons()
+        })
     }
 
 }
