@@ -11,8 +11,9 @@ import GameKit
 
 protocol PointCollectionDataSource {
 
-    var points: [Point] { get }
     var maxDimension: UInt32 { get }
+    var points: [Point] { get }
+    var closestPoints: (Point, Point)? { get }
 
 }
 
@@ -25,6 +26,7 @@ class PointCollection: NSObject, PointCollectionDataSource {
 
     let maxDimension: UInt32 = 1024
     var points: [Point]
+    var closestPoints: (Point, Point)?
 
     // MARK: - Initializers
 
@@ -33,6 +35,7 @@ class PointCollection: NSObject, PointCollectionDataSource {
         g_distribution = GKGaussianDistribution(lowestValue: 0, highestValue: Int(maxDimension))
 
         points = []
+        closestPoints = nil
     }
 
     convenience init(withPoints: [Point]) {
@@ -44,29 +47,33 @@ class PointCollection: NSObject, PointCollectionDataSource {
 
     func clear() {
         points = []
+        closestPoints = nil
     }
 
-    func generateUniformRandomPoints(numberOfPoints: Int) {
-        _generateRandomPoints(numberOfPoints: numberOfPoints) {
-            return CGFloat(u_distribution.nextInt())
-        }
+    func generateUniformRandomPoints(numberOfPoints: Int, maxX: CGFloat, maxY: CGFloat, margin: CGFloat) {
+        let xDistribution = GKRandomDistribution(lowestValue: Int(margin), highestValue: Int(maxX - margin))
+        let yDistribution = GKRandomDistribution(lowestValue: Int(margin), highestValue: Int(maxY - margin))
+        _generateRandomPoints(numberOfPoints: numberOfPoints, xDist: xDistribution, yDist: yDistribution)
     }
 
-    func generateClusteredRandomPoints(numberOfPoints: Int) {
-        _generateRandomPoints(numberOfPoints: numberOfPoints) {
-            return CGFloat(g_distribution.nextInt())
-        }
+    func generateClusteredRandomPoints(numberOfPoints: Int, maxX: CGFloat, maxY: CGFloat, margin: CGFloat) {
+        let xDistribution = GKGaussianDistribution(lowestValue: Int(margin), highestValue: Int(maxX - margin))
+        let yDistribution = GKGaussianDistribution(lowestValue: Int(margin), highestValue: Int(maxY - margin))
+        _generateRandomPoints(numberOfPoints: numberOfPoints, xDist: xDistribution, yDist: yDistribution)
     }
 
-    private func _generateRandomPoints(numberOfPoints: Int, usingRandom: () -> CGFloat) {
+    private func _generateRandomPoints(numberOfPoints: Int, xDist: GKRandomDistribution, yDist: GKRandomDistribution) {
+        points = []
         if numberOfPoints > 0 {
             for _ in 1...numberOfPoints {
-                let x = usingRandom()
-                let y = usingRandom()
+                let x = CGFloat(xDist.nextInt())
+                let y = CGFloat(yDist.nextInt())
                 let p = Point(x: x, y: y)
                 points.append(p)
             }
         }
+
+        closestPoints = nil
     }
 
 }

@@ -102,7 +102,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
             break
         case o_ControlButton:
             deactivateButtons()
-            solutionEngine.findClosestPoints()
+            findClosestPoints()
             triggerPlotViewRedraw()
             activateButtons()
             break
@@ -127,7 +127,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         controlManager.solverOption = ControlManager.SolverOption.Live
 
         // SPIKE: ... for now
-        o_ControlButton.title = "Run"
+        o_ControlButton.title = "Solve"
 
         generatePoints()
         activateButtons()
@@ -204,14 +204,24 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         pointCollection.clear()
         switch definitionManager.pointDistribution {
         case DefinitionManager.PointDistribution.Uniform:
-            pointCollection.generateUniformRandomPoints(numberOfPoints: definitionManager.numberOfPoints)
+            pointCollection.generateUniformRandomPoints(numberOfPoints: definitionManager.numberOfPoints,
+                                                        maxX: o_PlotView.bounds.width,
+                                                        maxY: o_PlotView.bounds.height,
+                                                        margin: o_PlotView.pointRadius)
             break
         case DefinitionManager.PointDistribution.Clustered:
-            pointCollection.generateClusteredRandomPoints(numberOfPoints: definitionManager.numberOfPoints)
+            pointCollection.generateClusteredRandomPoints(numberOfPoints: definitionManager.numberOfPoints,
+                                                          maxX: o_PlotView.bounds.width,
+                                                          maxY: o_PlotView.bounds.height,
+                                                          margin: o_PlotView.pointRadius)
             break
         }
 
         triggerPlotViewRedraw()
+    }
+
+    func findClosestPoints() {
+        pointCollection.closestPoints = solutionEngine.findClosestPoints_NaiveCombination(points: pointCollection.points)
     }
 
 }

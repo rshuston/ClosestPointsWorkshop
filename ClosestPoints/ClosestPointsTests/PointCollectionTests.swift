@@ -42,10 +42,24 @@ class PointCollectionTests: XCTestCase {
         XCTAssertEqual(subject.points.count, 0)
     }
 
+    func test_PointCollection_clear_RemovesClosestPointsPair() {
+        let points = [ Point(x: 1, y: 2), Point(x: 3, y: 4) ]
+        let pair = (points[0], points[1])
+
+        let subject = PointCollection()
+        subject.points = points
+        subject.closestPoints = pair
+
+        subject.clear()
+
+        XCTAssertEqual(subject.points.count, 0)
+        XCTAssertNil(subject.closestPoints)
+    }
+
     func test_PointCollection_generateUniformRandomPoints_PopulatesList() {
         let subject = PointCollection()
 
-        subject.generateUniformRandomPoints(numberOfPoints: 10)
+        subject.generateUniformRandomPoints(numberOfPoints: 10, maxX: 100, maxY: 100, margin: 8)
 
         XCTAssertEqual(subject.points.count, 10)
     }
@@ -53,7 +67,7 @@ class PointCollectionTests: XCTestCase {
     func test_PointCollection_generateClusteredRandomPoints_PopulatesList() {
         let subject = PointCollection()
 
-        subject.generateClusteredRandomPoints(numberOfPoints: 10)
+        subject.generateClusteredRandomPoints(numberOfPoints: 10, maxX: 100, maxY: 100, margin: 8)
 
         XCTAssertEqual(subject.points.count, 10)
     }

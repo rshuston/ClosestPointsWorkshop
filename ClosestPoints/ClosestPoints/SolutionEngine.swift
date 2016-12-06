@@ -10,8 +10,29 @@ import Cocoa
 
 class SolutionEngine: NSObject {
 
-    func findClosestPoints() {
-        print("It is pitch black. You are likely to be eaten by a grue.")
+    func findClosestPoints_NaiveCombination(points: [Point]) -> (Point, Point)? {
+        var closestPoints: (Point, Point)?
+        
+        if points.count == 2 {
+            closestPoints = (points[0], points[1])
+        } else if points.count > 2 {
+            var smallestDist_sq: CGFloat = CGFloat.greatestFiniteMagnitude
+            for ptA in points {
+                for ptB in points {
+                    if ptB != ptA {
+                        let dx = ptB.x - ptA.x
+                        let dy = ptB.y - ptA.y
+                        let dist_sq = dx * dx + dy * dy
+                        if dist_sq < smallestDist_sq {
+                            closestPoints = (ptA, ptB)
+                            smallestDist_sq = dist_sq
+                        }
+                    }
+                }
+            }
+        }
+
+        return closestPoints
     }
 
 }
