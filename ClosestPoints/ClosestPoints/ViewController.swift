@@ -241,11 +241,16 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
     func findClosestPoints() {
         deactivateButtons()
 
+        pointCollection.clearClosestPoints()
+        pointCollection.clearCheckPoints()
+
         DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
             self.solutionEngine.permutationSolver.findClosestPoints(points: self.pointCollection.points, monitor: {
-                (closestPoints: (Point, Point)?) -> Void in
-                self.pointCollection.closestPoints = closestPoints
-                self.pointCollection.closestPointsColor = NSColor.red
+                (checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Void in
+                self.pointCollection.closestPoints = closestPointsSoFar
+                self.pointCollection.closestPointsColor = NSColor.blue
+                self.pointCollection.checkPoints = checkPoints
+                self.pointCollection.checkPointsColor = NSColor.red
                 DispatchQueue.main.async {
                     self.triggerPlotViewRedraw()
                 }
@@ -253,6 +258,8 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
             }, completion: { (closestPoints: (Point, Point)?) in
                 self.pointCollection.closestPoints = closestPoints
                 self.pointCollection.closestPointsColor = NSColor.blue
+                self.pointCollection.checkPoints = nil
+                self.pointCollection.checkPointsColor = nil
                 DispatchQueue.main.async {
                     self.triggerPlotViewRedraw()
                     self.activateButtons()

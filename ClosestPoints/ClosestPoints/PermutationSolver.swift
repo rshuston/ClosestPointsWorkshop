@@ -11,13 +11,13 @@ import Cocoa
 class PermutationSolver: Solver {
 
     override func findClosestPoints(points: [Point],
-                                    monitor: (((Point, Point)?) -> Void)?,
+                                    monitor: (((Point, Point), (Point, Point)?) -> Void)?,
                                     completion: (((Point, Point)?) -> Void)) {
         var closestPoints: (Point, Point)?
 
         if points.count == 2 {
             closestPoints = (points[0], points[1])
-            monitor?(closestPoints)
+            monitor?(closestPoints!, closestPoints)
         } else if points.count > 2 {
             var smallestDist_sq: CGFloat = CGFloat.greatestFiniteMagnitude
             for ptA in points {
@@ -30,7 +30,7 @@ class PermutationSolver: Solver {
                             smallestDist_sq = dist_sq
                             closestPoints = (ptA, ptB)
                         }
-                        monitor?((ptA, ptB))
+                        monitor?((ptA, ptB), closestPoints)
                     }
                 }
             }

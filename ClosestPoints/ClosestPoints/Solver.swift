@@ -10,8 +10,12 @@ import Cocoa
 
 class Solver: NSObject {
 
+    // points: the point array to search
+    // monitor: optional closure that passes the current point pair, and the best point pair so far (optional)
+    // completion: closure that passes the found closest point pair (optional)
+
     func findClosestPoints(points: [Point],
-                           monitor: (((Point, Point)?) -> Void)?,
+                           monitor: (((Point, Point), (Point, Point)?) -> Void)?,
                            completion: (((Point, Point)?) -> Void)) {
         completion(nil)
     }

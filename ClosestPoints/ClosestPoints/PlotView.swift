@@ -22,39 +22,53 @@ class PlotView: NSView {
         if let pds = pointDataSource {
             let points = pds.points
             for index in 0..<points.count {
-                let pt = points[index]
-                let rect = NSRect(x: pt.x - pointRadius, y: pt.y - pointRadius, width: 2 * pointRadius, height: 2 * pointRadius)
-                let path = NSBezierPath(ovalIn: rect)
-                path.fill()
+                drawPoint(points[index].getAsNSPoint(), radius: pointRadius, color: NSColor.black)
+            }
+
+            if let checkPoints = pds.checkPoints {
+                let color = pds.checkPointsColor ?? NSColor.black
+
+                let p1 = checkPoints.0.getAsNSPoint()
+                let p2 = checkPoints.1.getAsNSPoint()
+
+                drawPoint(p1, radius: pointRadius, color: color)
+                drawPoint(p2, radius: pointRadius, color: color)
+
+                drawLine(from: p1, to: p2, width: 2, color: color)
             }
 
             if let closestPoints = pds.closestPoints {
-                var rect: NSRect
-                var path: NSBezierPath
-
                 let color = pds.closestPointsColor ?? NSColor.black
-                color.set()
 
                 let p1 = closestPoints.0.getAsNSPoint()
                 let p2 = closestPoints.1.getAsNSPoint()
 
-                rect = NSRect(x: p1.x - pointRadius, y: p1.y - pointRadius, width: 2 * pointRadius, height: 2 * pointRadius)
-                path = NSBezierPath(ovalIn: rect)
-                path.fill()
+                drawPoint(p1, radius: pointRadius, color: color)
+                drawPoint(p2, radius: pointRadius, color: color)
 
-                rect = NSRect(x: p2.x - pointRadius, y: p2.y - pointRadius, width: 2 * pointRadius, height: 2 * pointRadius)
-                path = NSBezierPath(ovalIn: rect)
-                path.fill()
-
-                path = NSBezierPath()
-                path.lineWidth = 2
-
-                path.move(to: p1)
-                path.line(to: p2)
-                path.close()
-                path.stroke()
+                drawLine(from: p1, to: p2, width: 2, color: color)
             }
         }
     }
-    
+
+    func drawPoint(_ point: NSPoint, radius: CGFloat, color: NSColor) {
+        color.set()
+
+        let rect = NSRect(x: point.x - radius, y: point.y - radius, width: 2 * radius, height: 2 * radius)
+        let path = NSBezierPath(ovalIn: rect)
+        path.fill()
+    }
+
+    func drawLine(from: NSPoint, to: NSPoint, width: CGFloat, color: NSColor) {
+        color.set()
+
+        let path = NSBezierPath()
+        path.lineWidth = width
+
+        path.move(to: from)
+        path.line(to: to)
+        path.close()
+        path.stroke()
+    }
+
 }
