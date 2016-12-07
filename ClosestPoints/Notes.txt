@@ -1,2 +1,16 @@
-General notes...
+Permutation:
+order matters
+nPr = P(n,r) = n! / (n-r)!
 
+
+Combination:
+order does not matter
+nCr = C(n,r) = P(n,r) / r!
+             = n! / ((n-r)! * r!)
+"n choose r" is also the binomial coefficient
+
+
+Plane Sweep:
+
+
+Divide and Conquer:

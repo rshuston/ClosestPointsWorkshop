@@ -219,4 +219,44 @@ class PermutationSolverTests: XCTestCase {
         waitForExpectations(timeout: 1.0, handler: nil)
     }
 
+    func test_findClosestPoints_CallsMonitorClosureForForMultiplePointSet() {
+        var points: [Point] = []
+        let subject = PermutationSolver()
+
+        points.append(Point(x: 1, y: 2))
+        points.append(Point(x: 100, y: 100))
+        points.append(Point(x: 10, y: 10))
+        points.append(Point(x: 101, y: 101))
+        points.append(Point(x: 3, y: 4))
+
+        let completionExpectation = expectation(description: "completion")
+        var monitorCount = 0
+
+        subject.findClosestPoints(points: points, monitor: {
+            (checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Void in
+            monitorCount += 1
+
+            XCTAssertNotNil(closestPointsSoFar)
+        }, completion: {
+            (closestPoints: (Point, Point)?) -> Void in
+
+            XCTAssertEqual(monitorCount, 20) // Permutation (nPr) of 5P2 = 20
+
+            XCTAssertNotNil(closestPoints)
+
+            let listOrdered = (closestPoints?.0 == points[1])
+            if listOrdered {
+                XCTAssertEqual(closestPoints?.0, points[1])
+                XCTAssertEqual(closestPoints?.1, points[3])
+            } else {
+                XCTAssertEqual(closestPoints?.0, points[3])
+                XCTAssertEqual(closestPoints?.1, points[1])
+            }
+
+            completionExpectation.fulfill()
+        })
+
+        waitForExpectations(timeout: 1.0, handler: nil)
+    }
+
 }
