@@ -1,5 +1,2 @@
 General notes...
 
-func findClosestPoints_NaiveCombination(points: [Point]) -> (Point, Point)? {
-    return (firstPoint, secondPoint)
-}

@@ -57,13 +57,13 @@ class PermutationSolverTests: XCTestCase {
             (closestPoints: (Point, Point)?) -> Void in
             XCTAssertNotNil(closestPoints)
 
-            let listOrdered = (closestPoints!.0 == points[0])
+            let listOrdered = (closestPoints?.0 == points[0])
             if listOrdered {
-                XCTAssertEqual(closestPoints!.0, points[0])
-                XCTAssertEqual(closestPoints!.1, points[1])
+                XCTAssertEqual(closestPoints?.0, points[0])
+                XCTAssertEqual(closestPoints?.1, points[1])
             } else {
-                XCTAssertEqual(closestPoints!.0, points[1])
-                XCTAssertEqual(closestPoints!.1, points[0])
+                XCTAssertEqual(closestPoints?.0, points[1])
+                XCTAssertEqual(closestPoints?.1, points[0])
             }
 
             completionExpectation.fulfill()
@@ -88,16 +88,16 @@ class PermutationSolverTests: XCTestCase {
 
             XCTAssertNotNil(closestPointsSoFar)
 
-            XCTAssertEqual(checkPoints.0, closestPointsSoFar!.0)
-            XCTAssertEqual(checkPoints.1, closestPointsSoFar!.1)
+            XCTAssertEqual(checkPoints.0, closestPointsSoFar?.0)
+            XCTAssertEqual(checkPoints.1, closestPointsSoFar?.1)
 
-            let listOrdered = (closestPointsSoFar!.0 == points[0])
+            let listOrdered = (closestPointsSoFar?.0 == points[0])
             if listOrdered {
-                XCTAssertEqual(closestPointsSoFar!.0, points[0])
-                XCTAssertEqual(closestPointsSoFar!.1, points[1])
+                XCTAssertEqual(closestPointsSoFar?.0, points[0])
+                XCTAssertEqual(closestPointsSoFar?.1, points[1])
             } else {
-                XCTAssertEqual(closestPointsSoFar!.0, points[1])
-                XCTAssertEqual(closestPointsSoFar!.1, points[0])
+                XCTAssertEqual(closestPointsSoFar?.0, points[1])
+                XCTAssertEqual(closestPointsSoFar?.1, points[0])
             }
         }, completion: {
             (closestPoints: (Point, Point)?) -> Void in
@@ -106,13 +106,13 @@ class PermutationSolverTests: XCTestCase {
 
             XCTAssertNotNil(closestPoints)
 
-            let listOrdered = (closestPoints!.0 == points[0])
+            let listOrdered = (closestPoints?.0 == points[0])
             if listOrdered {
-                XCTAssertEqual(closestPoints!.0, points[0])
-                XCTAssertEqual(closestPoints!.1, points[1])
+                XCTAssertEqual(closestPoints?.0, points[0])
+                XCTAssertEqual(closestPoints?.1, points[1])
             } else {
-                XCTAssertEqual(closestPoints!.0, points[1])
-                XCTAssertEqual(closestPoints!.1, points[0])
+                XCTAssertEqual(closestPoints?.0, points[1])
+                XCTAssertEqual(closestPoints?.1, points[0])
             }
 
             completionExpectation.fulfill()
@@ -135,13 +135,13 @@ class PermutationSolverTests: XCTestCase {
             (closestPoints: (Point, Point)?) -> Void in
             XCTAssertNotNil(closestPoints)
 
-            let listOrdered = (closestPoints!.0 == points[0])
+            let listOrdered = (closestPoints?.0 == points[0])
             if listOrdered {
-                XCTAssertEqual(closestPoints!.0, points[0])
-                XCTAssertEqual(closestPoints!.1, points[2])
+                XCTAssertEqual(closestPoints?.0, points[0])
+                XCTAssertEqual(closestPoints?.1, points[2])
             } else {
-                XCTAssertEqual(closestPoints!.0, points[2])
-                XCTAssertEqual(closestPoints!.1, points[0])
+                XCTAssertEqual(closestPoints?.0, points[2])
+                XCTAssertEqual(closestPoints?.1, points[0])
             }
 
             completionExpectation.fulfill()
@@ -173,13 +173,13 @@ class PermutationSolverTests: XCTestCase {
 
             XCTAssertNotNil(closestPoints)
 
-            let listOrdered = (closestPoints!.0 == points[0])
+            let listOrdered = (closestPoints?.0 == points[0])
             if listOrdered {
-                XCTAssertEqual(closestPoints!.0, points[0])
-                XCTAssertEqual(closestPoints!.1, points[2])
+                XCTAssertEqual(closestPoints?.0, points[0])
+                XCTAssertEqual(closestPoints?.1, points[2])
             } else {
-                XCTAssertEqual(closestPoints!.0, points[2])
-                XCTAssertEqual(closestPoints!.1, points[0])
+                XCTAssertEqual(closestPoints?.0, points[2])
+                XCTAssertEqual(closestPoints?.1, points[0])
             }
 
             completionExpectation.fulfill()
@@ -204,13 +204,13 @@ class PermutationSolverTests: XCTestCase {
             (closestPoints: (Point, Point)?) -> Void in
             XCTAssertNotNil(closestPoints)
 
-            let listOrdered = (closestPoints!.0 == points[1])
+            let listOrdered = (closestPoints?.0 == points[1])
             if listOrdered {
-                XCTAssertEqual(closestPoints!.0, points[1])
-                XCTAssertEqual(closestPoints!.1, points[3])
+                XCTAssertEqual(closestPoints?.0, points[1])
+                XCTAssertEqual(closestPoints?.1, points[3])
             } else {
-                XCTAssertEqual(closestPoints!.0, points[3])
-                XCTAssertEqual(closestPoints!.1, points[1])
+                XCTAssertEqual(closestPoints?.0, points[3])
+                XCTAssertEqual(closestPoints?.1, points[1])
             }
             
             completionExpectation.fulfill()
