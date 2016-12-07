@@ -242,7 +242,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         deactivateButtons()
 
         DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
-            self.solutionEngine.findClosestPoints(points: self.pointCollection.points, monitor: {
+            self.solutionEngine.permutationSolver.findClosestPoints(points: self.pointCollection.points, monitor: {
                 (closestPoints: (Point, Point)?) -> Void in
                 self.pointCollection.closestPoints = closestPoints
                 self.pointCollection.closestPointsColor = NSColor.red
