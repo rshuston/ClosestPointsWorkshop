@@ -10,9 +10,9 @@ import Cocoa
 
 class SolutionEngine: NSObject {
 
-    func findClosestPoints_NaiveCombination(points: [Point],
-                                            monitor: (((Point, Point)?) -> Void)?,
-                                            completion: (((Point, Point)?) -> Void)) {
+    func findClosestPoints(points: [Point],
+                           monitor: (((Point, Point)?) -> Void)?,
+                           completion: (((Point, Point)?) -> Void)) {
         var closestPoints: (Point, Point)?
         
         if points.count == 2 {

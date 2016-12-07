@@ -53,11 +53,11 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
             break
         case o_SolutionTypePopUp:
             switch sender.titleOfSelectedItem {
-            case "Naive Combination"?:
-                controlManager.solutionType = ControlManager.SolutionType.NaiveCombination
+            case "Permutation Search"?:
+                controlManager.solutionType = ControlManager.SolutionType.PermutationSearch
                 break
-            case "Sorted Search"?:
-                controlManager.solutionType = ControlManager.SolutionType.SortedSearch
+            case "Combination Search"?:
+                controlManager.solutionType = ControlManager.SolutionType.CombinationSearch
                 break
             case "Plane Sweep"?:
                 controlManager.solutionType = ControlManager.SolutionType.PlaneSweep
@@ -122,7 +122,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         definitionManager.numberOfPoints = o_NumberOfPointsBox.integerValue
         definitionManager.pointDistribution = DefinitionManager.PointDistribution.Uniform
 
-        controlManager.solutionType = ControlManager.SolutionType.NaiveCombination
+        controlManager.solutionType = ControlManager.SolutionType.PermutationSearch
         controlManager.solverOption = ControlManager.SolverOption.OneShot
 
         // SPIKE: ... for now
@@ -173,7 +173,21 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
 
     func activateButtons() {
         o_GenerateButton.isEnabled = true
-        o_ControlButton.isEnabled = (pointCollection.points.count > 0)
+
+        switch controlManager.solutionType {
+        case ControlManager.SolutionType.PermutationSearch:
+            o_ControlButton.isEnabled = (pointCollection.points.count > 0)
+            break
+        case ControlManager.SolutionType.CombinationSearch:
+            o_ControlButton.isEnabled = false
+            break
+        case ControlManager.SolutionType.PlaneSweep:
+            o_ControlButton.isEnabled = false
+            break
+        case ControlManager.SolutionType.DivideAndConquer:
+            o_ControlButton.isEnabled = false
+            break
+        }
     }
 
     func deactivateButtons() {
@@ -228,7 +242,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         deactivateButtons()
 
         DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
-            self.solutionEngine.findClosestPoints_NaiveCombination(points: self.pointCollection.points, monitor: {
+            self.solutionEngine.findClosestPoints(points: self.pointCollection.points, monitor: {
                 (closestPoints: (Point, Point)?) -> Void in
                 self.pointCollection.closestPoints = closestPoints
                 self.pointCollection.closestPointsColor = NSColor.red

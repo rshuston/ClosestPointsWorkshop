@@ -12,13 +12,13 @@ import XCTest
 
 class SolutionEngineTests: XCTestCase {
 
-    func test_findClosestPoints_NaiveCombination_ReturnsNilForEmptyPointSet() {
+    func test_findClosestPoints_ReturnsNilForEmptyPointSet() {
         let points: [Point] = []
         let subject = SolutionEngine()
 
         let completionExpectation = expectation(description: "completion")
 
-        subject.findClosestPoints_NaiveCombination(points: points, monitor: nil, completion: {
+        subject.findClosestPoints(points: points, monitor: nil, completion: {
             (closestPoints: (Point, Point)?) -> Void in
             XCTAssertNil(closestPoints)
             completionExpectation.fulfill()
@@ -27,7 +27,7 @@ class SolutionEngineTests: XCTestCase {
         waitForExpectations(timeout: 1.0, handler: nil)
     }
 
-    func test_findClosestPoints_NaiveCombination_ReturnsNilForInsufficientPointSet() {
+    func test_findClosestPoints_ReturnsNilForInsufficientPointSet() {
         var points: [Point] = []
         let subject = SolutionEngine()
 
@@ -35,7 +35,7 @@ class SolutionEngineTests: XCTestCase {
 
         let completionExpectation = expectation(description: "completion")
 
-        subject.findClosestPoints_NaiveCombination(points: points, monitor: nil, completion: {
+        subject.findClosestPoints(points: points, monitor: nil, completion: {
             (closestPoints: (Point, Point)?) -> Void in
             XCTAssertNil(closestPoints)
             completionExpectation.fulfill()
@@ -44,7 +44,7 @@ class SolutionEngineTests: XCTestCase {
         waitForExpectations(timeout: 1.0, handler: nil)
     }
 
-    func test_findClosestPoints_NaiveCombination_FindsClosestPointsForTrivialPointSet() {
+    func test_findClosestPoints_FindsClosestPointsForTrivialPointSet() {
         var points: [Point] = []
         let subject = SolutionEngine()
 
@@ -53,7 +53,7 @@ class SolutionEngineTests: XCTestCase {
 
         let completionExpectation = expectation(description: "completion")
 
-        subject.findClosestPoints_NaiveCombination(points: points, monitor: nil, completion: {
+        subject.findClosestPoints(points: points, monitor: nil, completion: {
             (closestPoints: (Point, Point)?) -> Void in
             XCTAssertNotNil(closestPoints)
 
@@ -72,7 +72,7 @@ class SolutionEngineTests: XCTestCase {
         waitForExpectations(timeout: 1.0, handler: nil)
     }
 
-    func test_findClosestPoints_NaiveCombination_CallsMonitorClosureForTrivialPointSet() {
+    func test_findClosestPoints_CallsMonitorClosureForTrivialPointSet() {
         var points: [Point] = []
         let subject = SolutionEngine()
 
@@ -82,7 +82,7 @@ class SolutionEngineTests: XCTestCase {
         let completionExpectation = expectation(description: "completion")
         var monitorCount = 0
 
-        subject.findClosestPoints_NaiveCombination(points: points, monitor: {
+        subject.findClosestPoints(points: points, monitor: {
             (closestPoints: (Point, Point)?) -> Void in
             monitorCount += 1
 
@@ -118,7 +118,7 @@ class SolutionEngineTests: XCTestCase {
         waitForExpectations(timeout: 1.0, handler: nil)
     }
 
-    func test_findClosestPoints_NaiveCombination_FindsClosestPointsForTrinaryPointSet() {
+    func test_findClosestPoints_FindsClosestPointsForTrinaryPointSet() {
         var points: [Point] = []
         let subject = SolutionEngine()
 
@@ -128,7 +128,7 @@ class SolutionEngineTests: XCTestCase {
 
         let completionExpectation = expectation(description: "completion")
 
-        subject.findClosestPoints_NaiveCombination(points: points, monitor: nil, completion: {
+        subject.findClosestPoints(points: points, monitor: nil, completion: {
             (closestPoints: (Point, Point)?) -> Void in
             XCTAssertNotNil(closestPoints)
 
@@ -147,7 +147,7 @@ class SolutionEngineTests: XCTestCase {
         waitForExpectations(timeout: 1.0, handler: nil)
     }
 
-    func test_findClosestPoints_NaiveCombination_CallsMonitorClosureForTrinaryPointSet() {
+    func test_findClosestPoints_CallsMonitorClosureForTrinaryPointSet() {
         var points: [Point] = []
         let subject = SolutionEngine()
 
@@ -158,7 +158,7 @@ class SolutionEngineTests: XCTestCase {
         let completionExpectation = expectation(description: "completion")
         var monitorCount = 0
 
-        subject.findClosestPoints_NaiveCombination(points: points, monitor: {
+        subject.findClosestPoints(points: points, monitor: {
             (closestPoints: (Point, Point)?) -> Void in
             monitorCount += 1
 
@@ -185,7 +185,7 @@ class SolutionEngineTests: XCTestCase {
         waitForExpectations(timeout: 1.0, handler: nil)
     }
 
-    func test_findClosestPoints_NaiveCombination_FindsClosestPointsForMultiplePointSet() {
+    func test_findClosestPoints_FindsClosestPointsForMultiplePointSet() {
         var points: [Point] = []
         let subject = SolutionEngine()
 
@@ -197,7 +197,7 @@ class SolutionEngineTests: XCTestCase {
 
         let completionExpectation = expectation(description: "completion")
 
-        subject.findClosestPoints_NaiveCombination(points: points, monitor: nil, completion: {
+        subject.findClosestPoints(points: points, monitor: nil, completion: {
             (closestPoints: (Point, Point)?) -> Void in
             XCTAssertNotNil(closestPoints)
 

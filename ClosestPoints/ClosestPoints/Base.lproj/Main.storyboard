@@ -818,15 +818,15 @@
                                         </textField>
                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m1m-Ki-6qY">
                                             <rect key="frame" x="113" y="100" width="166" height="26"/>
-                                            <popUpButtonCell key="cell" type="push" title="Naive Combination" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4Tv-jI-mBg" id="7GZ-oJ-zXe">
+                                            <popUpButtonCell key="cell" type="push" title="Permutation Search" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4Tv-jI-mBg" id="7GZ-oJ-zXe">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
                                                 <menu key="menu" id="vA0-k9-6sm">
                                                     <items>
-                                                        <menuItem title="Naive Combination" state="on" id="4Tv-jI-mBg">
+                                                        <menuItem title="Permutation Search" state="on" id="4Tv-jI-mBg">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
                                                         </menuItem>
-                                                        <menuItem title="Sorted Search" id="zqt-Wq-4M5">
+                                                        <menuItem title="Combination Search" id="zqt-Wq-4M5">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
                                                         </menuItem>
                                                         <menuItem title="Plane Sweep" id="Mxl-AG-scy">

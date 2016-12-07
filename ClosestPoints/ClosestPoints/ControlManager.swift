@@ -11,8 +11,8 @@ import Cocoa
 class ControlManager: NSObject {
 
     enum SolutionType {
-        case NaiveCombination
-        case SortedSearch
+        case PermutationSearch
+        case CombinationSearch
         case PlaneSweep
         case DivideAndConquer
     }
@@ -25,7 +25,7 @@ class ControlManager: NSObject {
         case Live
     }
 
-    var solutionType = SolutionType.NaiveCombination
+    var solutionType = SolutionType.PermutationSearch
     var solverOption = SolverOption.Live
     
 }
