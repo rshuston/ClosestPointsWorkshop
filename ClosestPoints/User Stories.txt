@@ -1,28 +1,39 @@
 As a ..., I want to ..., so that I can ...
 
+
 As a nerd, I want to evaluate the closest-points solution using the four methods:
-1) Naive Combination
-2) Sorted Search
+1) Permutation Search
+2) Combination Search
 3) Plane Sweep
 4) Divide and Conquer,
 so that I can compare the performance of the methods.
 
 As a nerd, I want to measure the execution time of a closest-points solution method, so that I can assess its performance.
 
+
 As a nerd, I want to generate test points for the closest-points solution using two methods:
 1) Uniform random
 2) Clustered random,
 so that I can better exercise the behavior of the solution process.
 
-As a nerd, I want to be able to manually position the points being evaluated by the closest-points algorithm, so that I have better control of the data set.
-
 As a nerd, I want to have the ability to set the number of points being evaluated by the closest-points algorithm, so that I have better control of the data set.
 
-As a nerd, I want to have control over the closest-point solution operations via the four strategies:
-1) Live
-2) Fast Animation
+As a nerd, I want to be able to manually position the points being evaluated by the closest-points algorithm, so that I have better control of the data set.
+
+As a nerd, I want to be able to view the position of points, so that I know the location of a point as it's being moved.
+
+
+As a nerd, I want to have control over the closest-point solution operations via the five strategies:
+1) One Shot
+2) Single Step
 3) Slow Animation
-4) Single Step
-so that I have the ability to both use and explore the solution operations.
+4) Fast Animation
+5) Live
+so that I have the ability to explore the solution operations.
 
 As a nerd, I want to trace the execution paths of the closes-points solution, so that I can visually monitor the intermediate results of the solution process.
+
+As a nerd, I want to have the ability to suspend and resume the execution of the closes-points solution, so that I can view an intermediate solution.
+
+As a nerd, I want to have the ability to abort the execution of the closes-points solution, so that I can recover from inadvertently running "Slow Animation" for a large point set with an inefficient solution method.
+

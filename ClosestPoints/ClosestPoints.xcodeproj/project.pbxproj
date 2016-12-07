@@ -25,7 +25,6 @@
 		4E84FFCC1DF81BD700F5E27F /* CombinationSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E84FFCB1DF81BD700F5E27F /* CombinationSolver.swift */; };
 		4E84FFCE1DF81BEF00F5E27F /* CombinationSolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E84FFCD1DF81BEF00F5E27F /* CombinationSolverTests.swift */; };
 		4E8DCA351DF3BE74003139E1 /* PDLTestBench.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DCA341DF3BE74003139E1 /* PDLTestBench.framework */; };
-		4E8DCA371DF3BE79003139E1 /* PDLToolBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DCA361DF3BE79003139E1 /* PDLToolBox.framework */; };
 		4EB647571DF4B085004F10F7 /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB647561DF4B085004F10F7 /* AppUtils.swift */; };
 		4EDEDF071DF241F100BDA336 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDEDF061DF241F100BDA336 /* Point.swift */; };
 		4EDEDF0A1DF2426600BDA336 /* PointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDEDF091DF2426600BDA336 /* PointTests.swift */; };
@@ -89,7 +88,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E8DCA351DF3BE74003139E1 /* PDLTestBench.framework in Frameworks */,
-				4E8DCA371DF3BE79003139E1 /* PDLToolBox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

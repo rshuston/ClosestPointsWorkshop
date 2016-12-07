@@ -1,13 +1,17 @@
 Permutation:
 order matters
-nPr = P(n,r) = n! / (n-r)!
+nPr = P(n,r)
+    = n! / (n-r)!
+O(n!)
 
 
 Combination:
 order does not matter
-nCr = C(n,r) = P(n,r) / r!
-             = n! / ((n-r)! * r!)
+nCr = C(n,r)
+    = P(n,r) / r!
+    = n! / ((n-r)! * r!)
 "n choose r" is also the binomial coefficient
+O(n!)?
 
 
 Plane Sweep:
