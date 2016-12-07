@@ -44,6 +44,7 @@ class PointCollection: NSObject, PointCollectionDataSource {
     override init() {
         points = []
         closestPoints = nil
+        closestPointsColor = nil
     }
 
     convenience init(withPoints: [Point]) {
@@ -56,6 +57,7 @@ class PointCollection: NSObject, PointCollectionDataSource {
     func clear() {
         points = []
         closestPoints = nil
+        closestPointsColor = nil
     }
 
     func generateUniformRandomPoints(numberOfPoints: Int, maxX: CGFloat, maxY: CGFloat, margin: CGFloat) {
@@ -80,8 +82,6 @@ class PointCollection: NSObject, PointCollectionDataSource {
                 points.append(p)
             }
         }
-
-        closestPoints = nil
     }
 
 }

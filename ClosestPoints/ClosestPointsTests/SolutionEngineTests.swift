@@ -166,7 +166,7 @@ class SolutionEngineTests: XCTestCase {
         }, completion: {
             (closestPoints: (Point, Point)?) -> Void in
 
-            XCTAssertEqual(monitorCount, 2)  // 1: p1-p0, 2: p2-p0
+            XCTAssertEqual(monitorCount, 6) // Permutation (nPr) of 3P2 = 6
 
             XCTAssertNotNil(closestPoints)
 

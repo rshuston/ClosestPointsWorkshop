@@ -29,8 +29,8 @@ class SolutionEngine: NSObject {
                         if dist_sq < smallestDist_sq {
                             smallestDist_sq = dist_sq
                             closestPoints = (ptA, ptB)
-                            monitor?(closestPoints)
                         }
+                        monitor?((ptA, ptB))
                     }
                 }
             }

@@ -73,6 +73,21 @@ class PointCollectionTests: XCTestCase {
         XCTAssertNil(subject.closestPoints)
     }
 
+    func test_PointCollection_clear_RemovesClosestPointsColor() {
+        let points = [ Point(x: 1, y: 2), Point(x: 3, y: 4) ]
+        let pair = (points[0], points[1])
+
+        let subject = PointCollection()
+        subject.points = points
+        subject.closestPoints = pair
+        subject.closestPointsColor = NSColor.green
+
+        subject.clear()
+
+        XCTAssertEqual(subject.points.count, 0)
+        XCTAssertNil(subject.closestPointsColor)
+    }
+
     func test_PointCollection_generateUniformRandomPoints_PopulatesList() {
         let subject = PointCollection()
 
