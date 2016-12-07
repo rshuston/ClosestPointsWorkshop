@@ -11,5 +11,6 @@ import Cocoa
 class SolutionEngine: NSObject {
 
     let permutationSolver = PermutationSolver()
+    let combinationSolver = CombinationSolver()
 
 }

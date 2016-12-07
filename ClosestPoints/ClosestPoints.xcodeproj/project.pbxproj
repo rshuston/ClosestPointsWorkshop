@@ -22,6 +22,8 @@
 		4E397FFC1DF315220053BBAA /* ControlManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E397FFB1DF315220053BBAA /* ControlManagerTests.swift */; };
 		4E397FFE1DF315340053BBAA /* SolutionEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E397FFD1DF315340053BBAA /* SolutionEngineTests.swift */; };
 		4E3E618B1DE2020B002A75C7 /* PlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3E618A1DE2020B002A75C7 /* PlotView.swift */; };
+		4E84FFCC1DF81BD700F5E27F /* CombinationSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E84FFCB1DF81BD700F5E27F /* CombinationSolver.swift */; };
+		4E84FFCE1DF81BEF00F5E27F /* CombinationSolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E84FFCD1DF81BEF00F5E27F /* CombinationSolverTests.swift */; };
 		4E8DCA351DF3BE74003139E1 /* PDLTestBench.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DCA341DF3BE74003139E1 /* PDLTestBench.framework */; };
 		4E8DCA371DF3BE79003139E1 /* PDLToolBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DCA361DF3BE79003139E1 /* PDLToolBox.framework */; };
 		4EB647571DF4B085004F10F7 /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB647561DF4B085004F10F7 /* AppUtils.swift */; };
@@ -62,6 +64,8 @@
 		4E397FFD1DF315340053BBAA /* SolutionEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolutionEngineTests.swift; sourceTree = "<group>"; };
 		4E3E618A1DE2020B002A75C7 /* PlotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlotView.swift; sourceTree = "<group>"; };
 		4E6F312B1DE5427E00221A9A /* User Stories.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "User Stories.txt"; sourceTree = "<group>"; };
+		4E84FFCB1DF81BD700F5E27F /* CombinationSolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinationSolver.swift; sourceTree = "<group>"; };
+		4E84FFCD1DF81BEF00F5E27F /* CombinationSolverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinationSolverTests.swift; sourceTree = "<group>"; };
 		4E8DCA341DF3BE74003139E1 /* PDLTestBench.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDLTestBench.framework; path = "../../../../Library/Developer/Xcode/DerivedData/ClosestPointsWorkshop-bjbkadvdhujgxxhiwklajocqyepz/Build/Products/Debug/PDLTestBench.framework"; sourceTree = "<group>"; };
 		4E8DCA361DF3BE79003139E1 /* PDLToolBox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDLToolBox.framework; path = "../../../../Library/Developer/Xcode/DerivedData/ClosestPointsWorkshop-bjbkadvdhujgxxhiwklajocqyepz/Build/Products/Debug/PDLToolBox.framework"; sourceTree = "<group>"; };
 		4EB647561DF4B085004F10F7 /* AppUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtils.swift; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 				4E397FF71DF314EC0053BBAA /* SolutionEngine.swift */,
 				4E0291EE1DF818EB00371684 /* Solver.swift */,
 				4E0291F01DF8194900371684 /* PermutationSolver.swift */,
+				4E84FFCB1DF81BD700F5E27F /* CombinationSolver.swift */,
 				4E0531391DD640EA006E9B8F /* Assets.xcassets */,
 				4E05313B1DD640EA006E9B8F /* Main.storyboard */,
 				4E05313E1DD640EA006E9B8F /* Info.plist */,
@@ -144,6 +149,7 @@
 				4E397FFB1DF315220053BBAA /* ControlManagerTests.swift */,
 				4E397FFD1DF315340053BBAA /* SolutionEngineTests.swift */,
 				4E0291F21DF8198E00371684 /* PermutationSolverTests.swift */,
+				4E84FFCD1DF81BEF00F5E27F /* CombinationSolverTests.swift */,
 				4E0531491DD640EA006E9B8F /* Info.plist */,
 			);
 			path = ClosestPointsTests;
@@ -264,6 +270,7 @@
 				4EB647571DF4B085004F10F7 /* AppUtils.swift in Sources */,
 				4EDEDF071DF241F100BDA336 /* Point.swift in Sources */,
 				4EDEDF0C1DF243D600BDA336 /* PointCollection.swift in Sources */,
+				4E84FFCC1DF81BD700F5E27F /* CombinationSolver.swift in Sources */,
 				4E397FF81DF314EC0053BBAA /* SolutionEngine.swift in Sources */,
 				4E397FF61DF314CF0053BBAA /* ControlManager.swift in Sources */,
 				4E0291F11DF8194900371684 /* PermutationSolver.swift in Sources */,
@@ -278,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E84FFCE1DF81BEF00F5E27F /* CombinationSolverTests.swift in Sources */,
 				4EDEDF0A1DF2426600BDA336 /* PointTests.swift in Sources */,
 				4E0531481DD640EA006E9B8F /* ClosestPointsTests.swift in Sources */,
 				4E397FFC1DF315220053BBAA /* ControlManagerTests.swift in Sources */,
