@@ -659,7 +659,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="ClosestPoints" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="-150"/>
+            <point key="canvasLocation" x="75" y="-202"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -668,7 +668,7 @@
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="640" height="480"/>
+                        <rect key="contentRect" x="196" y="240" width="800" height="600"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                     </window>
                     <connections>
@@ -677,26 +677,26 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="75" y="254"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="ClosestPoints" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="ZrH-qu-neQ" customClass="PlotView" customModule="ClosestPoints" customModuleProvider="target">
-                                <rect key="frame" x="20" y="185" width="600" height="275"/>
+                                <rect key="frame" x="20" y="185" width="760" height="395"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="Ttu-Lx-Ek3"/>
                                 </constraints>
                             </customView>
                             <box title="Definition" translatesAutoresizingMaskIntoConstraints="NO" id="dx0-aF-o0i">
-                                <rect key="frame" x="17" y="16" width="300" height="161"/>
+                                <rect key="frame" x="17" y="16" width="380" height="161"/>
                                 <view key="contentView" id="OHs-yZ-aGD">
-                                    <rect key="frame" x="2" y="2" width="296" height="144"/>
+                                    <rect key="frame" x="2" y="2" width="376" height="144"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ji7-Mf-roE">
@@ -726,7 +726,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JkB-LA-9DJ">
-                                            <rect key="frame" x="136" y="58" width="143" height="26"/>
+                                            <rect key="frame" x="136" y="58" width="223" height="26"/>
                                             <popUpButtonCell key="cell" type="push" title="Uniform" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="GN4-1q-dPX" id="3TI-eC-NYh">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -746,7 +746,7 @@
                                             </connections>
                                         </popUpButton>
                                         <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lH0-7J-0tc">
-                                            <rect key="frame" x="138" y="100" width="141" height="26"/>
+                                            <rect key="frame" x="138" y="100" width="221" height="26"/>
                                             <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="8y1-XD-ig8">
                                                 <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="b5W-NJ-1Mi"/>
                                                 <font key="font" metaFont="system"/>
@@ -785,13 +785,13 @@
                                 </constraints>
                             </box>
                             <box title="Control" translatesAutoresizingMaskIntoConstraints="NO" id="0Zc-hb-D1Z">
-                                <rect key="frame" x="323" y="16" width="300" height="161"/>
+                                <rect key="frame" x="403" y="16" width="380" height="161"/>
                                 <view key="contentView" id="hJA-Cw-d7e">
-                                    <rect key="frame" x="2" y="2" width="296" height="144"/>
+                                    <rect key="frame" x="2" y="2" width="376" height="144"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GKx-ce-V8e">
-                                            <rect key="frame" x="197" y="13" width="85" height="32"/>
+                                            <rect key="frame" x="277" y="13" width="85" height="32"/>
                                             <buttonCell key="cell" type="push" title="Control" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rkY-9u-hAq">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -817,7 +817,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m1m-Ki-6qY">
-                                            <rect key="frame" x="113" y="100" width="166" height="26"/>
+                                            <rect key="frame" x="113" y="100" width="246" height="26"/>
                                             <popUpButtonCell key="cell" type="push" title="Permutation Search" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4Tv-jI-mBg" id="7GZ-oJ-zXe">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -843,7 +843,7 @@
                                             </connections>
                                         </popUpButton>
                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z4F-Fd-lSn">
-                                            <rect key="frame" x="113" y="58" width="166" height="26"/>
+                                            <rect key="frame" x="113" y="58" width="246" height="26"/>
                                             <popUpButtonCell key="cell" type="push" title="One Shot" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="JVc-S4-fTm" id="11X-um-99E">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -918,7 +918,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="915"/>
+            <point key="canvasLocation" x="75" y="1058"/>
         </scene>
     </scenes>
 </document>
