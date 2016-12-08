@@ -12,7 +12,7 @@ class SolutionEngine: NSObject {
 
     var solving = false
 
-    let permutationSolver = PermutationSolver()
-    let combinationSolver = CombinationSolver()
+    var permutationSolver: PermutationSolver! = PermutationSolver()
+    var combinationSolver: CombinationSolver! = CombinationSolver()
 
 }

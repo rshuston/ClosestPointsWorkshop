@@ -18,132 +18,74 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
     // Definition
     @IBOutlet weak var o_NumberOfPointsBox: NSComboBox!
     @IBOutlet weak var o_PointDistributionPopUp: NSPopUpButton!
+    @IBOutlet weak var o_GenerateButton: NSButton!
 
     // Control
     @IBOutlet weak var o_SolutionTypePopUp: NSPopUpButton!
     @IBOutlet weak var o_SolverOptionPopUp: NSPopUpButton!
-    @IBOutlet weak var o_GenerateButton: NSButton!
     @IBOutlet weak var o_ControlButton: NSButton!
 
     // MARK: - Composition
 
-    let minNumberOfPoints = 3
-    let maxNumberOfPoints = 100
-
-    let pointCollection = PointCollection()
-    let definitionManager = DefinitionManager()
-    let controlManager = ControlManager()
-    let solutionEngine = SolutionEngine()
-
-    // MARK: - IBAction methods
-
-    @IBAction func popUpButtonSelected(_ sender: NSPopUpButton) {
-        switch sender {
-        case o_PointDistributionPopUp:
-            switch sender.titleOfSelectedItem {
-            case "Uniform"?:
-                definitionManager.pointDistribution = DefinitionManager.PointDistribution.Uniform
-                break
-            case "Clustered"?:
-                definitionManager.pointDistribution = DefinitionManager.PointDistribution.Clustered
-                break
-            default:
-                break
-            }
-            break
-        case o_SolutionTypePopUp:
-            switch sender.titleOfSelectedItem {
-            case "Permutation Search"?:
-                controlManager.solutionType = ControlManager.SolutionType.PermutationSearch
-                break
-            case "Combination Search"?:
-                controlManager.solutionType = ControlManager.SolutionType.CombinationSearch
-                break
-            case "Plane Sweep"?:
-                controlManager.solutionType = ControlManager.SolutionType.PlaneSweep
-                break
-            case "Divide and Conquer"?:
-                controlManager.solutionType = ControlManager.SolutionType.DivideAndConquer
-                break
-            default:
-                break
-            }
-            break
-        case o_SolverOptionPopUp:
-            switch sender.titleOfSelectedItem {
-            case "One Shot"?:
-                controlManager.solverOption = ControlManager.SolverOption.OneShot
-                break
-            case "Single Step"?:
-                controlManager.solverOption = ControlManager.SolverOption.SingleStep
-                break
-            case "Slow Animation"?:
-                controlManager.solverOption = ControlManager.SolverOption.SlowAnimation
-                break
-            case "Fast Animation"?:
-                controlManager.solverOption = ControlManager.SolverOption.FastAnimation
-                break
-            case "Live"?:
-                controlManager.solverOption = ControlManager.SolverOption.Live
-                break
-            default:
-                break
-            }
-            break
-        default:
-            break
-        }
-
-        activateGenerateButton()
-        activateControlButtonIfCanSolve()
-    }
-
-    @IBAction func pushButtonSelected(_ sender: NSButton) {
-        switch sender {
-        case o_GenerateButton:
-            generatePoints()
-            break
-        case o_ControlButton:
-            if solutionEngine.solving {
-                solutionEngine.solving = false
-            } else {
-                findClosestPoints()
-            }
-            break
-        default:
-            break
-        }
-    }
+    var viewControllerLogic: ViewControllerLogic!
 
     // MARK: - NSViewController life cycle methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        o_PlotView.pointDataSource = pointCollection
-
-        o_NumberOfPointsBox.integerValue = minNumberOfPoints
-
-        definitionManager.numberOfPoints = o_NumberOfPointsBox.integerValue
-        definitionManager.pointDistribution = DefinitionManager.PointDistribution.Uniform
-
-        controlManager.solutionType = ControlManager.SolutionType.PermutationSearch
-        controlManager.solverOption = ControlManager.SolverOption.OneShot
-
-        // SPIKE: ... for now
-        o_ControlButton.title = "Solve"
-
-        generatePoints()
-        activateGenerateButton()
-        activateControlButtonIfCanSolve()
+        viewControllerLogic = ViewControllerLogic(hostViewController: self)
+        viewControllerLogic.viewDidLoad()
     }
 
     // NOTE: Do we still need to keep this?
-//    override var representedObject: Any? {
-//        didSet {
-//        // Update the view, if already loaded.
-//        }
-//    }
+    override var representedObject: Any? {
+        didSet {
+        // Update the view, if already loaded.
+        }
+    }
+
+    // MARK: - Parameter access methods
+    
+    func setPlotViewPointCollectionDataSource(dataSource: PointCollectionDataSource) {
+        o_PlotView.pointDataSource = dataSource
+    }
+
+    func getNumberOfPoints() -> Int {
+        return o_NumberOfPointsBox.integerValue
+    }
+
+    func setNumberOfPoints(numberOfPoints: Int) {
+        o_NumberOfPointsBox.integerValue = numberOfPoints
+    }
+
+    func getPlotViewSize() -> CGSize {
+        return o_PlotView.bounds.size
+    }
+
+    func getPlotViewPointRadius() -> CGFloat {
+        return o_PlotView.pointRadius
+    }
+
+    // MARK: - Control modifiers
+
+    func setGenerateButtonEnableState(enabled: Bool) {
+        o_GenerateButton.isEnabled = enabled
+    }
+
+    func setControlButtonEnableState(enabled: Bool) {
+        o_ControlButton.isEnabled = enabled
+    }
+
+    func setControlButtonTitle(title: String) {
+        o_ControlButton.title = title
+    }
+
+    // MARK: - Other commands
+
+    func triggerPlotViewRedraw() {
+        o_PlotView.needsDisplay = true
+    }
 
     // MARK: - NSObject notification methods
 
@@ -151,9 +93,9 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         // Called when value is directly entered into combo box
         if let comboBox: NSComboBox = (obj.object as? NSComboBox) {
             if comboBox == o_NumberOfPointsBox {
-                constrainNumberOfPointsBox()
-                activateGenerateButton()
-                activateControlButtonIfCanSolve()
+                viewControllerLogic.constrainNumberOfPointsBox()
+                viewControllerLogic.activateGenerateButton()
+                viewControllerLogic.activateControlButtonIfCanSolve()
             }
         }
     }
@@ -169,156 +111,92 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
                     o_NumberOfPointsBox.deselectItem(at: index)
                     if let value = Int(stringValue) {
                         o_NumberOfPointsBox.integerValue = value
-                        definitionManager.numberOfPoints = value
-                        activateGenerateButton()
-                        activateControlButtonIfCanSolve()
+                        viewControllerLogic.definitionManager.numberOfPoints = value
+                        viewControllerLogic.activateGenerateButton()
+                        viewControllerLogic.activateControlButtonIfCanSolve()
                     }
                 }
             }
         }
     }
 
-    // MARK: - Behavior methods
+    // MARK: - IBAction methods
 
-    func deactivateGenerateButton() {
-        o_GenerateButton.isEnabled = false
-    }
-
-    func activateGenerateButton() {
-        o_GenerateButton.isEnabled = true
-    }
-
-    func deactivateControlButton() {
-        o_ControlButton.isEnabled = false
-    }
-
-    func activateControlButtonIfCanSolve() {
-        switch controlManager.solutionType {
-        case ControlManager.SolutionType.PermutationSearch:
-            o_ControlButton.isEnabled = (pointCollection.points.count > 0)
-            break
-        case ControlManager.SolutionType.CombinationSearch:
-            o_ControlButton.isEnabled = (pointCollection.points.count > 0)
-            break
-        case ControlManager.SolutionType.PlaneSweep:
-            o_ControlButton.isEnabled = false
-            break
-        case ControlManager.SolutionType.DivideAndConquer:
-            o_ControlButton.isEnabled = false
-            break
-        }
-    }
-
-    func configureControlButtonForSolvingState() {
-        if solutionEngine.solving {
-            o_ControlButton.title = "Cancel"
-        } else {
-            o_ControlButton.title = "Solve"
-        }
-    }
-
-    func triggerPlotViewRedraw() {
-        o_PlotView.needsDisplay = true
-    }
-
-    func constrainNumberOfPointsBox() {
-        var value = o_NumberOfPointsBox.integerValue
-        if value < minNumberOfPoints {
-            value = minNumberOfPoints
-        }
-        if value > maxNumberOfPoints {
-            value = maxNumberOfPoints
-        }
-        o_NumberOfPointsBox.integerValue = value
-        definitionManager.numberOfPoints = o_NumberOfPointsBox.integerValue
-    }
-
-    func generatePoints() {
-        deactivateGenerateButton()
-        deactivateControlButton()
-
-        constrainNumberOfPointsBox()
-
-        pointCollection.clear()
-
-        switch definitionManager.pointDistribution {
-        case DefinitionManager.PointDistribution.Uniform:
-            pointCollection.generateUniformRandomPoints(numberOfPoints: definitionManager.numberOfPoints,
-                                                        maxX: o_PlotView.bounds.width,
-                                                        maxY: o_PlotView.bounds.height,
-                                                        margin: o_PlotView.pointRadius)
-            break
-        case DefinitionManager.PointDistribution.Clustered:
-            pointCollection.generateClusteredRandomPoints(numberOfPoints: definitionManager.numberOfPoints,
-                                                          maxX: o_PlotView.bounds.width,
-                                                          maxY: o_PlotView.bounds.height,
-                                                          margin: o_PlotView.pointRadius)
-            break
-        }
-
-        triggerPlotViewRedraw()
-
-        activateGenerateButton()
-        activateControlButtonIfCanSolve()
-    }
-
-    func findClosestPoints() {
-        solutionEngine.solving = true
-
-        var solver: Solver?
-        switch controlManager.solutionType {
-        case ControlManager.SolutionType.PermutationSearch:
-            solver = solutionEngine.permutationSolver
-            break
-        case ControlManager.SolutionType.CombinationSearch:
-            solver = solutionEngine.combinationSolver
-            break
-        case ControlManager.SolutionType.PlaneSweep:
-            solver = nil
-            break
-        case ControlManager.SolutionType.DivideAndConquer:
-            solver = nil
-            break
-        }
-
-        if solver != nil {
-            deactivateGenerateButton()
-
-            pointCollection.clearClosestPoints()
-            pointCollection.clearCheckPoints()
-
-            configureControlButtonForSolvingState()
-
-            DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
-                solver!.findClosestPoints(points: self.pointCollection.points, monitor: {
-                    (checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool in
-                    self.pointCollection.closestPoints = closestPointsSoFar
-                    self.pointCollection.closestPointsColor = NSColor.blue
-                    self.pointCollection.checkPoints = checkPoints
-                    self.pointCollection.checkPointsColor = NSColor.red
-                    DispatchQueue.main.async {
-                        self.triggerPlotViewRedraw()
-                    }
-                    usleep(1000)
-                    return self.solutionEngine.solving
-                }, completion: { (closestPoints: (Point, Point)?) in
-                    if self.solutionEngine.solving {
-                        self.pointCollection.closestPoints = closestPoints
-                        self.pointCollection.closestPointsColor = NSColor.blue
-                        self.pointCollection.checkPoints = nil
-                        self.pointCollection.checkPointsColor = nil
-                    }
-                    DispatchQueue.main.async {
-                        self.triggerPlotViewRedraw()
-                        self.solutionEngine.solving = false
-                        self.configureControlButtonForSolvingState()
-                        self.activateGenerateButton()
-                        self.activateControlButtonIfCanSolve()
-                    }
-                })
+    @IBAction func popUpButtonSelected(_ sender: NSPopUpButton) {
+        switch sender {
+        case o_PointDistributionPopUp:
+            switch sender.titleOfSelectedItem {
+            case "Uniform"?:
+                viewControllerLogic.definitionManager.pointDistribution = DefinitionManager.PointDistribution.Uniform
+                break
+            case "Clustered"?:
+                viewControllerLogic.definitionManager.pointDistribution = DefinitionManager.PointDistribution.Clustered
+                break
+            default:
+                break
             }
-        } else {
-            solutionEngine.solving = false
+            break
+        case o_SolutionTypePopUp:
+            switch sender.titleOfSelectedItem {
+            case "Permutation Search"?:
+                viewControllerLogic.controlManager.solutionType = ControlManager.SolutionType.PermutationSearch
+                break
+            case "Combination Search"?:
+                viewControllerLogic.controlManager.solutionType = ControlManager.SolutionType.CombinationSearch
+                break
+            case "Plane Sweep"?:
+                viewControllerLogic.controlManager.solutionType = ControlManager.SolutionType.PlaneSweep
+                break
+            case "Divide and Conquer"?:
+                viewControllerLogic.controlManager.solutionType = ControlManager.SolutionType.DivideAndConquer
+                break
+            default:
+                break
+            }
+            break
+        case o_SolverOptionPopUp:
+            switch sender.titleOfSelectedItem {
+            case "One Shot"?:
+                viewControllerLogic.controlManager.solverOption = ControlManager.SolverOption.OneShot
+                break
+            case "Single Step"?:
+                viewControllerLogic.controlManager.solverOption = ControlManager.SolverOption.SingleStep
+                break
+            case "Slow Animation"?:
+                viewControllerLogic.controlManager.solverOption = ControlManager.SolverOption.SlowAnimation
+                break
+            case "Fast Animation"?:
+                viewControllerLogic.controlManager.solverOption = ControlManager.SolverOption.FastAnimation
+                break
+            case "Live"?:
+                viewControllerLogic.controlManager.solverOption = ControlManager.SolverOption.Live
+                break
+            default:
+                break
+            }
+            break
+        default:
+            break
+        }
+
+        viewControllerLogic.activateGenerateButton()
+        viewControllerLogic.activateControlButtonIfCanSolve()
+    }
+
+    @IBAction func pushButtonSelected(_ sender: NSButton) {
+        switch sender {
+        case o_GenerateButton:
+            viewControllerLogic.generatePoints()
+            break
+        case o_ControlButton:
+            if viewControllerLogic.solutionEngine.solving {
+                viewControllerLogic.solutionEngine.solving = false
+            } else {
+                viewControllerLogic.findClosestPoints()
+            }
+            break
+        default:
+            break
         }
     }
 

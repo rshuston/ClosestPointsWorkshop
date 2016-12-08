@@ -17,9 +17,9 @@ class PointCollectionTests: XCTestCase {
     var mockGKRandomDistribution: MockGKRandomDistribution!
 
     override func setUp() {
-        mockGKRandomDistribution = MockGKRandomDistribution(lowestValue: 0, highestValue: 10)
-
         super.setUp()
+        
+        mockGKRandomDistribution = MockGKRandomDistribution(lowestValue: 0, highestValue: 10)
     }
 
     override func tearDown() {
@@ -28,13 +28,13 @@ class PointCollectionTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_PointCollection_DefaultInitializesWithEmptyList() {
+    func test_init_DefaultInitializesWithEmptyList() {
         let subject = PointCollection()
 
         XCTAssertEqual(subject.points.count, 0)
     }
 
-    func test_PointCollection_InitializesWithGivenList() {
+    func test_init_InitializesWithGivenList() {
         let points = [ Point(x: 1, y: 2), Point(x: 3, y: 4) ]
 
         let subject = PointCollection(withPoints: points)
@@ -48,7 +48,7 @@ class PointCollectionTests: XCTestCase {
         XCTAssertEqual(subject.points[1].y, 4)
     }
 
-    func test_PointCollection_clear_RemovesPointsFromList() {
+    func test_clear_RemovesPointsFromList() {
         let points = [ Point(x: 1, y: 2), Point(x: 3, y: 4) ]
 
         let subject = PointCollection()
@@ -59,7 +59,7 @@ class PointCollectionTests: XCTestCase {
         XCTAssertEqual(subject.points.count, 0)
     }
 
-    func test_PointCollection_clear_RemovesClosestPointsPairAndColor() {
+    func test_clear_RemovesClosestPointsPairAndColor() {
         let points = [ Point(x: 1, y: 2), Point(x: 3, y: 4) ]
         let pair = (points[0], points[1])
 
@@ -75,7 +75,7 @@ class PointCollectionTests: XCTestCase {
         XCTAssertNil(subject.closestPointsColor)
     }
 
-    func test_PointCollection_clear_RemovesCheckPointsPairAndColor() {
+    func test_clear_RemovesCheckPointsPairAndColor() {
         let points = [ Point(x: 1, y: 2), Point(x: 3, y: 4) ]
         let pair = (points[0], points[1])
 
@@ -91,7 +91,7 @@ class PointCollectionTests: XCTestCase {
         XCTAssertNil(subject.checkPointsColor)
     }
 
-    func test_PointCollection_clearClosestPoints_RemovesOnlyClosestPointsPairAndColor() {
+    func test_clearClosestPoints_RemovesOnlyClosestPointsPairAndColor() {
         let points = [ Point(x: 1, y: 2), Point(x: 3, y: 4) ]
         let pair = (points[0], points[1])
 
@@ -111,7 +111,7 @@ class PointCollectionTests: XCTestCase {
         XCTAssertNotNil(subject.checkPointsColor)
     }
 
-    func test_PointCollection_clearCheckPoints_RemovesOnlyCheckPointsPairAndColor() {
+    func test_clearCheckPoints_RemovesOnlyCheckPointsPairAndColor() {
         let points = [ Point(x: 1, y: 2), Point(x: 3, y: 4) ]
         let pair = (points[0], points[1])
 
@@ -131,7 +131,7 @@ class PointCollectionTests: XCTestCase {
         XCTAssertNil(subject.checkPointsColor)
     }
 
-    func test_PointCollection_generateUniformRandomPoints_PopulatesList() {
+    func test_generateUniformRandomPoints_PopulatesList() {
         let subject = PointCollection()
 
         mockGKRandomDistribution.count = 0
@@ -156,7 +156,7 @@ class PointCollectionTests: XCTestCase {
         XCTAssertEqual(subject.points[4].y, 10)
     }
 
-    func test_PointCollection_generateClusteredRandomPoints_PopulatesList() {
+    func test_generateClusteredRandomPoints_PopulatesList() {
         let subject = PointCollection()
 
         mockGKRandomDistribution.count = 0
