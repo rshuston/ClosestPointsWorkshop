@@ -10,6 +10,8 @@ import Cocoa
 
 class SolutionEngine: NSObject {
 
+    var solving = false
+
     let permutationSolver = PermutationSolver()
     let combinationSolver = CombinationSolver()
 

@@ -94,7 +94,8 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
             break
         }
 
-        activateButtons()
+        activateGenerateButton()
+        activateControlButtonIfCanSolve()
     }
 
     @IBAction func pushButtonSelected(_ sender: NSButton) {
@@ -103,7 +104,11 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
             generatePoints()
             break
         case o_ControlButton:
-            findClosestPoints()
+            if solutionEngine.solving {
+                solutionEngine.solving = false
+            } else {
+                findClosestPoints()
+            }
             break
         default:
             break
@@ -129,14 +134,16 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         o_ControlButton.title = "Solve"
 
         generatePoints()
-        activateButtons()
+        activateGenerateButton()
+        activateControlButtonIfCanSolve()
     }
 
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
+    // NOTE: Do we still need to keep this?
+//    override var representedObject: Any? {
+//        didSet {
+//        // Update the view, if already loaded.
+//        }
+//    }
 
     // MARK: - NSObject notification methods
 
@@ -145,7 +152,8 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         if let comboBox: NSComboBox = (obj.object as? NSComboBox) {
             if comboBox == o_NumberOfPointsBox {
                 constrainNumberOfPointsBox()
-                activateButtons()
+                activateGenerateButton()
+                activateControlButtonIfCanSolve()
             }
         }
     }
@@ -162,7 +170,8 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
                     if let value = Int(stringValue) {
                         o_NumberOfPointsBox.integerValue = value
                         definitionManager.numberOfPoints = value
-                        activateButtons()
+                        activateGenerateButton()
+                        activateControlButtonIfCanSolve()
                     }
                 }
             }
@@ -171,9 +180,19 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
 
     // MARK: - Behavior methods
 
-    func activateButtons() {
-        o_GenerateButton.isEnabled = true
+    func deactivateGenerateButton() {
+        o_GenerateButton.isEnabled = false
+    }
 
+    func activateGenerateButton() {
+        o_GenerateButton.isEnabled = true
+    }
+
+    func deactivateControlButton() {
+        o_ControlButton.isEnabled = false
+    }
+
+    func activateControlButtonIfCanSolve() {
         switch controlManager.solutionType {
         case ControlManager.SolutionType.PermutationSearch:
             o_ControlButton.isEnabled = (pointCollection.points.count > 0)
@@ -190,9 +209,12 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         }
     }
 
-    func deactivateButtons() {
-        o_GenerateButton.isEnabled = false
-        o_ControlButton.isEnabled = false
+    func configureControlButtonForSolvingState() {
+        if solutionEngine.solving {
+            o_ControlButton.title = "Cancel"
+        } else {
+            o_ControlButton.title = "Solve"
+        }
     }
 
     func triggerPlotViewRedraw() {
@@ -212,7 +234,8 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
     }
 
     func generatePoints() {
-        deactivateButtons()
+        deactivateGenerateButton()
+        deactivateControlButton()
 
         constrainNumberOfPointsBox()
 
@@ -235,10 +258,13 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
 
         triggerPlotViewRedraw()
 
-        activateButtons()
+        activateGenerateButton()
+        activateControlButtonIfCanSolve()
     }
 
     func findClosestPoints() {
+        solutionEngine.solving = true
+
         var solver: Solver?
         switch controlManager.solutionType {
         case ControlManager.SolutionType.PermutationSearch:
@@ -256,14 +282,16 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         }
 
         if solver != nil {
-            deactivateButtons()
+            deactivateGenerateButton()
 
             pointCollection.clearClosestPoints()
             pointCollection.clearCheckPoints()
 
+            configureControlButtonForSolvingState()
+
             DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
                 solver!.findClosestPoints(points: self.pointCollection.points, monitor: {
-                    (checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Void in
+                    (checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool in
                     self.pointCollection.closestPoints = closestPointsSoFar
                     self.pointCollection.closestPointsColor = NSColor.blue
                     self.pointCollection.checkPoints = checkPoints
@@ -272,17 +300,25 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
                         self.triggerPlotViewRedraw()
                     }
                     usleep(1000)
+                    return self.solutionEngine.solving
                 }, completion: { (closestPoints: (Point, Point)?) in
-                    self.pointCollection.closestPoints = closestPoints
-                    self.pointCollection.closestPointsColor = NSColor.blue
-                    self.pointCollection.checkPoints = nil
-                    self.pointCollection.checkPointsColor = nil
+                    if self.solutionEngine.solving {
+                        self.pointCollection.closestPoints = closestPoints
+                        self.pointCollection.closestPointsColor = NSColor.blue
+                        self.pointCollection.checkPoints = nil
+                        self.pointCollection.checkPointsColor = nil
+                    }
                     DispatchQueue.main.async {
                         self.triggerPlotViewRedraw()
-                        self.activateButtons()
+                        self.solutionEngine.solving = false
+                        self.configureControlButtonForSolvingState()
+                        self.activateGenerateButton()
+                        self.activateControlButtonIfCanSolve()
                     }
                 })
             }
+        } else {
+            solutionEngine.solving = false
         }
     }
 

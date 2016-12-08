@@ -15,7 +15,7 @@ class Solver: NSObject {
     // completion: closure that passes the found closest point pair (optional)
 
     func findClosestPoints(points: [Point],
-                           monitor: (((Point, Point), (Point, Point)?) -> Void)?,
+                           monitor: (((Point, Point), (Point, Point)?) -> Bool)?,
                            completion: (((Point, Point)?) -> Void)) {
         completion(nil)
     }
