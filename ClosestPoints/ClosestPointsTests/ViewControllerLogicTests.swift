@@ -256,7 +256,7 @@ class ViewControllerLogicTests: XCTestCase {
         XCTAssertEqual(callRecord?[0] as? Int, expectedNumberOfPoints)
     }
 
-    func test_findClosestPoints_FindsSolutionUsingPermutationSearch() {
+    func test_findClosestPoints_FindsSolutionUsingPermutationSearchWithClosures() {
         let mockPermutationSolver = MockPermutationSolver()
         let mockCombinationSolver = MockCombinationSolver()
 
@@ -275,9 +275,30 @@ class ViewControllerLogicTests: XCTestCase {
         waitForExpectations(timeout: 1.0, handler: nil)
 
         XCTAssertEqual(mockPermutationSolver.recorder.getCallCountFor("findClosestPoints (P)"), 1)
+
+        let record = mockPermutationSolver.recorder.getCallRecordFor("findClosestPoints (P)")
+
+        XCTAssertEqual(3, record?.count)
+        let points = record?[0] as? [Point]
+        let monitorClosure = record?[1] as? (((Point, Point), (Point, Point)?) -> Bool)
+        let completionClosure = record?[2] as? (((Point, Point)?) -> Void)
+
+        XCTAssertNotNil(points)
+        XCTAssertEqual(points!, subject.pointCollection.points)
+
+        let pointPair1 = (subject.pointCollection.points[0], subject.pointCollection.points[1])
+        let pointPair2 = (subject.pointCollection.points[0], subject.pointCollection.points[1])
+        let keepGoing = monitorClosure?(pointPair1, pointPair2)
+        XCTAssertTrue(keepGoing!)
+        XCTAssertNil(subject.pointCollection.checkPoints)
+        XCTAssertNil(subject.pointCollection.closestPoints)
+
+        completionClosure?(pointPair2)
+        XCTAssertNil(subject.pointCollection.checkPoints)
+        XCTAssertNotNil(subject.pointCollection.closestPoints)
     }
 
-    func test_findClosestPoints_FindsSolutionUsingCombinationSearch() {
+    func test_findClosestPoints_FindsSolutionUsingCombinationSearchWithClosures() {
         let mockPermutationSolver = MockPermutationSolver()
         let mockCombinationSolver = MockCombinationSolver()
 
@@ -296,6 +317,27 @@ class ViewControllerLogicTests: XCTestCase {
         waitForExpectations(timeout: 1.0, handler: nil)
 
         XCTAssertEqual(mockCombinationSolver.recorder.getCallCountFor("findClosestPoints (C)"), 1)
+
+        let record = mockCombinationSolver.recorder.getCallRecordFor("findClosestPoints (C)")
+
+        XCTAssertEqual(3, record?.count)
+        let points = record?[0] as? [Point]
+        let monitorClosure = record?[1] as? (((Point, Point), (Point, Point)?) -> Bool)
+        let completionClosure = record?[2] as? (((Point, Point)?) -> Void)
+
+        XCTAssertNotNil(points)
+        XCTAssertEqual(points!, subject.pointCollection.points)
+
+        let pointPair1 = (subject.pointCollection.points[0], subject.pointCollection.points[1])
+        let pointPair2 = (subject.pointCollection.points[0], subject.pointCollection.points[1])
+        let keepGoing = monitorClosure?(pointPair1, pointPair2)
+        XCTAssertTrue(keepGoing!)
+        XCTAssertNil(subject.pointCollection.checkPoints)
+        XCTAssertNil(subject.pointCollection.closestPoints)
+
+        completionClosure?(pointPair2)
+        XCTAssertNil(subject.pointCollection.checkPoints)
+        XCTAssertNotNil(subject.pointCollection.closestPoints)
     }
 
     class MockViewController: ViewController {
@@ -407,18 +449,13 @@ class ViewControllerLogicTests: XCTestCase {
     class MockPermutationSolver: PermutationSolver {
 
         let recorder = FuncRecorder()
-        var recorderEnabled = true
 
         var completionExpectation: XCTestExpectation!
 
         override func findClosestPoints(points: [Point],
                                         monitor: (((Point, Point), (Point, Point)?) -> Bool)?,
                                         completion: (((Point, Point)?) -> Void)) {
-            if recorderEnabled {
-                recorder.recordCallFor("findClosestPoints (P)", params: [points, monitor, completion])
-            }
-            completion(nil)
-
+            recorder.recordCallFor("findClosestPoints (P)", params: [points, monitor, completion])
             completionExpectation?.fulfill()
         }
 
@@ -427,18 +464,13 @@ class ViewControllerLogicTests: XCTestCase {
     class MockCombinationSolver: CombinationSolver {
 
         let recorder = FuncRecorder()
-        var recorderEnabled = true
 
         var completionExpectation: XCTestExpectation!
 
         override func findClosestPoints(points: [Point],
                                         monitor: (((Point, Point), (Point, Point)?) -> Bool)?,
                                         completion: (((Point, Point)?) -> Void)) {
-            if recorderEnabled {
-                recorder.recordCallFor("findClosestPoints (C)", params: [points, monitor, completion])
-            }
-            completion(nil)
-
+            recorder.recordCallFor("findClosestPoints (C)", params: [points, monitor, completion])
             completionExpectation?.fulfill()
         }
         

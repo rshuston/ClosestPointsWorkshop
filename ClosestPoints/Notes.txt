@@ -11,7 +11,7 @@ nCr = C(n,r)
     = P(n,r) / r!
     = n! / ((n-r)! * r!)
 "n choose r" is also the binomial coefficient
-O(n!)?
+O(n!)/r!
 
 
 Plane Sweep:
