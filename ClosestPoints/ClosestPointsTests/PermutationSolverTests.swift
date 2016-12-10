@@ -83,13 +83,15 @@ class PermutationSolverTests: XCTestCase {
         var monitorCount = 0
 
         subject.findClosestPoints(points: points, monitor: {
-            (checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool in
+            (checkRect: NSRect, checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool in
             monitorCount += 1
 
             XCTAssertNotNil(closestPointsSoFar)
 
             XCTAssertEqual(checkPoints.0, closestPointsSoFar?.0)
             XCTAssertEqual(checkPoints.1, closestPointsSoFar?.1)
+
+            XCTAssertNotEqual(checkRect.size.width + checkRect.size.height, 0)
 
             let listOrdered = (closestPointsSoFar?.0 == points[0])
             if listOrdered {
@@ -164,7 +166,7 @@ class PermutationSolverTests: XCTestCase {
         var monitorCount = 0
 
         subject.findClosestPoints(points: points, monitor: {
-            (checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool in
+            (checkRect: NSRect, checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool in
             monitorCount += 1
 
             XCTAssertNotNil(closestPointsSoFar)
@@ -204,7 +206,7 @@ class PermutationSolverTests: XCTestCase {
         var monitorCount = 0
 
         subject.findClosestPoints(points: points, monitor: {
-            (checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool in
+            (checkRect: NSRect, checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool in
             monitorCount += 1
 
             XCTAssertNotNil(closestPointsSoFar)
@@ -271,7 +273,7 @@ class PermutationSolverTests: XCTestCase {
         var monitorCount = 0
 
         subject.findClosestPoints(points: points, monitor: {
-            (checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool in
+            (checkRect: NSRect, checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool in
             monitorCount += 1
 
             XCTAssertNotNil(closestPointsSoFar)

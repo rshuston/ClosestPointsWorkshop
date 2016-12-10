@@ -352,7 +352,7 @@ class ViewControllerLogicTests: XCTestCase {
 
         XCTAssertEqual(3, record?.count)
         let points = record?[0] as? [Point]
-        let monitorClosure = record?[1] as? (((Point, Point), (Point, Point)?) -> Bool)
+        let monitorClosure = record?[1] as? ((NSRect, (Point, Point), (Point, Point)?) -> Bool)
         let completionClosure = record?[2] as? (((Point, Point)?) -> Void)
 
         XCTAssertNotNil(points)
@@ -360,7 +360,8 @@ class ViewControllerLogicTests: XCTestCase {
 
         let pointPair1 = (subject.pointCollection.points[0], subject.pointCollection.points[1])
         let pointPair2 = (subject.pointCollection.points[0], subject.pointCollection.points[1])
-        let keepGoing = monitorClosure?(pointPair1, pointPair2)
+        let dummyRect = NSRect(x: 0, y: 0, width: 1, height: 1)
+        let keepGoing = monitorClosure?(dummyRect, pointPair1, pointPair2)
         XCTAssertTrue(keepGoing!)
         XCTAssertNil(subject.pointCollection.checkPoints)
         XCTAssertNil(subject.pointCollection.closestPoints)
@@ -394,7 +395,7 @@ class ViewControllerLogicTests: XCTestCase {
 
         XCTAssertEqual(3, record?.count)
         let points = record?[0] as? [Point]
-        let monitorClosure = record?[1] as? (((Point, Point), (Point, Point)?) -> Bool)
+        let monitorClosure = record?[1] as? ((NSRect, (Point, Point), (Point, Point)?) -> Bool)
         let completionClosure = record?[2] as? (((Point, Point)?) -> Void)
 
         XCTAssertNotNil(points)
@@ -402,7 +403,8 @@ class ViewControllerLogicTests: XCTestCase {
 
         let pointPair1 = (subject.pointCollection.points[0], subject.pointCollection.points[1])
         let pointPair2 = (subject.pointCollection.points[0], subject.pointCollection.points[1])
-        let keepGoing = monitorClosure?(pointPair1, pointPair2)
+        let dummyRect = NSRect(x: 0, y: 0, width: 1, height: 1)
+        let keepGoing = monitorClosure?(dummyRect, pointPair1, pointPair2)
         XCTAssertTrue(keepGoing!)
         XCTAssertNil(subject.pointCollection.checkPoints)
         XCTAssertNil(subject.pointCollection.closestPoints)
@@ -602,7 +604,7 @@ class ViewControllerLogicTests: XCTestCase {
         var completionExpectation: XCTestExpectation?
 
         override func findClosestPoints(points: [Point],
-                                        monitor: (((Point, Point), (Point, Point)?) -> Bool)?,
+                                        monitor: ((NSRect, (Point, Point), (Point, Point)?) -> Bool)?,
                                         completion: (((Point, Point)?) -> Void)) {
             recorder.recordCallFor("findClosestPoints (P)", params: [points, monitor, completion])
             completionExpectation?.fulfill()
@@ -617,7 +619,7 @@ class ViewControllerLogicTests: XCTestCase {
         var completionExpectation: XCTestExpectation?
 
         override func findClosestPoints(points: [Point],
-                                        monitor: (((Point, Point), (Point, Point)?) -> Bool)?,
+                                        monitor: ((NSRect, (Point, Point), (Point, Point)?) -> Bool)?,
                                         completion: (((Point, Point)?) -> Void)) {
             recorder.recordCallFor("findClosestPoints (C)", params: [points, monitor, completion])
             completionExpectation?.fulfill()

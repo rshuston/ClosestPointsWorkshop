@@ -8,6 +8,12 @@
 
 import Cocoa
 
+// We use a ViewControllerLogic as a companion to ViewController so that we can more
+// easily isolate the logic that can be test-driven from the standard MVC logic that
+// adheres to the Cocoa design patterns.
+//
+// (Eewww! A comment! How untrendy! The horror of it all! Whaah! What can it mean?)
+
 class ViewControllerLogic: NSObject {
 
     let minNumberOfPoints = 2
@@ -148,7 +154,7 @@ class ViewControllerLogic: NSObject {
 
             configureControlButtonForSolvingState()
 
-            let monitor: (((Point, Point), (Point, Point)?) -> Bool)?
+            let monitor: ((NSRect, (Point, Point), (Point, Point)?) -> Bool)?
             switch controlManager.solverOption {
             case ControlManager.SolverOption.OneShot:
                 monitor = monitorCancelOnly
@@ -177,11 +183,11 @@ class ViewControllerLogic: NSObject {
         }
     }
 
-    internal func monitorCancelOnly(checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool {
+    internal func monitorCancelOnly(checkRect: NSRect, checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool {
         return solutionEngine.solving
     }
 
-    internal func monitorWaitCancelSlow(checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool {
+    internal func monitorWaitCancelSlow(checkRect: NSRect, checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool {
         pointCollection.closestPoints = closestPointsSoFar
         pointCollection.closestPointsColor = NSColor.blue
         pointCollection.checkPoints = checkPoints
@@ -193,7 +199,7 @@ class ViewControllerLogic: NSObject {
         return solutionEngine.solving
     }
 
-    internal func monitorWaitCancelFast(checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool {
+    internal func monitorWaitCancelFast(checkRect: NSRect, checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool {
         pointCollection.closestPoints = closestPointsSoFar
         pointCollection.closestPointsColor = NSColor.blue
         pointCollection.checkPoints = checkPoints

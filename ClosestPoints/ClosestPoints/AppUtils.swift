@@ -75,4 +75,13 @@ class AppUtils: NSObject {
         return pinnedPoint
     }
 
+    // Make an NSRect from two NSPoints
+    class func NSRectFromNSPoints(pt1: NSPoint, pt2: NSPoint) -> NSRect {
+        let x = min(pt1.x, pt2.x)
+        let y = min(pt1.y, pt2.y)
+        let width = abs(pt2.x - pt1.x)
+        let height = abs(pt2.y - pt1.y)
+        return NSRect(x: x, y: y, width: width, height: height)
+    }
+
 }

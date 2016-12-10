@@ -22,7 +22,7 @@ protocol PointCollectionDataSource {
 
 class PointCollection: NSObject, PointCollectionDataSource {
 
-    // MARK: - PointCollectionDataSource
+    // MARK: - PointCollectionDataSource protocol
 
     let maxDimension: UInt32 = 1024
     var points: [Point]

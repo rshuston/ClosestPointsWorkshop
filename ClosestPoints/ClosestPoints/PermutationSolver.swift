@@ -11,14 +11,16 @@ import Cocoa
 class PermutationSolver: Solver {
 
     override func findClosestPoints(points: [Point],
-                                    monitor: (((Point, Point), (Point, Point)?) -> Bool)?,
+                                    monitor: ((NSRect, (Point, Point), (Point, Point)?) -> Bool)?,
                                     completion: (((Point, Point)?) -> Void)) {
+        var checkRect: NSRect
         var closestPoints: (Point, Point)?
         var keepRunning = true
 
         if points.count == 2 {
             closestPoints = (points[0], points[1])
-            keepRunning = monitor?(closestPoints!, closestPoints) ?? true
+            checkRect = AppUtils.NSRectFromNSPoints(pt1: points[0].getAsNSPoint(), pt2: points[1].getAsNSPoint())
+            keepRunning = monitor?(checkRect, closestPoints!, closestPoints) ?? true
         } else if points.count > 2 {
             var smallestDist_sq: CGFloat = CGFloat.greatestFiniteMagnitude
             for ptA in points {
@@ -31,7 +33,8 @@ class PermutationSolver: Solver {
                             smallestDist_sq = dist_sq
                             closestPoints = (ptA, ptB)
                         }
-                        keepRunning = monitor?((ptA, ptB), closestPoints) ?? true
+                        checkRect = AppUtils.NSRectFromNSPoints(pt1: ptA.getAsNSPoint(), pt2: ptB.getAsNSPoint())
+                        keepRunning = monitor?(checkRect, (ptA, ptB), closestPoints) ?? true
                     }
                     if keepRunning == false {
                         break

@@ -86,4 +86,88 @@ class AppUtilsTests: XCTestCase {
         XCTAssertEqual(pinnedPoint, expectedPoint)
     }
 
+    func test_NSRectFromNSPoints_CreatesRectangleFromTwoHorizontalPoints() {
+        let pt1 = NSPoint(x: 0, y: 0)
+        let pt2 = NSPoint(x: 2, y: 0)
+
+        let rect = AppUtils.NSRectFromNSPoints(pt1: pt1, pt2: pt2)
+
+        XCTAssertEqual(rect.origin.x, 0)
+        XCTAssertEqual(rect.origin.y, 0)
+        XCTAssertEqual(rect.size.width, 2)
+        XCTAssertEqual(rect.size.height, 0)
+    }
+
+    func test_NSRectFromNSPoints_CreatesRectangleFromTwoMoreHorizontalPoints() {
+        let pt1 = NSPoint(x: 3, y: 0)
+        let pt2 = NSPoint(x: 0, y: 0)
+
+        let rect = AppUtils.NSRectFromNSPoints(pt1: pt1, pt2: pt2)
+
+        XCTAssertEqual(rect.origin.x, 0)
+        XCTAssertEqual(rect.origin.y, 0)
+        XCTAssertEqual(rect.size.width, 3)
+        XCTAssertEqual(rect.size.height, 0)
+    }
+
+    func test_NSRectFromNSPoints_CreatesRectangleFromTwoVerticalPoints() {
+        let pt1 = NSPoint(x: -1, y: -1)
+        let pt2 = NSPoint(x: -1, y: 1)
+
+        let rect = AppUtils.NSRectFromNSPoints(pt1: pt1, pt2: pt2)
+
+        XCTAssertEqual(rect.origin.x, -1)
+        XCTAssertEqual(rect.origin.y, -1)
+        XCTAssertEqual(rect.size.width, 0)
+        XCTAssertEqual(rect.size.height, 2)
+    }
+
+    func test_NSRectFromNSPoints_CreatesRectangleFromTwoMoreVerticalPoints() {
+        let pt1 = NSPoint(x: -1, y: 1)
+        let pt2 = NSPoint(x: -1, y: -2)
+
+        let rect = AppUtils.NSRectFromNSPoints(pt1: pt1, pt2: pt2)
+
+        XCTAssertEqual(rect.origin.x, -1)
+        XCTAssertEqual(rect.origin.y, -2)
+        XCTAssertEqual(rect.size.width, 0)
+        XCTAssertEqual(rect.size.height, 3)
+    }
+
+    func test_NSRectFromNSPoints_CreatesRectangleFromTwoDiagonalPoints() {
+        let pt1 = NSPoint(x: 1, y: 1)
+        let pt2 = NSPoint(x: 10, y: 10)
+
+        let rect = AppUtils.NSRectFromNSPoints(pt1: pt1, pt2: pt2)
+
+        XCTAssertEqual(rect.origin.x, 1)
+        XCTAssertEqual(rect.origin.y, 1)
+        XCTAssertEqual(rect.size.width, 9)
+        XCTAssertEqual(rect.size.height, 9)
+    }
+
+    func test_NSRectFromNSPoints_CreatesRectangleFromTwoMoreDiagonalPoints() {
+        let pt1 = NSPoint(x: 5, y: 0)
+        let pt2 = NSPoint(x: -1, y: 6)
+
+        let rect = AppUtils.NSRectFromNSPoints(pt1: pt1, pt2: pt2)
+
+        XCTAssertEqual(rect.origin.x, -1)
+        XCTAssertEqual(rect.origin.y, 0)
+        XCTAssertEqual(rect.size.width, 6)
+        XCTAssertEqual(rect.size.height, 6)
+    }
+
+    func test_NSRectFromNSPoints_CreatesEmptyRectangleFromTwoIdenticalPoints() {
+        let pt1 = NSPoint(x: 5, y: 5)
+        let pt2 = NSPoint(x: 5, y: 5)
+
+        let rect = AppUtils.NSRectFromNSPoints(pt1: pt1, pt2: pt2)
+
+        XCTAssertEqual(rect.origin.x, 5)
+        XCTAssertEqual(rect.origin.y, 5)
+        XCTAssertEqual(rect.size.width, 0)
+        XCTAssertEqual(rect.size.height, 0)
+    }
+
 }
