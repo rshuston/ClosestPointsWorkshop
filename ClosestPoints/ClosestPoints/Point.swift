@@ -10,6 +10,13 @@ import Cocoa
 
 class Point: NSObject {
 
+    // Note:
+    // We use a class for Point instead of just using NSPoint because we
+    // need a Point to be a reference type. NSPoint, which is typealiased
+    // from CGPoint, is a struct, which is a value type.
+    //
+    // (Eewww! A comment! How untrendy! The horror of it all! Whaah! What can it mean?)
+
     var x: CGFloat
     var y: CGFloat
 

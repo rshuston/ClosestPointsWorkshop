@@ -23,6 +23,8 @@ class AppUtils: NSObject {
         // Access to the contentViewController doesn't resolve until the app has finished
         // loading. If you try accessing it in a viewDidLoad() method, it will resolve to
         // nil.
+        //
+        // (Eewww! A comment! How untrendy! The horror of it all! Whaah! What can it mean?)
         return NSApplication.shared().mainWindow?.contentViewController as? ViewController
     }
 
@@ -50,6 +52,7 @@ class AppUtils: NSObject {
         return result
     }
 
+    // Pin an NSPoint to an NSRect with a given margin
     class func PinNSPoint(point: NSPoint, toNSRect: NSRect, withMargin: CGFloat) -> NSPoint {
         var pinnedPoint = point
 

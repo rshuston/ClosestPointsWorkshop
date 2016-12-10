@@ -138,13 +138,4 @@ class PlotView: NSView {
         }
     }
 
-//    override func mouseEntered(with event: NSEvent) {
-//    }
-
-//    override func mouseExited(with event: NSEvent) {
-//    }
-
-//    override func mouseMoved(with event: NSEvent) {
-//    }
-
 }
