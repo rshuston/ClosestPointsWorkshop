@@ -28,6 +28,7 @@
 		4E84FFCE1DF81BEF00F5E27F /* CombinationSolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E84FFCD1DF81BEF00F5E27F /* CombinationSolverTests.swift */; };
 		4E8DCA351DF3BE74003139E1 /* PDLTestBench.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DCA341DF3BE74003139E1 /* PDLTestBench.framework */; };
 		4EB647571DF4B085004F10F7 /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB647561DF4B085004F10F7 /* AppUtils.swift */; };
+		4EC175FC1DFB647200BB1AF0 /* AppUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC175FB1DFB647200BB1AF0 /* AppUtilsTests.swift */; };
 		4EDEDF071DF241F100BDA336 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDEDF061DF241F100BDA336 /* Point.swift */; };
 		4EDEDF0A1DF2426600BDA336 /* PointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDEDF091DF2426600BDA336 /* PointTests.swift */; };
 		4EDEDF0C1DF243D600BDA336 /* PointCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDEDF0B1DF243D600BDA336 /* PointCollection.swift */; };
@@ -72,6 +73,7 @@
 		4E8DCA341DF3BE74003139E1 /* PDLTestBench.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDLTestBench.framework; path = "../../../../Library/Developer/Xcode/DerivedData/ClosestPointsWorkshop-bjbkadvdhujgxxhiwklajocqyepz/Build/Products/Debug/PDLTestBench.framework"; sourceTree = "<group>"; };
 		4E8DCA361DF3BE79003139E1 /* PDLToolBox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDLToolBox.framework; path = "../../../../Library/Developer/Xcode/DerivedData/ClosestPointsWorkshop-bjbkadvdhujgxxhiwklajocqyepz/Build/Products/Debug/PDLToolBox.framework"; sourceTree = "<group>"; };
 		4EB647561DF4B085004F10F7 /* AppUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtils.swift; sourceTree = "<group>"; };
+		4EC175FB1DFB647200BB1AF0 /* AppUtilsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtilsTests.swift; sourceTree = "<group>"; };
 		4EDEDF061DF241F100BDA336 /* Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		4EDEDF091DF2426600BDA336 /* PointTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointTests.swift; sourceTree = "<group>"; };
 		4EDEDF0B1DF243D600BDA336 /* PointCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointCollection.swift; sourceTree = "<group>"; };
@@ -125,7 +127,6 @@
 				4E0531351DD640EA006E9B8F /* AppDelegate.swift */,
 				4E0531371DD640EA006E9B8F /* ViewController.swift */,
 				4E55CC131DF8E4F700CB0E87 /* ViewControllerLogic.swift */,
-				4EB647561DF4B085004F10F7 /* AppUtils.swift */,
 				4E3E618A1DE2020B002A75C7 /* PlotView.swift */,
 				4EDEDF061DF241F100BDA336 /* Point.swift */,
 				4EDEDF0B1DF243D600BDA336 /* PointCollection.swift */,
@@ -135,6 +136,7 @@
 				4E0291EE1DF818EB00371684 /* Solver.swift */,
 				4E0291F01DF8194900371684 /* PermutationSolver.swift */,
 				4E84FFCB1DF81BD700F5E27F /* CombinationSolver.swift */,
+				4EB647561DF4B085004F10F7 /* AppUtils.swift */,
 				4E0531391DD640EA006E9B8F /* Assets.xcassets */,
 				4E05313B1DD640EA006E9B8F /* Main.storyboard */,
 				4E05313E1DD640EA006E9B8F /* Info.plist */,
@@ -154,6 +156,7 @@
 				4E397FFD1DF315340053BBAA /* SolutionEngineTests.swift */,
 				4E0291F21DF8198E00371684 /* PermutationSolverTests.swift */,
 				4E84FFCD1DF81BEF00F5E27F /* CombinationSolverTests.swift */,
+				4EC175FB1DFB647200BB1AF0 /* AppUtilsTests.swift */,
 				4E0531491DD640EA006E9B8F /* Info.plist */,
 			);
 			path = ClosestPointsTests;
@@ -295,6 +298,7 @@
 				4E0531481DD640EA006E9B8F /* ClosestPointsTests.swift in Sources */,
 				4E397FFC1DF315220053BBAA /* ControlManagerTests.swift in Sources */,
 				4E55CC161DF8E53D00CB0E87 /* ViewControllerLogicTests.swift in Sources */,
+				4EC175FC1DFB647200BB1AF0 /* AppUtilsTests.swift in Sources */,
 				4E397FFE1DF315340053BBAA /* SolutionEngineTests.swift in Sources */,
 				4E0291F31DF8198E00371684 /* PermutationSolverTests.swift in Sources */,
 				4EDEDF0F1DF243EF00BDA336 /* PointCollectionTests.swift in Sources */,

@@ -87,6 +87,18 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         o_PlotView.needsDisplay = true
     }
 
+    // --SPIKE
+    func triggerSolutionUpdate() {
+        viewControllerLogic.updateSolution()
+    }
+    // SPIKE++
+
+    // --SPIKE
+    func isFindingClosestPoints() -> Bool {
+        return viewControllerLogic.isFindingClosestPoints()
+    }
+    // SPIKE++
+
     // MARK: - NSObject notification methods
 
     override func controlTextDidEndEditing(_ obj: Notification) {
@@ -170,6 +182,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
                 break
             case "Live"?:
                 viewControllerLogic.controlManager.solverOption = ControlManager.SolverOption.Live
+                viewControllerLogic.triggerLiveSolutionIfConfigured()
                 break
             default:
                 break

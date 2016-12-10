@@ -18,3 +18,9 @@ Plane Sweep:
 
 
 Divide and Conquer:
+
+
+
+To Do:
+
+Need to handle race conditions when moving points

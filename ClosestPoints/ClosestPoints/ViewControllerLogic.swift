@@ -117,7 +117,35 @@ class ViewControllerLogic: NSObject {
 
         activateGenerateButton()
         activateControlButtonIfCanSolve()
+
+        // --SPIKE
+        triggerLiveSolutionIfConfigured()
+        // SPIKE++
     }
+
+    // --SPIKE
+    func triggerLiveSolutionIfConfigured() {
+        switch controlManager.solverOption {
+        case ControlManager.SolverOption.OneShot:
+            break
+        case ControlManager.SolverOption.SingleStep:
+            break
+        case ControlManager.SolverOption.SlowAnimation:
+            break
+        case ControlManager.SolverOption.FastAnimation:
+            break
+        case ControlManager.SolverOption.Live:
+            findClosestPoints()
+            break
+        }
+    }
+    // SPIKE++
+
+    // --SPIKE
+    func isFindingClosestPoints() -> Bool {
+        return solutionEngine.solving
+    }
+    // SPIKE++
 
     func findClosestPoints() {
         solutionEngine.solving = true
@@ -217,6 +245,27 @@ class ViewControllerLogic: NSObject {
             self.activateGenerateButton()
             self.activateControlButtonIfCanSolve()
         }
+    }
+
+    func updateSolution() {
+        // --SPIKE
+        pointCollection.clearCheckPoints()
+        pointCollection.clearClosestPoints()
+
+        switch controlManager.solverOption {
+        case ControlManager.SolverOption.OneShot:
+            break
+        case ControlManager.SolverOption.SingleStep:
+            break
+        case ControlManager.SolverOption.SlowAnimation:
+            break
+        case ControlManager.SolverOption.FastAnimation:
+            break
+        case ControlManager.SolverOption.Live:
+            findClosestPoints()
+            break
+        }
+        // SPIKE++
     }
 
 }
