@@ -14,6 +14,8 @@ import PDLTestBench
 
 class ViewControllerLogicTests: XCTestCase {
 
+    // MARK: - Setup and tear down
+
     var mockViewController: MockViewController!
     var subject: ViewControllerLogic!
 
@@ -33,9 +35,13 @@ class ViewControllerLogicTests: XCTestCase {
         super.tearDown()
     }
 
+    // MARK: - init()
+
     func test_init_SetsHostViewController() {
         XCTAssertEqual(subject.hostViewController, mockViewController)
     }
+
+    // MARK: - viewDidLoad()
 
     func test_viewDidLoad_InitializesDefinitionManagerForThreePointsAndUniformDistribution() {
         subject.viewDidLoad()
@@ -90,6 +96,8 @@ class ViewControllerLogicTests: XCTestCase {
         XCTAssertEqual(mockViewController.o_ControlButton.title, "Solve")
     }
 
+    // MARK: - constrainNumberOfPointsBox()
+
     func test_constrainNumberOfPointsBox_ClampsLowValuesToMinimum() {
         mockViewController.player.setReturnValue(subject.minNumberOfPoints - 1, forName: "getNumberOfPoints")
 
@@ -110,6 +118,8 @@ class ViewControllerLogicTests: XCTestCase {
         XCTAssertEqual(callRecord?[0] as? Int, subject.maxNumberOfPoints)
     }
 
+    // MARK: - deactivateGenerateButton()
+
     func test_deactivateGenerateButton_TellsViewControllerToDisableGenerateButton() {
         subject.deactivateGenerateButton()
 
@@ -117,6 +127,8 @@ class ViewControllerLogicTests: XCTestCase {
         let callRecord = mockViewController.recorder.getCallRecordFor("setGenerateButtonEnableState")
         XCTAssertEqual(callRecord?[0] as? Bool, false)
     }
+
+    // MARK: - activateGenerateButton()
 
     func test_activateGenerateButton_TellsViewControllerToEnableGenerateButton() {
         subject.activateGenerateButton()
@@ -126,6 +138,8 @@ class ViewControllerLogicTests: XCTestCase {
         XCTAssertEqual(callRecord?[0] as? Bool, true)
     }
 
+    // MARK: - deactivateControlButton()
+
     func test_deactivateControlButton_TellsViewControllerToDisableControlButton() {
         subject.deactivateControlButton()
 
@@ -133,6 +147,8 @@ class ViewControllerLogicTests: XCTestCase {
         let callRecord = mockViewController.recorder.getCallRecordFor("setControlButtonEnableState")
         XCTAssertEqual(callRecord?[0] as? Bool, false)
     }
+
+    // MARK: - activateControlButtonIfCanSolve()
 
     func test_activateControlButtonIfCanSolve_DisablesControlButtonForPermutationSearchingWithNoPoints() {
         subject.pointCollection.points = []
@@ -200,6 +216,8 @@ class ViewControllerLogicTests: XCTestCase {
         XCTAssertEqual(callRecord?[0] as? Bool, false)
     }
 
+    // MARK: - configureControlButtonForSolvingState()
+
     func test_configureControlButtonForSolvingState_SetsTitleToSolveIfNotSolving() {
         subject.solutionEngine.solving = false
 
@@ -220,11 +238,15 @@ class ViewControllerLogicTests: XCTestCase {
         XCTAssertEqual(callRecord?[0] as? String, "Cancel")
     }
 
-    func test_triggerPlotViewRedraw_TriggersViewControllerToRedrawPlotView() {
-        subject.triggerPlotViewRedraw()
+    // MARK: - requestPlotViewRedraw()
 
-        XCTAssertEqual(mockViewController.recorder.getCallCountFor("triggerPlotViewRedraw"), 1)
+    func test_requestPlotViewRedraw_TriggersViewControllerToRedrawPlotView() {
+        subject.requestPlotViewRedraw()
+
+        XCTAssertEqual(mockViewController.recorder.getCallCountFor("requestPlotViewRedraw"), 1)
     }
+
+    // MARK: - generatePoints()
 
     func test_generatePoints_TellsPointCollectionToGenerateUniformRandomPoints() {
         let mockPointCollection = MockPointCollection()
@@ -255,6 +277,56 @@ class ViewControllerLogicTests: XCTestCase {
         let callRecord = mockPointCollection.recorder.getCallRecordFor("generateClusteredRandomPoints")
         XCTAssertEqual(callRecord?[0] as? Int, expectedNumberOfPoints)
     }
+
+    func test_generatePoints_RequestsSolutionWhenConfiguredForLive() {
+        let mockPointCollection = MockPointCollection()
+        let expectedNumberOfPoints = 5
+
+        subject.pointCollection = mockPointCollection
+        subject.definitionManager.numberOfPoints = expectedNumberOfPoints
+        subject.definitionManager.pointDistribution = DefinitionManager.PointDistribution.Uniform
+
+        let mockPermutationSolver = MockPermutationSolver()
+        let mockCombinationSolver = MockCombinationSolver()
+
+        subject.solutionEngine.permutationSolver = mockPermutationSolver
+        subject.solutionEngine.combinationSolver = mockCombinationSolver
+
+        subject.controlManager.solutionType = ControlManager.SolutionType.PermutationSearch
+        subject.controlManager.solverOption = ControlManager.SolverOption.Live
+
+        mockPermutationSolver.completionExpectation = expectation(description: "completion")
+
+        subject.generatePoints()
+
+        waitForExpectations(timeout: 1.0, handler: nil)
+
+        XCTAssertEqual(mockPermutationSolver.recorder.getCallCountFor("findClosestPoints (P)"), 1)
+    }
+
+    func test_generatePoints_DoesNotRequestSolutionWhenNotConfiguredForLive() {
+        let mockPointCollection = MockPointCollection()
+        let expectedNumberOfPoints = 5
+
+        subject.pointCollection = mockPointCollection
+        subject.definitionManager.numberOfPoints = expectedNumberOfPoints
+        subject.definitionManager.pointDistribution = DefinitionManager.PointDistribution.Uniform
+
+        let mockPermutationSolver = MockPermutationSolver()
+        let mockCombinationSolver = MockCombinationSolver()
+
+        subject.solutionEngine.permutationSolver = mockPermutationSolver
+        subject.solutionEngine.combinationSolver = mockCombinationSolver
+
+        subject.controlManager.solutionType = ControlManager.SolutionType.PermutationSearch
+        subject.controlManager.solverOption = ControlManager.SolverOption.OneShot
+
+        subject.generatePoints()
+
+        XCTAssertEqual(mockPermutationSolver.recorder.getCallCountFor("findClosestPoints (P)"), 0)
+    }
+
+    // MARK: - findClosestPoints()
 
     func test_findClosestPoints_FindsSolutionUsingPermutationSearchWithClosures() {
         let mockPermutationSolver = MockPermutationSolver()
@@ -340,6 +412,83 @@ class ViewControllerLogicTests: XCTestCase {
         XCTAssertNotNil(subject.pointCollection.closestPoints)
     }
 
+    // MARK: - isFindingClosestPoints()
+
+    func test_isFindingClosestPoints_IndicatesWhenSolutionIsInProgress() {
+        subject.solutionEngine.solving = true
+
+        let result = subject.isFindingClosestPoints()
+
+        XCTAssertTrue(result)
+    }
+
+    func test_isFindingClosestPoints_IndicatesWhenSolutionIsInNotProgress() {
+        subject.solutionEngine.solving = false
+
+        let result = subject.isFindingClosestPoints()
+
+        XCTAssertFalse(result)
+    }
+
+    // MARK: - requestLiveSolutionIfConfigured()
+
+    func test_requestLiveSolutionIfConfigured_FindsClosestPointsForLiveOption() {
+        let mockPermutationSolver = MockPermutationSolver()
+        let mockCombinationSolver = MockCombinationSolver()
+
+        subject.solutionEngine.permutationSolver = mockPermutationSolver
+        subject.solutionEngine.combinationSolver = mockCombinationSolver
+
+        subject.controlManager.solutionType = ControlManager.SolutionType.PermutationSearch
+        subject.controlManager.solverOption = ControlManager.SolverOption.Live
+
+        subject.pointCollection.points = [Point(x: 1, y: 2), Point(x: 3, y: 4)]
+
+        mockPermutationSolver.completionExpectation = expectation(description: "completion")
+
+        subject.requestLiveSolutionIfConfigured()
+
+        waitForExpectations(timeout: 1.0, handler: nil)
+
+        XCTAssertEqual(mockPermutationSolver.recorder.getCallCountFor("findClosestPoints (P)"), 1)
+    }
+
+    func test_requestLiveSolutionIfConfigured_DoesNotFindClosestPointsForNonLiveOption() {
+        let mockPermutationSolver = MockPermutationSolver()
+        let mockCombinationSolver = MockCombinationSolver()
+
+        subject.solutionEngine.permutationSolver = mockPermutationSolver
+        subject.solutionEngine.combinationSolver = mockCombinationSolver
+
+        subject.controlManager.solutionType = ControlManager.SolutionType.PermutationSearch
+        subject.controlManager.solverOption = ControlManager.SolverOption.OneShot
+
+        subject.pointCollection.points = [Point(x: 1, y: 2), Point(x: 3, y: 4)]
+
+        subject.requestLiveSolutionIfConfigured()
+
+        XCTAssertEqual(mockPermutationSolver.recorder.getCallCountFor("findClosestPoints (P)"), 0)
+    }
+
+    // MARK: - updatePointDataSource()
+
+    func test_updatePointDataSource_ClearsAnyCheckPointsAndClosestPoints() {
+        subject.controlManager.solutionType = ControlManager.SolutionType.PermutationSearch
+        subject.controlManager.solverOption = ControlManager.SolverOption.OneShot
+
+        let points = [Point(x: 1, y: 2), Point(x: 3, y: 4)]
+        subject.pointCollection.points = points
+        subject.pointCollection.checkPoints = (points[0], points[1])
+        subject.pointCollection.closestPoints = (points[0], points[1])
+
+        subject.updatePointDataSource()
+
+        XCTAssertNil(subject.pointCollection.checkPoints)
+        XCTAssertNil(subject.pointCollection.closestPoints)
+    }
+
+    // MARK: - Mocks
+    
     class MockViewController: ViewController {
         
         let player = FuncPlayer()
@@ -398,11 +547,11 @@ class ViewControllerLogicTests: XCTestCase {
             super.setControlButtonTitle(title: title)
         }
 
-        override func triggerPlotViewRedraw() {
+        override func requestPlotViewRedraw() {
             if recorderEnabled {
-                recorder.recordCallFor("triggerPlotViewRedraw", params: [])
+                recorder.recordCallFor("requestPlotViewRedraw", params: [])
             }
-            super.triggerPlotViewRedraw()
+            super.requestPlotViewRedraw()
         }
 
         override func setNumberOfPoints(numberOfPoints: Int) {
@@ -450,7 +599,7 @@ class ViewControllerLogicTests: XCTestCase {
 
         let recorder = FuncRecorder()
 
-        var completionExpectation: XCTestExpectation!
+        var completionExpectation: XCTestExpectation?
 
         override func findClosestPoints(points: [Point],
                                         monitor: (((Point, Point), (Point, Point)?) -> Bool)?,
@@ -465,7 +614,7 @@ class ViewControllerLogicTests: XCTestCase {
 
         let recorder = FuncRecorder()
 
-        var completionExpectation: XCTestExpectation!
+        var completionExpectation: XCTestExpectation?
 
         override func findClosestPoints(points: [Point],
                                         monitor: (((Point, Point), (Point, Point)?) -> Bool)?,

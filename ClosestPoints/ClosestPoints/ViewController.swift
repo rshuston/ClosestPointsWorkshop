@@ -83,21 +83,21 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
 
     // MARK: - Other commands
 
-    func triggerPlotViewRedraw() {
+    func requestPlotViewRedraw() {
         o_PlotView.needsDisplay = true
     }
 
-    // --SPIKE
-    func triggerSolutionUpdate() {
-        viewControllerLogic.updateSolution()
+    func requestPointDataSourceUpdate() {
+        viewControllerLogic.updatePointDataSource()
     }
-    // SPIKE++
 
-    // --SPIKE
+    func requestLiveSolutionIfConfigured() {
+        viewControllerLogic.requestLiveSolutionIfConfigured()
+    }
+
     func isFindingClosestPoints() -> Bool {
         return viewControllerLogic.isFindingClosestPoints()
     }
-    // SPIKE++
 
     // MARK: - NSObject notification methods
 
@@ -182,7 +182,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
                 break
             case "Live"?:
                 viewControllerLogic.controlManager.solverOption = ControlManager.SolverOption.Live
-                viewControllerLogic.triggerLiveSolutionIfConfigured()
+                viewControllerLogic.requestLiveSolutionIfConfigured()
                 break
             default:
                 break

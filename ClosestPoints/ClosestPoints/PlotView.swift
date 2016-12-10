@@ -105,7 +105,8 @@ class PlotView: NSView {
                     if AppUtils.IsNSPoint(point: eventLocation, onNSPoint: nsPoint, withMargin: pointCaptureMargin) {
                         point.highlighted = true
                         selectedPoint = point
-                        appViewController?.triggerSolutionUpdate()
+                        appViewController?.requestPointDataSourceUpdate()
+                        appViewController?.requestLiveSolutionIfConfigured()
                         needsDisplay = true
                         break
                     }
@@ -121,7 +122,8 @@ class PlotView: NSView {
             let pinnedEventLocation = AppUtils.PinNSPoint(point: eventLocation, toNSRect: bounds, withMargin: pointRadius)
             selectedPoint!.x = pinnedEventLocation.x
             selectedPoint!.y = pinnedEventLocation.y
-            appViewController?.triggerSolutionUpdate()
+            appViewController?.requestPointDataSourceUpdate()
+            appViewController?.requestLiveSolutionIfConfigured()
             needsDisplay = true
         }
     }
@@ -130,7 +132,8 @@ class PlotView: NSView {
         if selectedPoint != nil {
             selectedPoint!.highlighted = false
             selectedPoint = nil
-            appViewController?.triggerSolutionUpdate()
+            appViewController?.requestPointDataSourceUpdate()
+            appViewController?.requestLiveSolutionIfConfigured()
             needsDisplay = true
         }
     }

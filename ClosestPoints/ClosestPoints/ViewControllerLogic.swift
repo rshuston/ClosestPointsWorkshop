@@ -86,8 +86,8 @@ class ViewControllerLogic: NSObject {
         hostViewController.setControlButtonTitle(title: solutionEngine.solving ? "Cancel" : "Solve")
     }
 
-    internal func triggerPlotViewRedraw() {
-        hostViewController.triggerPlotViewRedraw()
+    internal func requestPlotViewRedraw() {
+        hostViewController.requestPlotViewRedraw()
     }
 
     func generatePoints() {
@@ -113,39 +113,13 @@ class ViewControllerLogic: NSObject {
             break
         }
 
-        triggerPlotViewRedraw()
+        requestPlotViewRedraw()
 
         activateGenerateButton()
         activateControlButtonIfCanSolve()
 
-        // --SPIKE
-        triggerLiveSolutionIfConfigured()
-        // SPIKE++
+        requestLiveSolutionIfConfigured()
     }
-
-    // --SPIKE
-    func triggerLiveSolutionIfConfigured() {
-        switch controlManager.solverOption {
-        case ControlManager.SolverOption.OneShot:
-            break
-        case ControlManager.SolverOption.SingleStep:
-            break
-        case ControlManager.SolverOption.SlowAnimation:
-            break
-        case ControlManager.SolverOption.FastAnimation:
-            break
-        case ControlManager.SolverOption.Live:
-            findClosestPoints()
-            break
-        }
-    }
-    // SPIKE++
-
-    // --SPIKE
-    func isFindingClosestPoints() -> Bool {
-        return solutionEngine.solving
-    }
-    // SPIKE++
 
     func findClosestPoints() {
         solutionEngine.solving = true
@@ -213,7 +187,7 @@ class ViewControllerLogic: NSObject {
         pointCollection.checkPoints = checkPoints
         pointCollection.checkPointsColor = NSColor.red
         DispatchQueue.main.async {
-            self.triggerPlotViewRedraw()
+            self.requestPlotViewRedraw()
         }
         usleep(25000)
         return solutionEngine.solving
@@ -225,7 +199,7 @@ class ViewControllerLogic: NSObject {
         pointCollection.checkPoints = checkPoints
         pointCollection.checkPointsColor = NSColor.red
         DispatchQueue.main.async {
-            self.triggerPlotViewRedraw()
+            self.requestPlotViewRedraw()
         }
         usleep(1000)
         return solutionEngine.solving
@@ -239,7 +213,7 @@ class ViewControllerLogic: NSObject {
             pointCollection.checkPointsColor = nil
         }
         DispatchQueue.main.async {
-            self.triggerPlotViewRedraw()
+            self.requestPlotViewRedraw()
             self.solutionEngine.solving = false
             self.configureControlButtonForSolvingState()
             self.activateGenerateButton()
@@ -247,11 +221,11 @@ class ViewControllerLogic: NSObject {
         }
     }
 
-    func updateSolution() {
-        // --SPIKE
-        pointCollection.clearCheckPoints()
-        pointCollection.clearClosestPoints()
+    func isFindingClosestPoints() -> Bool {
+        return solutionEngine.solving
+    }
 
+    func requestLiveSolutionIfConfigured() {
         switch controlManager.solverOption {
         case ControlManager.SolverOption.OneShot:
             break
@@ -265,7 +239,11 @@ class ViewControllerLogic: NSObject {
             findClosestPoints()
             break
         }
-        // SPIKE++
+    }
+
+    func updatePointDataSource() {
+        pointCollection.clearCheckPoints()
+        pointCollection.clearClosestPoints()
     }
 
 }
