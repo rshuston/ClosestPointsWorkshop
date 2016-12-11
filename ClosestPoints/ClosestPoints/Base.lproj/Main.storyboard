@@ -852,9 +852,6 @@
                                                         <menuItem title="One Shot" state="on" id="JVc-S4-fTm">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
                                                         </menuItem>
-                                                        <menuItem title="Single Step" id="GC5-L3-SOw">
-                                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                                        </menuItem>
                                                         <menuItem title="Slow Animation" id="v6b-Pf-fbN">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
                                                         </menuItem>

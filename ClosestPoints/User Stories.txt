@@ -21,12 +21,11 @@ As a nerd, I want to have the ability to set the number of points being evaluate
 As a nerd, I want to be able to manually position the points being evaluated by the closest-points algorithm, so that I have better control of the data set.
 
 
-As a nerd, I want to have control over the closest-point solution operations via the five strategies:
+As a nerd, I want to have control over the closest-point solution operations via the four strategies:
 1) One Shot
-2) Single Step
-3) Slow Animation
-4) Fast Animation
-5) Live
+2) Slow Animation
+3) Fast Animation
+4) Live
 so that I have the ability to explore the solution operations.
 
 As a nerd, I want to trace the execution paths of the closes-points solution, so that I can visually monitor the intermediate results of the solution process.

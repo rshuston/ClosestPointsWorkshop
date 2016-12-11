@@ -158,9 +158,6 @@ class ViewControllerLogic: NSObject {
             case ControlManager.SolverOption.OneShot:
                 monitor = monitorCancelOnly
                 break
-            case ControlManager.SolverOption.SingleStep:
-                monitor = monitorCancelOnly
-                break
             case ControlManager.SolverOption.SlowAnimation:
                 monitor = monitorWaitCancelSlow
                 break
@@ -236,8 +233,6 @@ class ViewControllerLogic: NSObject {
     func requestLiveSolutionIfConfigured() {
         switch controlManager.solverOption {
         case ControlManager.SolverOption.OneShot:
-            break
-        case ControlManager.SolverOption.SingleStep:
             break
         case ControlManager.SolverOption.SlowAnimation:
             break

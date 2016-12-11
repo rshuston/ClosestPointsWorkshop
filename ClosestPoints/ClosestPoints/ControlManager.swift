@@ -19,7 +19,6 @@ class ControlManager: NSObject {
 
     enum SolverOption {
         case OneShot
-        case SingleStep
         case SlowAnimation
         case FastAnimation
         case Live

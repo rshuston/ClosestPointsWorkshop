@@ -171,9 +171,6 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
             case "One Shot"?:
                 viewControllerLogic.controlManager.solverOption = ControlManager.SolverOption.OneShot
                 break
-            case "Single Step"?:
-                viewControllerLogic.controlManager.solverOption = ControlManager.SolverOption.SingleStep
-                break
             case "Slow Animation"?:
                 viewControllerLogic.controlManager.solverOption = ControlManager.SolverOption.SlowAnimation
                 break
