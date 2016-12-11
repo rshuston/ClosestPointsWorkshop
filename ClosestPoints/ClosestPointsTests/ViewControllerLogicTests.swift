@@ -474,7 +474,7 @@ class ViewControllerLogicTests: XCTestCase {
 
     // MARK: - updatePointDataSource()
 
-    func test_updatePointDataSource_ClearsAnyCheckPointsAndClosestPoints() {
+    func test_updatePointDataSource_ClearsAnyCheckPointsAndClosestPointsAndSearchRect() {
         subject.controlManager.solutionType = ControlManager.SolutionType.PermutationSearch
         subject.controlManager.solverOption = ControlManager.SolverOption.OneShot
 
@@ -487,6 +487,7 @@ class ViewControllerLogicTests: XCTestCase {
 
         XCTAssertNil(subject.pointCollection.checkPoints)
         XCTAssertNil(subject.pointCollection.closestPoints)
+        XCTAssertNil(subject.pointCollection.searchRect)
     }
 
     // MARK: - Mocks

@@ -23,41 +23,45 @@ class PlotView: NSView {
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
 
+        // White background
+        NSColor.white.set()
+        NSBezierPath(rect: bounds).fill()
+
+        // Black border
+        NSColor.black.set()
         NSFrameRect(bounds)
 
+        // Point data
         if let pds = pointDataSource {
+            // Search rectangle
+            if pds.searchRect != nil {
+                NSColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.25).set()
+                NSBezierPath(rect: NSInsetRect(pds.searchRect!, -pointRadius, -pointRadius)).fill()
+            }
+
+            // All points
             let points = pds.points
             for index in 0..<points.count {
                 let pt = points[index]
                 drawPoint(pt.getAsNSPoint(), radius: pointRadius, color: NSColor.black, withHighlight: pt.highlighted)
             }
 
+            // Check point pair
             if let checkPoints = pds.checkPoints {
-                let color = pds.checkPointsColor ?? NSColor.black
-
-                let p0 = checkPoints.0
-                let p1 = checkPoints.1
-                let nsP0 = p0.getAsNSPoint()
-                let nsP1 = p1.getAsNSPoint()
-
-                drawPoint(nsP0, radius: pointRadius, color: color, withHighlight: p0.highlighted)
-                drawPoint(nsP1, radius: pointRadius, color: color, withHighlight: p1.highlighted)
-
-                drawLine(from: nsP0, to: nsP1, width: 2, color: color)
+                drawPointPair(pointPair: (checkPoints.0.getAsNSPoint(), checkPoints.1.getAsNSPoint()),
+                              radius: pointRadius,
+                              lineWidth: 2,
+                              color: pds.checkPointsColor ?? NSColor.black,
+                              highlightPair: (checkPoints.0.highlighted, checkPoints.1.highlighted))
             }
 
+            // Closest point pair
             if let closestPoints = pds.closestPoints {
-                let color = pds.closestPointsColor ?? NSColor.black
-
-                let p0 = closestPoints.0
-                let p1 = closestPoints.1
-                let nsP0 = p0.getAsNSPoint()
-                let nsP1 = p1.getAsNSPoint()
-
-                drawPoint(nsP0, radius: pointRadius, color: color, withHighlight: p0.highlighted)
-                drawPoint(nsP1, radius: pointRadius, color: color, withHighlight: p1.highlighted)
-
-                drawLine(from: nsP0, to: nsP1, width: 2, color: color)
+                drawPointPair(pointPair: (closestPoints.0.getAsNSPoint(), closestPoints.1.getAsNSPoint()),
+                              radius: pointRadius,
+                              lineWidth: 2,
+                              color: pds.closestPointsColor ?? NSColor.black,
+                              highlightPair: (closestPoints.0.highlighted, closestPoints.1.highlighted))
             }
         }
     }
@@ -66,20 +70,24 @@ class PlotView: NSView {
         color.set()
 
         var rect: NSRect
-        var path: NSBezierPath
 
         rect = NSRect(x: point.x - radius, y: point.y - radius, width: 2 * radius, height: 2 * radius)
-        path = NSBezierPath(ovalIn: rect)
-        path.fill()
+        NSBezierPath(ovalIn: rect).fill()
 
         if withHighlight {
             rect.origin.x = point.x - pointHighlightRadius
             rect.origin.y = point.y - pointHighlightRadius
             rect.size.width = 2 * pointHighlightRadius
             rect.size.height = 2 * pointHighlightRadius
-            path = NSBezierPath(ovalIn: rect)
-            path.stroke()
+            NSBezierPath(ovalIn: rect).stroke()
         }
+    }
+
+    func drawPointPair(pointPair: (NSPoint, NSPoint), radius: CGFloat, lineWidth: CGFloat, color: NSColor, highlightPair: (Bool, Bool)) {
+        drawPoint(pointPair.0, radius: radius, color: color, withHighlight: highlightPair.0)
+        drawPoint(pointPair.1, radius: radius, color: color, withHighlight: highlightPair.1)
+
+        drawLine(from: pointPair.0, to: pointPair.1, width: lineWidth, color: color)
     }
 
     func drawLine(from: NSPoint, to: NSPoint, width: CGFloat, color: NSColor) {

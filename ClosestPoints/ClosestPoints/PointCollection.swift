@@ -17,6 +17,7 @@ protocol PointCollectionDataSource {
     var closestPointsColor: NSColor? { get }
     var checkPoints: (Point, Point)? { get }
     var checkPointsColor: NSColor? { get }
+    var searchRect: NSRect? { get }
 
 }
 
@@ -30,6 +31,7 @@ class PointCollection: NSObject, PointCollectionDataSource {
     var closestPointsColor: NSColor?
     var checkPoints: (Point, Point)?
     var checkPointsColor: NSColor?
+    var searchRect: NSRect?
 
     // MARK: GKRandomDistribution Factories
     
@@ -51,6 +53,7 @@ class PointCollection: NSObject, PointCollectionDataSource {
         closestPointsColor = nil
         checkPoints = nil
         checkPointsColor = nil
+        searchRect = nil
     }
 
     convenience init(withPoints: [Point]) {
@@ -66,17 +69,26 @@ class PointCollection: NSObject, PointCollectionDataSource {
         closestPointsColor = nil
         checkPoints = nil
         checkPointsColor = nil
+        searchRect = nil
     }
 
-    func clearClosestPoints() {
+    func clearAllDataExceptForPoints() {
         closestPoints = nil
         closestPointsColor = nil
-    }
-
-    func clearCheckPoints() {
         checkPoints = nil
         checkPointsColor = nil
+        searchRect = nil
     }
+
+//    func clearClosestPoints() {
+//        closestPoints = nil
+//        closestPointsColor = nil
+//    }
+
+//    func clearCheckPoints() {
+//        checkPoints = nil
+//        checkPointsColor = nil
+//    }
 
     func generateUniformRandomPoints(numberOfPoints: Int, maxX: CGFloat, maxY: CGFloat, margin: CGFloat) {
         let xDistribution = uniformDistributionFactory(Int(margin), Int(maxX - margin))

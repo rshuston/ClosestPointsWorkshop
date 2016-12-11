@@ -91,7 +91,7 @@ class PointCollectionTests: XCTestCase {
         XCTAssertNil(subject.checkPointsColor)
     }
 
-    func test_clearClosestPoints_RemovesOnlyClosestPointsPairAndColor() {
+    func test_clearAllDataExceptForPoints_RemovesOnlyClosestPointsPairAndColor() {
         let points = [ Point(x: 1, y: 2), Point(x: 3, y: 4) ]
         let pair = (points[0], points[1])
 
@@ -101,34 +101,16 @@ class PointCollectionTests: XCTestCase {
         subject.closestPointsColor = NSColor.green
         subject.checkPoints = pair
         subject.checkPointsColor = NSColor.yellow
+        subject.searchRect = NSRect(x: 0, y: 0, width: 100, height: 100)
 
-        subject.clearClosestPoints()
+        subject.clearAllDataExceptForPoints()
 
         XCTAssertEqual(subject.points.count, 2)
         XCTAssertNil(subject.closestPoints)
         XCTAssertNil(subject.closestPointsColor)
-        XCTAssertNotNil(subject.checkPoints)
-        XCTAssertNotNil(subject.checkPointsColor)
-    }
-
-    func test_clearCheckPoints_RemovesOnlyCheckPointsPairAndColor() {
-        let points = [ Point(x: 1, y: 2), Point(x: 3, y: 4) ]
-        let pair = (points[0], points[1])
-
-        let subject = PointCollection()
-        subject.points = points
-        subject.closestPoints = pair
-        subject.closestPointsColor = NSColor.green
-        subject.checkPoints = pair
-        subject.checkPointsColor = NSColor.yellow
-
-        subject.clearCheckPoints()
-
-        XCTAssertEqual(subject.points.count, 2)
-        XCTAssertNotNil(subject.closestPoints)
-        XCTAssertNotNil(subject.closestPointsColor)
         XCTAssertNil(subject.checkPoints)
         XCTAssertNil(subject.checkPointsColor)
+        XCTAssertNil(subject.searchRect)
     }
 
     func test_generateUniformRandomPoints_PopulatesList() {

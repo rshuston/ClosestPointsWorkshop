@@ -91,7 +91,7 @@ class PermutationSolverTests: XCTestCase {
             XCTAssertEqual(checkPoints.0, closestPointsSoFar?.0)
             XCTAssertEqual(checkPoints.1, closestPointsSoFar?.1)
 
-            XCTAssertNotEqual(checkRect.size.width + checkRect.size.height, 0)
+            XCTAssertFalse(NSIsEmptyRect(checkRect))
 
             let listOrdered = (closestPointsSoFar?.0 == points[0])
             if listOrdered {

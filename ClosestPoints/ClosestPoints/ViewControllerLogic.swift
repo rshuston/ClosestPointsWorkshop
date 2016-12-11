@@ -149,8 +149,7 @@ class ViewControllerLogic: NSObject {
         if solver != nil {
             deactivateGenerateButton()
 
-            pointCollection.clearClosestPoints()
-            pointCollection.clearCheckPoints()
+            pointCollection.clearAllDataExceptForPoints()
 
             configureControlButtonForSolvingState()
 
@@ -192,6 +191,7 @@ class ViewControllerLogic: NSObject {
         pointCollection.closestPointsColor = NSColor.blue
         pointCollection.checkPoints = checkPoints
         pointCollection.checkPointsColor = NSColor.red
+        pointCollection.searchRect = checkRect
         DispatchQueue.main.async {
             self.requestPlotViewRedraw()
         }
@@ -204,6 +204,7 @@ class ViewControllerLogic: NSObject {
         pointCollection.closestPointsColor = NSColor.blue
         pointCollection.checkPoints = checkPoints
         pointCollection.checkPointsColor = NSColor.red
+        pointCollection.searchRect = checkRect
         DispatchQueue.main.async {
             self.requestPlotViewRedraw()
         }
@@ -217,6 +218,7 @@ class ViewControllerLogic: NSObject {
             pointCollection.closestPointsColor = NSColor.blue
             pointCollection.checkPoints = nil
             pointCollection.checkPointsColor = nil
+            pointCollection.searchRect = nil
         }
         DispatchQueue.main.async {
             self.requestPlotViewRedraw()
@@ -248,8 +250,7 @@ class ViewControllerLogic: NSObject {
     }
 
     func updatePointDataSource() {
-        pointCollection.clearCheckPoints()
-        pointCollection.clearClosestPoints()
+        pointCollection.clearAllDataExceptForPoints()
     }
 
 }
