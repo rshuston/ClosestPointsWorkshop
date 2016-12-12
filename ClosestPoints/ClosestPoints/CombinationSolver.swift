@@ -22,7 +22,7 @@ class CombinationSolver: Solver {
             checkRect = AppUtils.NSRectFromNSPoints(pt1: points[0].getAsNSPoint(), pt2: points[1].getAsNSPoint())
             keepRunning = monitor?(checkRect, closestPoints!, closestPoints) ?? true
         } else if points.count > 2 {
-            var smallestDist_sq: CGFloat = CGFloat.greatestFiniteMagnitude
+            var smallestDistSquared: CGFloat = CGFloat.greatestFiniteMagnitude
             let count = points.count
             for ptA_index in 0..<count {
                 let ptA = points[ptA_index]
@@ -31,8 +31,8 @@ class CombinationSolver: Solver {
                     let dx = ptB.x - ptA.x
                     let dy = ptB.y - ptA.y
                     let dist_sq = dx * dx + dy * dy
-                    if dist_sq < smallestDist_sq {
-                        smallestDist_sq = dist_sq
+                    if dist_sq < smallestDistSquared {
+                        smallestDistSquared = dist_sq
                         closestPoints = (ptA, ptB)
                     }
                     checkRect = AppUtils.NSRectFromNSPoints(pt1: ptA.getAsNSPoint(), pt2: ptB.getAsNSPoint())

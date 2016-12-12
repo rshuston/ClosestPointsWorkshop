@@ -14,5 +14,6 @@ class SolutionEngine: NSObject {
 
     var permutationSolver: PermutationSolver! = PermutationSolver()
     var combinationSolver: CombinationSolver! = CombinationSolver()
+    var planeSweepSolver: PlaneSweepSolver! = PlaneSweepSolver()
 
 }

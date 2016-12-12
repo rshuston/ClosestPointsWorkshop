@@ -194,7 +194,7 @@ class ViewControllerLogicTests: XCTestCase {
         XCTAssertEqual(callRecord?[0] as? Bool, true)
     }
 
-    func test_activateControlButtonIfCanSolve_DisablesControlButtonForPlaneSweepSearching() {
+    func test_activateControlButtonIfCanSolve_EnablesControlButtonForPlaneSweepSearching() {
         subject.pointCollection.points = [Point(x: 1, y: 2), Point(x: 3, y: 4)]
         subject.controlManager.solutionType = ControlManager.SolutionType.PlaneSweep
 
@@ -202,7 +202,7 @@ class ViewControllerLogicTests: XCTestCase {
 
         XCTAssertEqual(mockViewController.recorder.getCallCountFor("setControlButtonEnableState"), 1)
         let callRecord = mockViewController.recorder.getCallRecordFor("setControlButtonEnableState")
-        XCTAssertEqual(callRecord?[0] as? Bool, false)
+        XCTAssertEqual(callRecord?[0] as? Bool, true)
     }
 
     func test_activateControlButtonIfCanSolve_DisablesControlButtonForDivideAndConquerSearching() {

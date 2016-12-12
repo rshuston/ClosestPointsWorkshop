@@ -16,5 +16,14 @@ O(n!)/r!
 
 Plane Sweep:
 
+Given points[]
+Generate pointsSortedByX[]
+Set best point pair to pointsSortedByX[0] and pointsSortedByX[1]
+for index in 2..<pointsSortedByX.count {
+    Scan backwards through pointsSortedByX[] from index until x-distance is greater than "best so far"
+    Find closest points in array slice
+    If better than "best so far" then keep the found point pair
+}
+
 
 Divide and Conquer:

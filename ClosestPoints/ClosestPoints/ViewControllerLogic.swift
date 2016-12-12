@@ -80,7 +80,7 @@ class ViewControllerLogic: NSObject {
             hostViewController.setControlButtonEnableState(enabled: pointCollection.points.count >= 2)
             break
         case ControlManager.SolutionType.PlaneSweep:
-            hostViewController.setControlButtonEnableState(enabled: false)
+            hostViewController.setControlButtonEnableState(enabled: pointCollection.points.count >= 2)
             break
         case ControlManager.SolutionType.DivideAndConquer:
             hostViewController.setControlButtonEnableState(enabled: false)
@@ -139,7 +139,7 @@ class ViewControllerLogic: NSObject {
             solver = solutionEngine.combinationSolver
             break
         case ControlManager.SolutionType.PlaneSweep:
-            solver = nil
+            solver = solutionEngine.planeSweepSolver
             break
         case ControlManager.SolutionType.DivideAndConquer:
             solver = nil
