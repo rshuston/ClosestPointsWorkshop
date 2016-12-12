@@ -80,16 +80,6 @@ class PointCollection: NSObject, PointCollectionDataSource {
         searchRect = nil
     }
 
-//    func clearClosestPoints() {
-//        closestPoints = nil
-//        closestPointsColor = nil
-//    }
-
-//    func clearCheckPoints() {
-//        checkPoints = nil
-//        checkPointsColor = nil
-//    }
-
     func generateUniformRandomPoints(numberOfPoints: Int, maxX: CGFloat, maxY: CGFloat, margin: CGFloat) {
         let xDistribution = uniformDistributionFactory(Int(margin), Int(maxX - margin))
         let yDistribution = uniformDistributionFactory(Int(margin), Int(maxY - margin))

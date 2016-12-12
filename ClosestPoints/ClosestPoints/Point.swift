@@ -27,6 +27,7 @@ class Point: NSObject {
     {
         self.x = x
         self.y = y
+        
         self.highlighted = false
     }
 

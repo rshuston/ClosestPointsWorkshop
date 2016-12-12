@@ -24,6 +24,10 @@
 		4E3E618B1DE2020B002A75C7 /* PlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3E618A1DE2020B002A75C7 /* PlotView.swift */; };
 		4E55CC141DF8E4F700CB0E87 /* ViewControllerLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E55CC131DF8E4F700CB0E87 /* ViewControllerLogic.swift */; };
 		4E55CC161DF8E53D00CB0E87 /* ViewControllerLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E55CC151DF8E53D00CB0E87 /* ViewControllerLogicTests.swift */; };
+		4E5DE51D1DFE200F0032FB7B /* PlaneSweepSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5DE51C1DFE200F0032FB7B /* PlaneSweepSolver.swift */; };
+		4E5DE51F1DFE203E0032FB7B /* PlaneSweepSolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5DE51E1DFE203E0032FB7B /* PlaneSweepSolverTests.swift */; };
+		4E5DE5211DFE22B80032FB7B /* DivideAndConquerSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5DE5201DFE22B80032FB7B /* DivideAndConquerSolver.swift */; };
+		4E5DE5231DFE22D10032FB7B /* DivideAndConquerSolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5DE5221DFE22D10032FB7B /* DivideAndConquerSolverTests.swift */; };
 		4E84FFCC1DF81BD700F5E27F /* CombinationSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E84FFCB1DF81BD700F5E27F /* CombinationSolver.swift */; };
 		4E84FFCE1DF81BEF00F5E27F /* CombinationSolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E84FFCD1DF81BEF00F5E27F /* CombinationSolverTests.swift */; };
 		4E8DCA351DF3BE74003139E1 /* PDLTestBench.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DCA341DF3BE74003139E1 /* PDLTestBench.framework */; };
@@ -67,6 +71,10 @@
 		4E3E618A1DE2020B002A75C7 /* PlotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlotView.swift; sourceTree = "<group>"; };
 		4E55CC131DF8E4F700CB0E87 /* ViewControllerLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerLogic.swift; sourceTree = "<group>"; };
 		4E55CC151DF8E53D00CB0E87 /* ViewControllerLogicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerLogicTests.swift; sourceTree = "<group>"; };
+		4E5DE51C1DFE200F0032FB7B /* PlaneSweepSolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneSweepSolver.swift; sourceTree = "<group>"; };
+		4E5DE51E1DFE203E0032FB7B /* PlaneSweepSolverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneSweepSolverTests.swift; sourceTree = "<group>"; };
+		4E5DE5201DFE22B80032FB7B /* DivideAndConquerSolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DivideAndConquerSolver.swift; sourceTree = "<group>"; };
+		4E5DE5221DFE22D10032FB7B /* DivideAndConquerSolverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DivideAndConquerSolverTests.swift; sourceTree = "<group>"; };
 		4E6F312B1DE5427E00221A9A /* User Stories.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "User Stories.txt"; sourceTree = "<group>"; };
 		4E84FFCB1DF81BD700F5E27F /* CombinationSolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinationSolver.swift; sourceTree = "<group>"; };
 		4E84FFCD1DF81BEF00F5E27F /* CombinationSolverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinationSolverTests.swift; sourceTree = "<group>"; };
@@ -136,6 +144,8 @@
 				4E0291EE1DF818EB00371684 /* Solver.swift */,
 				4E0291F01DF8194900371684 /* PermutationSolver.swift */,
 				4E84FFCB1DF81BD700F5E27F /* CombinationSolver.swift */,
+				4E5DE51C1DFE200F0032FB7B /* PlaneSweepSolver.swift */,
+				4E5DE5201DFE22B80032FB7B /* DivideAndConquerSolver.swift */,
 				4EB647561DF4B085004F10F7 /* AppUtils.swift */,
 				4E0531391DD640EA006E9B8F /* Assets.xcassets */,
 				4E05313B1DD640EA006E9B8F /* Main.storyboard */,
@@ -156,6 +166,8 @@
 				4E397FFD1DF315340053BBAA /* SolutionEngineTests.swift */,
 				4E0291F21DF8198E00371684 /* PermutationSolverTests.swift */,
 				4E84FFCD1DF81BEF00F5E27F /* CombinationSolverTests.swift */,
+				4E5DE51E1DFE203E0032FB7B /* PlaneSweepSolverTests.swift */,
+				4E5DE5221DFE22D10032FB7B /* DivideAndConquerSolverTests.swift */,
 				4EC175FB1DFB647200BB1AF0 /* AppUtilsTests.swift */,
 				4E0531491DD640EA006E9B8F /* Info.plist */,
 			);
@@ -273,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E5DE51D1DFE200F0032FB7B /* PlaneSweepSolver.swift in Sources */,
 				4E0291EF1DF818EB00371684 /* Solver.swift in Sources */,
 				4EB647571DF4B085004F10F7 /* AppUtils.swift in Sources */,
 				4E55CC141DF8E4F700CB0E87 /* ViewControllerLogic.swift in Sources */,
@@ -282,6 +295,7 @@
 				4E397FF81DF314EC0053BBAA /* SolutionEngine.swift in Sources */,
 				4E397FF61DF314CF0053BBAA /* ControlManager.swift in Sources */,
 				4E0291F11DF8194900371684 /* PermutationSolver.swift in Sources */,
+				4E5DE5211DFE22B80032FB7B /* DivideAndConquerSolver.swift in Sources */,
 				4E0531381DD640EA006E9B8F /* ViewController.swift in Sources */,
 				4E3E618B1DE2020B002A75C7 /* PlotView.swift in Sources */,
 				4E397FF41DF314B90053BBAA /* DefinitionManager.swift in Sources */,
@@ -300,7 +314,9 @@
 				4E55CC161DF8E53D00CB0E87 /* ViewControllerLogicTests.swift in Sources */,
 				4EC175FC1DFB647200BB1AF0 /* AppUtilsTests.swift in Sources */,
 				4E397FFE1DF315340053BBAA /* SolutionEngineTests.swift in Sources */,
+				4E5DE51F1DFE203E0032FB7B /* PlaneSweepSolverTests.swift in Sources */,
 				4E0291F31DF8198E00371684 /* PermutationSolverTests.swift in Sources */,
+				4E5DE5231DFE22D10032FB7B /* DivideAndConquerSolverTests.swift in Sources */,
 				4EDEDF0F1DF243EF00BDA336 /* PointCollectionTests.swift in Sources */,
 				4E397FFA1DF3150E0053BBAA /* DefinitionManagerTests.swift in Sources */,
 			);
