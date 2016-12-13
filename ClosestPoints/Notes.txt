@@ -1,29 +1,36 @@
 Permutation:
+
 order matters
 nPr = P(n,r)
     = n! / (n-r)!
+
 O(n!)
 
 
 Combination:
+
 order does not matter
 nCr = C(n,r)
     = P(n,r) / r!
     = n! / ((n-r)! * r!)
 "n choose r" is also the binomial coefficient
+
 O(n!)/r!
 
 
 Plane Sweep:
 
+O(n log n)
+
 Given points[]
 Generate pointsSortedByX[]
 Set best point pair to pointsSortedByX[0] and pointsSortedByX[1]
 for index in 2..<pointsSortedByX.count {
-    Scan backwards through pointsSortedByX[] from index until x-distance is greater than "best so far"
+    Scan backwards through pointsSortedByX[] from index until x-distance is greater than "best so far", excluding points whose y-distance is also greater than "best so far"
     Find closest points in array slice
     If better than "best so far" then keep the found point pair
 }
+
 
 
 Divide and Conquer:
