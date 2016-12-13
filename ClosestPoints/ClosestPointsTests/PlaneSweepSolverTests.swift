@@ -77,6 +77,24 @@ class PlaneSweepSolverTests: XCTestCase {
         XCTAssertEqual(matchedPoints[3], points[1])
     }
 
+    func test_groupPointsForIndexWithinDistance_DoesNotIncludePointsOusideOfMatchDistance() {
+        var points: [Point] = []
+        let subject = PlaneSweepSolver()
+
+        points.append(Point(x: 0, y: 1))
+        points.append(Point(x: 1, y: 2))
+        points.append(Point(x: 2, y: 30))
+        points.append(Point(x: 3, y: 3))
+        points.append(Point(x: 4, y: 4))
+
+        let matchedPoints = subject.groupPoints(points: points, forIndex: 4, withinDistance: 3.5)
+
+        XCTAssertEqual(matchedPoints.count, 3)
+        XCTAssertEqual(matchedPoints[0], points[4])
+        XCTAssertEqual(matchedPoints[1], points[3])
+        XCTAssertEqual(matchedPoints[2], points[1])
+    }
+
     func test_groupPointsForIndexWithinDistance_DoesNotExceedPointsArray() {
         var points: [Point] = []
         let subject = PlaneSweepSolver()

@@ -79,7 +79,10 @@ class PlaneSweepSolver: Solver {
         for index in (0..<forIndex).reversed() {
             let dx = points[forIndex].x - points[index].x // points[] is sorted by x, so abs() not needed
             if dx <= withinDistance {
-                matchedPoints.append(points[index])
+                let dy = abs(points[forIndex].y - points[index].y)
+                if dy <= withinDistance {
+                    matchedPoints.append(points[index])
+                }
             } else {
                 break
             }
