@@ -99,13 +99,36 @@ class PlaneSweepSolverTests: XCTestCase {
 
     func test_findClosesPointIndexToFirstWithinDistanceSquared_FindsPointsForTrivialSet() {
         var points: [Point] = []
-        let dummyCarryOn = PlaneSweepSolver.SolutionCarryOn()
+        let solutionCarryOn = PlaneSweepSolver.SolutionCarryOn()
         let subject = PlaneSweepSolver()
 
         points.append(Point(x: 0, y: 1))
         points.append(Point(x: 1, y: 2))
 
-        let result = subject.findClosesPointIndexToFirst(points: points, withinDistanceSquared: 3, withCarryOn: dummyCarryOn)
+        let result = subject.findClosesPointIndexToFirst(points: points, withinDistanceSquared: 3, withCarryOn: solutionCarryOn)
+
+        XCTAssertEqual(result.0, 1)
+        XCTAssertEqual(result.1, 2)
+    }
+
+    func test_findClosesPointIndexToFirstWithinDistanceSquared_CallsMonitorInSolutionCarryOn() {
+        var points: [Point] = []
+        let solutionCarryOn = PlaneSweepSolver.SolutionCarryOn()
+        let subject = PlaneSweepSolver()
+
+        points.append(Point(x: 0, y: 1))
+        points.append(Point(x: 1, y: 2))
+
+        var monitorCount = 0
+
+        solutionCarryOn.monitor = { (checkRect: NSRect?, checkPoints: (Point, Point)?, closestPointsSoFar: (Point, Point)?) -> Bool in
+            monitorCount += 1
+            return true
+        }
+
+        let result = subject.findClosesPointIndexToFirst(points: points, withinDistanceSquared: 3, withCarryOn: solutionCarryOn)
+
+        XCTAssertNotEqual(monitorCount, 0)
 
         XCTAssertEqual(result.0, 1)
         XCTAssertEqual(result.1, 2)
@@ -113,7 +136,7 @@ class PlaneSweepSolverTests: XCTestCase {
 
     func test_findClosesPointIndexToFirstWithinDistanceSquared_FindsPointsForNonTrivialSet() {
         var points: [Point] = []
-        let dummyCarryOn = PlaneSweepSolver.SolutionCarryOn()
+        let solutionCarryOn = PlaneSweepSolver.SolutionCarryOn()
         let subject = PlaneSweepSolver()
 
         points.append(Point(x: 0, y: 1))
@@ -121,7 +144,7 @@ class PlaneSweepSolverTests: XCTestCase {
         points.append(Point(x: 2, y: 1))
         points.append(Point(x: 3, y: 10))
 
-        let result = subject.findClosesPointIndexToFirst(points: points, withinDistanceSquared: 100, withCarryOn: dummyCarryOn)
+        let result = subject.findClosesPointIndexToFirst(points: points, withinDistanceSquared: 100, withCarryOn: solutionCarryOn)
 
         XCTAssertEqual(result.0, 2)
         XCTAssertEqual(result.1, 4)
