@@ -352,7 +352,7 @@ class ViewControllerLogicTests: XCTestCase {
 
         XCTAssertEqual(3, record?.count)
         let points = record?[0] as? [Point]
-        let monitorClosure = record?[1] as? ((NSRect, (Point, Point), (Point, Point)?) -> Bool)
+        let monitorClosure = record?[1] as? ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)
         let completionClosure = record?[2] as? (((Point, Point)?) -> Void)
 
         XCTAssertNotNil(points)
@@ -395,7 +395,7 @@ class ViewControllerLogicTests: XCTestCase {
 
         XCTAssertEqual(3, record?.count)
         let points = record?[0] as? [Point]
-        let monitorClosure = record?[1] as? ((NSRect, (Point, Point), (Point, Point)?) -> Bool)
+        let monitorClosure = record?[1] as? ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)
         let completionClosure = record?[2] as? (((Point, Point)?) -> Void)
 
         XCTAssertNotNil(points)
@@ -605,7 +605,7 @@ class ViewControllerLogicTests: XCTestCase {
         var completionExpectation: XCTestExpectation?
 
         override func findClosestPoints(points: [Point],
-                                        monitor: ((NSRect, (Point, Point), (Point, Point)?) -> Bool)?,
+                                        monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?,
                                         completion: (((Point, Point)?) -> Void)) {
             recorder.recordCallFor("findClosestPoints (P)", params: [points, monitor, completion])
             completionExpectation?.fulfill()
@@ -620,7 +620,7 @@ class ViewControllerLogicTests: XCTestCase {
         var completionExpectation: XCTestExpectation?
 
         override func findClosestPoints(points: [Point],
-                                        monitor: ((NSRect, (Point, Point), (Point, Point)?) -> Bool)?,
+                                        monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?,
                                         completion: (((Point, Point)?) -> Void)) {
             recorder.recordCallFor("findClosestPoints (C)", params: [points, monitor, completion])
             completionExpectation?.fulfill()

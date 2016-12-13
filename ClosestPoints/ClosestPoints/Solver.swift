@@ -18,8 +18,8 @@ class Solver: NSObject {
     // the point array to search
     //
     // monitor:
-    // optional closure that passes the checked rectangle, current point pair, and the
-    // best point pair so far (optional)
+    // optional closure that passes the checked rectangle (optional), the current point
+    // pair (optional), and the best point pair so far (optional)
     //
     // completion:
     // closure that passes the found closest point pair (optional)
@@ -27,7 +27,7 @@ class Solver: NSObject {
     // (Eewww! A comment! How untrendy! The horror of it all! Whaah! What can it mean?)
 
     func findClosestPoints(points: [Point],
-                           monitor: ((NSRect, (Point, Point), (Point, Point)?) -> Bool)?,
+                           monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?,
                            completion: (((Point, Point)?) -> Void)) {
     }
 

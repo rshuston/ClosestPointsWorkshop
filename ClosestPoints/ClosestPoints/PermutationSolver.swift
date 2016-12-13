@@ -11,7 +11,7 @@ import Cocoa
 class PermutationSolver: Solver {
 
     override func findClosestPoints(points: [Point],
-                                    monitor: ((NSRect, (Point, Point), (Point, Point)?) -> Bool)?,
+                                    monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?,
                                     completion: (((Point, Point)?) -> Void)) {
         var checkRect: NSRect
         var closestPoints: (Point, Point)?

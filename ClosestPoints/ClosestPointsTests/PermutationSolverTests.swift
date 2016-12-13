@@ -83,15 +83,16 @@ class PermutationSolverTests: XCTestCase {
         var monitorCount = 0
 
         subject.findClosestPoints(points: points, monitor: {
-            (checkRect: NSRect, checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool in
+            (checkRect: NSRect?, checkPoints: (Point, Point)?, closestPointsSoFar: (Point, Point)?) -> Bool in
             monitorCount += 1
+
+            XCTAssertNotNil(checkRect)
+            XCTAssertFalse(NSIsEmptyRect(checkRect!))
 
             XCTAssertNotNil(closestPointsSoFar)
 
-            XCTAssertEqual(checkPoints.0, closestPointsSoFar?.0)
-            XCTAssertEqual(checkPoints.1, closestPointsSoFar?.1)
-
-            XCTAssertFalse(NSIsEmptyRect(checkRect))
+            XCTAssertEqual(checkPoints?.0, closestPointsSoFar?.0)
+            XCTAssertEqual(checkPoints?.1, closestPointsSoFar?.1)
 
             let listOrdered = (closestPointsSoFar?.0 == points[0])
             if listOrdered {
@@ -166,7 +167,7 @@ class PermutationSolverTests: XCTestCase {
         var monitorCount = 0
 
         subject.findClosestPoints(points: points, monitor: {
-            (checkRect: NSRect, checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool in
+            (checkRect: NSRect?, checkPoints: (Point, Point)?, closestPointsSoFar: (Point, Point)?) -> Bool in
             monitorCount += 1
 
             XCTAssertNotNil(closestPointsSoFar)
@@ -206,7 +207,7 @@ class PermutationSolverTests: XCTestCase {
         var monitorCount = 0
 
         subject.findClosestPoints(points: points, monitor: {
-            (checkRect: NSRect, checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool in
+            (checkRect: NSRect?, checkPoints: (Point, Point)?, closestPointsSoFar: (Point, Point)?) -> Bool in
             monitorCount += 1
 
             XCTAssertNotNil(closestPointsSoFar)
@@ -273,7 +274,7 @@ class PermutationSolverTests: XCTestCase {
         var monitorCount = 0
 
         subject.findClosestPoints(points: points, monitor: {
-            (checkRect: NSRect, checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool in
+            (checkRect: NSRect?, checkPoints: (Point, Point)?, closestPointsSoFar: (Point, Point)?) -> Bool in
             monitorCount += 1
 
             XCTAssertNotNil(closestPointsSoFar)

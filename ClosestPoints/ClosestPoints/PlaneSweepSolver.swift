@@ -10,11 +10,22 @@ import Cocoa
 
 class PlaneSweepSolver: Solver {
 
-    override func findClosestPoints(points: [Point],
-                                    monitor: ((NSRect, (Point, Point), (Point, Point)?) -> Bool)?,
-                                    completion: (((Point, Point)?) -> Void)) {
-        var checkRect: NSRect
+    class SolutionCarryOn {
+        var checkRect: NSRect?
+        var checkPoints: (Point, Point)?
         var closestPoints: (Point, Point)?
+        var monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?
+
+        func runMonitor() -> Bool {
+            return monitor?(checkRect, checkPoints, closestPoints) ?? true
+        }
+    }
+
+    override func findClosestPoints(points: [Point],
+                                    monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?,
+                                    completion: (((Point, Point)?) -> Void)) {
+        let solutionCarryOn = SolutionCarryOn()
+        
         var keepRunning = true
 
         if points.count >= 2 {
@@ -23,24 +34,29 @@ class PlaneSweepSolver: Solver {
             })
             let N = sortedPoints.count
             var distanceSquared = squaredEuclideanDistance(sortedPoints[0], sortedPoints[1])
-            closestPoints = (sortedPoints[0], sortedPoints[1])
-            checkRect = AppUtils.NSRectFromNSPoints(pt1: sortedPoints[0].getAsNSPoint(), pt2: sortedPoints[1].getAsNSPoint())
-            keepRunning = monitor?(checkRect, closestPoints!, closestPoints) ?? true
+            solutionCarryOn.checkRect = AppUtils.NSRectFromNSPoints(pt1: sortedPoints[0].getAsNSPoint(), pt2: sortedPoints[1].getAsNSPoint())
+            solutionCarryOn.checkPoints = (sortedPoints[0], sortedPoints[1])
+            solutionCarryOn.closestPoints = (sortedPoints[0], sortedPoints[1])
+            solutionCarryOn.monitor = monitor
+            keepRunning = solutionCarryOn.runMonitor()
             if N > 2 && keepRunning {
                 for index in 2..<N {
                     let checkPoint = sortedPoints[index]
                     let matchDistance = sqrt(distanceSquared)
-                    checkRect = NSRect(x: checkPoint.x - matchDistance,
-                                       y: checkPoint.y - matchDistance,
-                                       width: matchDistance,
-                                       height: 2 * matchDistance)
+                    solutionCarryOn.checkRect = NSRect(x: checkPoint.x - matchDistance,
+                                                       y: checkPoint.y - matchDistance,
+                                                       width: matchDistance,
+                                                       height: 2 * matchDistance)
                     let matchedPoints = groupPoints(points: sortedPoints, forIndex: index, withinDistance: matchDistance) // Results are in reverse order from sortedPoints[]
-                    let result = findClosesPointIndexToFirst(points: matchedPoints, withinDistanceSquared: distanceSquared)
+                    let result = findClosesPointIndexToFirst(points: matchedPoints,
+                                                             withinDistanceSquared: distanceSquared,
+                                                             withCarryOn: solutionCarryOn)
                     if result.1 < distanceSquared {
                         distanceSquared = result.1
-                        closestPoints = (checkPoint, matchedPoints[result.0])
+                        solutionCarryOn.closestPoints = (checkPoint, matchedPoints[result.0])
                     }
-                    keepRunning = monitor?(checkRect, closestPoints!, closestPoints) ?? true
+                    solutionCarryOn.checkPoints = nil
+                    keepRunning = solutionCarryOn.runMonitor()
                     if !keepRunning {
                         break
                     }
@@ -48,7 +64,7 @@ class PlaneSweepSolver: Solver {
             }
         }
 
-        completion(closestPoints)
+        completion(solutionCarryOn.closestPoints)
     }
 
     internal func squaredEuclideanDistance(_ pt1: Point, _ pt2: Point) -> CGFloat {
@@ -72,13 +88,20 @@ class PlaneSweepSolver: Solver {
         return matchedPoints
     }
 
-    internal func findClosesPointIndexToFirst(points: [Point], withinDistanceSquared: CGFloat) -> (Int, CGFloat) {
+    internal func findClosesPointIndexToFirst(points: [Point], withinDistanceSquared: CGFloat, withCarryOn: SolutionCarryOn) -> (Int, CGFloat) {
+        var keepRunning = true
         var found = (0, withinDistanceSquared)
         for index in 1..<points.count {
+            withCarryOn.checkPoints = (points[index], points[0])
             let distanceSquared = squaredEuclideanDistance(points[index], points[0])
             if distanceSquared < found.1 {
                 found = (index, distanceSquared)
             }
+            keepRunning = withCarryOn.runMonitor()
+            if !keepRunning {
+                break
+            }
+
         }
         return found
     }

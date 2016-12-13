@@ -99,12 +99,13 @@ class PlaneSweepSolverTests: XCTestCase {
 
     func test_findClosesPointIndexToFirstWithinDistanceSquared_FindsPointsForTrivialSet() {
         var points: [Point] = []
+        let dummyCarryOn = PlaneSweepSolver.SolutionCarryOn()
         let subject = PlaneSweepSolver()
 
         points.append(Point(x: 0, y: 1))
         points.append(Point(x: 1, y: 2))
 
-        let result = subject.findClosesPointIndexToFirst(points: points, withinDistanceSquared: 3)
+        let result = subject.findClosesPointIndexToFirst(points: points, withinDistanceSquared: 3, withCarryOn: dummyCarryOn)
 
         XCTAssertEqual(result.0, 1)
         XCTAssertEqual(result.1, 2)
@@ -112,6 +113,7 @@ class PlaneSweepSolverTests: XCTestCase {
 
     func test_findClosesPointIndexToFirstWithinDistanceSquared_FindsPointsForNonTrivialSet() {
         var points: [Point] = []
+        let dummyCarryOn = PlaneSweepSolver.SolutionCarryOn()
         let subject = PlaneSweepSolver()
 
         points.append(Point(x: 0, y: 1))
@@ -119,7 +121,7 @@ class PlaneSweepSolverTests: XCTestCase {
         points.append(Point(x: 2, y: 1))
         points.append(Point(x: 3, y: 10))
 
-        let result = subject.findClosesPointIndexToFirst(points: points, withinDistanceSquared: 100)
+        let result = subject.findClosesPointIndexToFirst(points: points, withinDistanceSquared: 100, withCarryOn: dummyCarryOn)
 
         XCTAssertEqual(result.0, 2)
         XCTAssertEqual(result.1, 4)
@@ -198,15 +200,16 @@ class PlaneSweepSolverTests: XCTestCase {
         var monitorCount = 0
 
         subject.findClosestPoints(points: points, monitor: {
-            (checkRect: NSRect, checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool in
+            (checkRect: NSRect?, checkPoints: (Point, Point)?, closestPointsSoFar: (Point, Point)?) -> Bool in
             monitorCount += 1
+
+            XCTAssertNotNil(checkRect)
+            XCTAssertFalse(NSIsEmptyRect(checkRect!))
 
             XCTAssertNotNil(closestPointsSoFar)
 
-            XCTAssertEqual(checkPoints.0, closestPointsSoFar?.0)
-            XCTAssertEqual(checkPoints.1, closestPointsSoFar?.1)
-
-            XCTAssertFalse(NSIsEmptyRect(checkRect))
+            XCTAssertEqual(checkPoints?.0, closestPointsSoFar?.0)
+            XCTAssertEqual(checkPoints?.1, closestPointsSoFar?.1)
 
             let listOrdered = (closestPointsSoFar?.0 == points[0])
             if listOrdered {
@@ -281,7 +284,7 @@ class PlaneSweepSolverTests: XCTestCase {
         var monitorCount = 0
 
         subject.findClosestPoints(points: points, monitor: {
-            (checkRect: NSRect, checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool in
+            (checkRect: NSRect?, checkPoints: (Point, Point)?, closestPointsSoFar: (Point, Point)?) -> Bool in
             monitorCount += 1
 
             XCTAssertNotNil(closestPointsSoFar)
@@ -290,7 +293,7 @@ class PlaneSweepSolverTests: XCTestCase {
         }, completion: {
             (closestPoints: (Point, Point)?) -> Void in
 
-            XCTAssertEqual(monitorCount, 2) // Number of points - 1
+            XCTAssertNotEqual(monitorCount, 0)
 
             XCTAssertNotNil(closestPoints)
 
@@ -321,7 +324,7 @@ class PlaneSweepSolverTests: XCTestCase {
         var monitorCount = 0
 
         subject.findClosestPoints(points: points, monitor: {
-            (checkRect: NSRect, checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool in
+            (checkRect: NSRect?, checkPoints: (Point, Point)?, closestPointsSoFar: (Point, Point)?) -> Bool in
             monitorCount += 1
 
             XCTAssertNotNil(closestPointsSoFar)
@@ -388,7 +391,7 @@ class PlaneSweepSolverTests: XCTestCase {
         var monitorCount = 0
 
         subject.findClosestPoints(points: points, monitor: {
-            (checkRect: NSRect, checkPoints: (Point, Point), closestPointsSoFar: (Point, Point)?) -> Bool in
+            (checkRect: NSRect?, checkPoints: (Point, Point)?, closestPointsSoFar: (Point, Point)?) -> Bool in
             monitorCount += 1
 
             XCTAssertNotNil(closestPointsSoFar)
@@ -397,7 +400,7 @@ class PlaneSweepSolverTests: XCTestCase {
         }, completion: {
             (closestPoints: (Point, Point)?) -> Void in
 
-            XCTAssertEqual(monitorCount, 4) // Number of points - 1
+            XCTAssertNotEqual(monitorCount, 0)
 
             XCTAssertNotNil(closestPoints)
 
