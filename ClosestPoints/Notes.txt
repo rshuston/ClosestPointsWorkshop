@@ -1,4 +1,5 @@
-Permutation:
+
+##### Permutation:
 
 order matters
 nPr = P(n,r)
@@ -7,7 +8,7 @@ nPr = P(n,r)
 O(n!)
 
 
-Combination:
+##### Combination:
 
 order does not matter
 nCr = C(n,r)
@@ -18,7 +19,7 @@ nCr = C(n,r)
 O(n!)/r!
 
 
-Plane Sweep:
+##### Plane Sweep:
 
 O(n log n)
 
@@ -33,4 +34,22 @@ for index in 2..<pointsSortedByX.count {
 
 
 
-Divide and Conquer:
+##### Divide and Conquer:
+
+O(n log n)
+
+Given points[]
+Generate pointsSortedByX[]
+Apply recursive_algorithm ...
+
+recursive_algorithm:
+Divide sorted point set into two sets
+For first set:
+    If set is sufficiently small, find closest point pair
+    Otherwise, apply recursive algorithm on set
+For second set:
+    If set is sufficiently small, find closest point pair
+    Otherwise, apply recursive algorithm on set
+Using best point pair from first and second sets, create middle set of points whose width is twice closest distance
+Find closest point pair in middle set
+Keep best point pair from first, second, and middle sets and return it
