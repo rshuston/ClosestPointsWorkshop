@@ -13,14 +13,15 @@ class CombinationSolver: Solver {
     override func findClosestPoints(points: [Point],
                                     monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?,
                                     completion: (((Point, Point)?) -> Void)) {
-        var checkRect: NSRect
         var closestPoints: (Point, Point)?
         var keepRunning = true
 
         if points.count == 2 {
             closestPoints = (points[0], points[1])
-            checkRect = AppUtils.NSRectFromNSPoints(pt1: points[0].getAsNSPoint(), pt2: points[1].getAsNSPoint())
-            keepRunning = monitor?(checkRect, closestPoints!, closestPoints) ?? true
+            if monitor != nil {
+                let checkRect = AppUtils.NSRectFromNSPoints(pt1: points[0].getAsNSPoint(), pt2: points[1].getAsNSPoint())
+                keepRunning = monitor!(checkRect, closestPoints!, closestPoints)
+            }
         } else if points.count > 2 {
             var smallestDistSquared: CGFloat = CGFloat.greatestFiniteMagnitude
             let count = points.count
@@ -35,8 +36,10 @@ class CombinationSolver: Solver {
                         smallestDistSquared = dist_sq
                         closestPoints = (ptA, ptB)
                     }
-                    checkRect = AppUtils.NSRectFromNSPoints(pt1: ptA.getAsNSPoint(), pt2: ptB.getAsNSPoint())
-                    keepRunning = monitor?(checkRect, (ptA, ptB), closestPoints) ?? true
+                    if monitor != nil {
+                        let checkRect = AppUtils.NSRectFromNSPoints(pt1: ptA.getAsNSPoint(), pt2: ptB.getAsNSPoint())
+                        keepRunning = monitor!(checkRect, (ptA, ptB), closestPoints)
+                    }
                     if keepRunning == false {
                         break
                     }

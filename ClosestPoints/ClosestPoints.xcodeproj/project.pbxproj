@@ -15,6 +15,7 @@
 		4E05313A1DD640EA006E9B8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E0531391DD640EA006E9B8F /* Assets.xcassets */; };
 		4E05313D1DD640EA006E9B8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E05313B1DD640EA006E9B8F /* Main.storyboard */; };
 		4E0531481DD640EA006E9B8F /* ClosestPointsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0531471DD640EA006E9B8F /* ClosestPointsTests.swift */; };
+		4E0E9E091E11AA4F00B1F142 /* PDLToolBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DCA361DF3BE79003139E1 /* PDLToolBox.framework */; };
 		4E397FF41DF314B90053BBAA /* DefinitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E397FF31DF314B90053BBAA /* DefinitionManager.swift */; };
 		4E397FF61DF314CF0053BBAA /* ControlManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E397FF51DF314CF0053BBAA /* ControlManager.swift */; };
 		4E397FF81DF314EC0053BBAA /* SolutionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E397FF71DF314EC0053BBAA /* SolutionEngine.swift */; };
@@ -101,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E0E9E091E11AA4F00B1F142 /* PDLToolBox.framework in Frameworks */,
 				4E8DCA351DF3BE74003139E1 /* PDLTestBench.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

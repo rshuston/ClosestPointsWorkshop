@@ -418,6 +418,45 @@ class PlaneSweepSolverTests: XCTestCase {
         waitForExpectations(timeout: 1.0, handler: nil)
     }
 
+    func test_findClosestPoints_FindsClosestPointsForThirteenPointSet() {
+        var points: [Point] = []
+        let subject = PlaneSweepSolver()
+
+        points.append(Point(x: 31, y: 17))
+        points.append(Point(x: 21, y: 23)) // first of closest pair
+        points.append(Point(x: 3, y: 15))
+        points.append(Point(x: 15, y: 31))
+        points.append(Point(x: 35, y: 25))
+        points.append(Point(x: 29, y: 11))
+        points.append(Point(x: 17, y: 21)) // second of closest pair
+        points.append(Point(x: 5, y: 27))
+        points.append(Point(x: 11, y: 9))
+        points.append(Point(x: 13, y: 37))
+        points.append(Point(x: 7, y: 19))
+        points.append(Point(x: 33, y: 5))
+        points.append(Point(x: 25, y: 29))
+
+        let completionExpectation = expectation(description: "completion")
+
+        subject.findClosestPoints(points: points, monitor: nil, completion: {
+            (closestPoints: (Point, Point)?) -> Void in
+            XCTAssertNotNil(closestPoints)
+
+            let listOrdered = (closestPoints?.0 == points[1])
+            if listOrdered {
+                XCTAssertEqual(closestPoints?.0, points[1])
+                XCTAssertEqual(closestPoints?.1, points[6])
+            } else {
+                XCTAssertEqual(closestPoints?.0, points[6])
+                XCTAssertEqual(closestPoints?.1, points[1])
+            }
+
+            completionExpectation.fulfill()
+        })
+
+        waitForExpectations(timeout: 1.0, handler: nil)
+    }
+
     func test_findClosestPoints_CallsMonitorClosureForForMultiplePointSet() {
         var points: [Point] = []
         let subject = PlaneSweepSolver()
