@@ -235,4 +235,200 @@ class FuncFuncRecorderTests: XCTestCase {
         XCTAssertEqual(0, subject.callHistoryDictionary.count)
     }
 
+    func test_recordReturnFor_RecordsFirstReturn() {
+        subject.returnHistoryDictionary = [:]
+
+        subject.recordReturnFor("foo", value: 1)
+
+        XCTAssertEqual(1, subject.returnHistoryDictionary.count)
+        let returnValues = subject.returnHistoryDictionary["foo"]
+        XCTAssertEqual(1, returnValues?.count)
+        let value = returnValues?[0] as? Int
+        XCTAssertEqual(1, value)
+    }
+
+    func test_recordReturnFor_RecordsSubsequentReturns() {
+        subject.returnHistoryDictionary = [:]
+
+        subject.recordReturnFor("foo", value: "one")
+        subject.recordReturnFor("foo", value: 2)
+
+        XCTAssertEqual(1, subject.returnHistoryDictionary.count)
+        let returnValues = subject.returnHistoryDictionary["foo"]
+        XCTAssertEqual(2, returnValues?.count)
+        let value0 = returnValues?[0] as? String
+        XCTAssertEqual("one", value0)
+        let value1 = returnValues?[1] as? Int
+        XCTAssertEqual(2, value1)
+    }
+
+    func test_recordReturnFor_RecordsReturnsForMixedCalls() {
+        subject.returnHistoryDictionary = [:]
+
+        subject.recordReturnFor("foo", value: "hee")
+        subject.recordReturnFor("bar", value: "yippie yie yay")
+        subject.recordReturnFor("foo", value: "haw")
+
+        XCTAssertEqual(2, subject.returnHistoryDictionary.count)
+
+        let returnValuesForFoo = subject.returnHistoryDictionary["foo"]
+        XCTAssertEqual(2, returnValuesForFoo?.count)
+        let fooValue0 = returnValuesForFoo?[0] as? String
+        XCTAssertEqual("hee", fooValue0)
+        let fooValue1 = returnValuesForFoo?[1] as? String
+        XCTAssertEqual("haw", fooValue1)
+
+        let returnValuesForBar = subject.returnHistoryDictionary["bar"]
+        XCTAssertEqual(1, returnValuesForBar?.count)
+        let barValue0 = returnValuesForBar?[0] as? String
+        XCTAssertEqual("yippie yie yay", barValue0)
+    }
+
+    func test_recordReturnFor_RecordsClosureValues() {
+        var testValue = 0
+        let testClosure = {(value: Int) -> Bool in
+            testValue = value
+            return true
+        }
+        subject.returnHistoryDictionary = [:]
+
+        subject.recordReturnFor("foo", value: testClosure)
+
+        XCTAssertEqual(1, subject.returnHistoryDictionary.count)
+        let returnValues = subject.returnHistoryDictionary["foo"]
+        XCTAssertEqual(1, returnValues?.count)
+        let closure = returnValues?[0] as? ((Int) -> Bool)
+        let answer = closure?(3) ?? false
+        XCTAssertTrue(answer)
+        XCTAssertEqual(testValue, 3)
+    }
+
+    func test_getReturnCountFor_ReturnsCorrectNumberForFirstCall() {
+        subject.returnHistoryDictionary = ["foo": [1]]
+
+        let count = subject.getReturnCountFor("foo")
+
+        XCTAssertEqual(1, count)
+    }
+
+    func test_getReturnCountFor_ReturnsCorrectNumberForSubsequentCalls() {
+        subject.returnHistoryDictionary = ["foo": [1, 2, 3]]
+
+        let count = subject.getReturnCountFor("foo")
+
+        XCTAssertEqual(3, count)
+    }
+
+    func test_getReturnCountFor_ReturnsZeroForUnrecordedCalls() {
+        subject.returnHistoryDictionary = ["foo": [1, 2, 3]]
+
+        let count = subject.getReturnCountFor("fubar")
+        
+        XCTAssertEqual(0, count)
+    }
+
+    func test_getReturnHistoryFor_ReturnsCallHistoryForRegisteredCalls() {
+        subject.returnHistoryDictionary = ["foo": [1, 2, 3]]
+
+        let returnHistory = subject.getReturnHistoryFor("foo")
+
+        XCTAssertEqual(3, returnHistory?.count)
+        XCTAssertEqual(1, returnHistory?[0] as? Int)
+        XCTAssertEqual(2, returnHistory?[1] as? Int)
+        XCTAssertEqual(3, returnHistory?[2] as? Int)
+    }
+
+    func test_getReturnHistoryFor_ReturnsNilForUnregisteredCalls() {
+        subject.returnHistoryDictionary = ["foo": [1, 2, 3]]
+
+        let returnHistory = subject.getReturnHistoryFor("fubar")
+
+        XCTAssertNil(returnHistory)
+    }
+
+    func test_getReturnValueFor_ReturnsCorrectValuesForRegisteredCalls() {
+        subject.returnHistoryDictionary = ["foo": [1, 2, 3]]
+
+        let value0 = subject.getReturnValueFor("foo", forInvocation: 0)
+        XCTAssertEqual(1, value0 as? Int)
+
+        let value1 = subject.getReturnValueFor("foo", forInvocation: 1)
+        XCTAssertEqual(2, value1 as? Int)
+
+        let value2 = subject.getReturnValueFor("foo", forInvocation: 2)
+        XCTAssertEqual(3, value2 as? Int)
+    }
+
+    func test_getReturnValueFor_ReturnsDefaultValueOfFirstCall() {
+        subject.returnHistoryDictionary = ["foo": [1, 2, 3]]
+
+        let value = subject.getReturnValueFor("foo")
+        XCTAssertEqual(1, value as? Int)
+    }
+
+    func test_getReturnValueFor_ReturnsCorrectValueContainingClosure() {
+        var testValue = 0
+        let testClosure = {(value: Int) -> Bool in
+            testValue = value
+            return true
+        }
+        subject.returnHistoryDictionary = ["foo": [testClosure]]
+
+        let closure = subject.getReturnValueFor("foo", forInvocation: 0) as? ((Int) -> Bool)
+        let answer = closure?(3) ?? false
+        XCTAssertTrue(answer)
+        XCTAssertEqual(testValue, 3)
+    }
+
+    func test_getReturnValueFor_ReturnsNilForInvalidInvocationNumber() {
+        subject.returnHistoryDictionary = ["foo": [1, 2, 3]]
+
+        let value = subject.getReturnValueFor("foo", forInvocation: 3)
+        XCTAssertNil(value)
+    }
+
+    func test_getReturnValueFor_ReturnsNilForUnregisteredCalls() {
+        subject.returnHistoryDictionary = ["foo": [1, 2, 3]]
+
+        let value = subject.getReturnValueFor("fubar", forInvocation: 0)
+        XCTAssertNil(value)
+    }
+
+    func test_clearReturnHistoryFor_ClearsReturnHistoryForRegisteredCalls() {
+        subject.returnHistoryDictionary = [
+            "foo": [1, 2, 3],
+            "bar": [1]
+        ]
+
+        subject.clearReturnHistoryFor("foo")
+
+        XCTAssertEqual(1, subject.returnHistoryDictionary.count)
+        XCTAssertNil(subject.returnHistoryDictionary["foo"])
+        XCTAssertNotNil(subject.returnHistoryDictionary["bar"])
+    }
+
+    func test_clearReturnHistoryFor_DoesNotClearReturnHistoryForUnregisteredCalls() {
+        subject.returnHistoryDictionary = [
+            "foo": [1, 2, 3],
+            "bar": [1]
+        ]
+
+        subject.clearReturnHistoryFor("fubar")
+
+        XCTAssertEqual(2, subject.returnHistoryDictionary.count)
+        XCTAssertNotNil(subject.returnHistoryDictionary["foo"])
+        XCTAssertNotNil(subject.returnHistoryDictionary["bar"])
+    }
+
+    func test_clearAllReturnHistories_ClearsAllEntries() {
+        subject.returnHistoryDictionary = [
+            "foo": [1, 2, 3],
+            "bar": [1]
+        ]
+
+        subject.clearAllReturnHistories()
+
+        XCTAssertEqual(0, subject.returnHistoryDictionary.count)
+    }
+
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4E06E3A81DF87EE000A5A7F7 /* PDLToolBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DCA311DF3BDD0003139E1 /* PDLToolBox.framework */; };
+		4E0E9E081E11A9E400B1F142 /* PDLToolBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DCA311DF3BDD0003139E1 /* PDLToolBox.framework */; };
 		4E37DBC01DF3BA4D0036E2AF /* PDLTestBench.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E37DBB61DF3BA4D0036E2AF /* PDLTestBench.framework */; };
 		4E37DBC51DF3BA4D0036E2AF /* PDLTestBenchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E37DBC41DF3BA4D0036E2AF /* PDLTestBenchTests.swift */; };
 		4E37DBC71DF3BA4D0036E2AF /* PDLTestBench.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E37DBB91DF3BA4D0036E2AF /* PDLTestBench.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -54,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E0E9E081E11A9E400B1F142 /* PDLToolBox.framework in Frameworks */,
 				4E37DBC01DF3BA4D0036E2AF /* PDLTestBench.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
