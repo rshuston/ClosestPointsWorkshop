@@ -10,7 +10,7 @@ import Cocoa
 
 class DivideAndConquerSolver: Solver {
 
-    internal let maxSimpleRegionSize = 5
+    var maxSimpleRegionSize = 3
 
     struct PointRegion {
         var lower: Int  // Lower index into points array, -1 if not defined
@@ -29,43 +29,42 @@ class DivideAndConquerSolver: Solver {
         var monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?
 
         var closestDistanceSquared: CGFloat = CGFloat.greatestFiniteMagnitude
-
-        func runMonitor() -> Bool {
-            return monitor?(checkRect, checkPoints, closestPoints) ?? true
+        
+        func monitorPointPair(pointPair: (Point, Point), distanceSquared: CGFloat) -> Bool {
+            var keepRunning = true
+            if monitor != nil {
+                checkRect = AppUtils.NSRectFromNSPoints(pt1: pointPair.0.getAsNSPoint(), pt2: pointPair.1.getAsNSPoint())
+                checkPoints = pointPair
+                if distanceSquared < closestDistanceSquared {
+                    closestDistanceSquared = distanceSquared
+                    closestPoints = checkPoints
+                }
+                keepRunning = monitor!(checkRect, checkPoints, closestPoints)
+            }
+            return keepRunning
         }
     }
     
     override func findClosestPoints(points: [Point],
                                     monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?,
                                     completion: (((Point, Point)?) -> Void)) {
+        var closestPoints: (Point, Point)?
+
         let solutionCarryOn = SolutionCarryOn()
 
-        var keepRunning = true
+        solutionCarryOn.monitor = monitor
 
         if points.count >= 2 {
             let sortedPoints = points.sorted(by: { (lhs: Point, rhs: Point) -> Bool in
                 return lhs.x <= rhs.x
             })
             let N = sortedPoints.count
-
-            solutionCarryOn.checkRect = AppUtils.NSRectFromNSPoints(pt1: points[0].getAsNSPoint(), pt2: points[1].getAsNSPoint())
-            solutionCarryOn.checkPoints = (points[0], points[1])
-            solutionCarryOn.closestPoints = (points[0], points[1])
-            solutionCarryOn.closestDistanceSquared = squaredEuclideanDistance(points[0], points[1])
-            solutionCarryOn.monitor = monitor
-            keepRunning = solutionCarryOn.runMonitor()
-
-            if N > 2 && keepRunning {
-                let pointRegion = PointRegion(lower: 0, upper: N - 1)
-
-                let result = findClosestPointsInRegion(points: sortedPoints, pointRegion: pointRegion, withCarryOn: solutionCarryOn)
-
-                solutionCarryOn.closestPoints = result?.pointPair
-                solutionCarryOn.closestDistanceSquared = result?.distanceSquared ?? CGFloat.greatestFiniteMagnitude
-            }
+            let pointRegion = PointRegion(lower: 0, upper: N - 1)
+            let result = findClosestPointsInRegion(points: sortedPoints, pointRegion: pointRegion, withCarryOn: solutionCarryOn)
+            closestPoints = result?.pointPair
         }
 
-        completion(solutionCarryOn.closestPoints)
+        completion(closestPoints)
     }
 
     internal func squaredEuclideanDistance(_ pt1: Point, _ pt2: Point) -> CGFloat {
@@ -81,11 +80,56 @@ class DivideAndConquerSolver: Solver {
         return (lowerRegion, upperRegion)
     }
 
+    internal func findClosestPointsInSimpleRegion(points: [Point],
+                                                  pointRegion: PointRegion,
+                                                  withCarryOn: SolutionCarryOn) -> PointPairAndDistance? {
+        var result: PointPairAndDistance?
+
+        let count = pointRegion.upper - pointRegion.lower + 1
+        switch count {
+        case 2:
+            let pointPair = (points[pointRegion.lower], points[pointRegion.upper])
+            let distanceSquared = squaredEuclideanDistance(points[pointRegion.lower], points[pointRegion.upper])
+            result = PointPairAndDistance(pointPair: pointPair, distanceSquared: distanceSquared)
+            _ = withCarryOn.monitorPointPair(pointPair: pointPair, distanceSquared: distanceSquared)
+            break
+        default:
+            // Use simple combinatorial search
+            var keepRunning = true
+            for ptA_index in pointRegion.lower..<pointRegion.upper {
+                let ptA = points[ptA_index]
+                for ptB_index in (ptA_index+1)...pointRegion.upper {
+                    let ptB = points[ptB_index]
+                    let distanceSquared = squaredEuclideanDistance(ptA, ptB)
+                    if result == nil {
+                        result = PointPairAndDistance(pointPair: (ptA, ptB),
+                                                      distanceSquared: distanceSquared)
+                    } else if distanceSquared < result!.distanceSquared {
+                        result!.pointPair = (ptA, ptB)
+                        result!.distanceSquared = distanceSquared
+                    }
+                    keepRunning = withCarryOn.monitorPointPair(pointPair: result!.pointPair, distanceSquared: distanceSquared)
+                    if !keepRunning {
+                        break
+                    }
+                }
+                if !keepRunning {
+                    break
+                }
+            }
+            break
+        }
+
+        return result
+    }
+
     internal func findClosestPointInBorderRegions(points: [Point],
                                                   lowerRegion: PointRegion,
                                                   upperRegion: PointRegion,
-                                                  withinAxisDistance: CGFloat) -> PointPairAndDistance? {
+                                                  withinAxisDistance: CGFloat,
+                                                  withCarryOn: SolutionCarryOn) -> PointPairAndDistance? {
         var result: PointPairAndDistance?
+        var keepRunning = true
 
         let midPt = points[lowerRegion.upper]
 
@@ -102,82 +146,37 @@ class DivideAndConquerSolver: Solver {
                 let dx = rightPt.x - leftPt.x
                 let dy = rightPt.y - leftPt.y
                 if abs(dx) <= withinAxisDistance && abs(dy) <= withinAxisDistance {
-                    let dist_sq = dx * dx + dy * dy
+                    let distanceSquared = dx * dx + dy * dy
                     if result == nil {
                         result = PointPairAndDistance(pointPair: (leftPt, rightPt),
-                                                      distanceSquared: dist_sq)
-                    } else if dist_sq < result!.distanceSquared {
+                                                      distanceSquared: distanceSquared)
+                    } else if distanceSquared < result!.distanceSquared {
                         result!.pointPair = (leftPt, rightPt)
-                        result!.distanceSquared = dist_sq
+                        result!.distanceSquared = distanceSquared
                     }
+                    keepRunning = withCarryOn.monitorPointPair(pointPair: result!.pointPair, distanceSquared: distanceSquared)
+                }
+                if !keepRunning {
+                    break
                 }
             }
-        }
-
-        return result
-    }
-
-    internal func findClosestPointsInSimpleRegion(points: [Point], pointRegion: PointRegion) -> PointPairAndDistance? {
-        var result: PointPairAndDistance?
-
-        let count = pointRegion.upper - pointRegion.lower + 1
-        switch count {
-        case 2:
-            let pointPair = (points[pointRegion.lower], points[pointRegion.upper])
-            let distanceSquared = squaredEuclideanDistance(points[pointRegion.lower], points[pointRegion.upper])
-            result = PointPairAndDistance(pointPair: pointPair, distanceSquared: distanceSquared)
-            break
-        case 3:
-            // Three points is simple enough to solve directly
-            let ptA = points[pointRegion.lower]
-            let ptB = points[pointRegion.lower + 1]
-            let ptC = points[pointRegion.upper]
-            let distAB_sq = squaredEuclideanDistance(ptA, ptB)
-            let distAC_sq = squaredEuclideanDistance(ptA, ptC)
-            let distBC_sq = squaredEuclideanDistance(ptB, ptC)
-            let pointPair: (Point, Point)
-            let distanceSquared: CGFloat
-            if distAB_sq <= distAC_sq && distAB_sq <= distBC_sq {
-                pointPair = (ptA, ptB)
-                distanceSquared = distAB_sq
-            } else if distAC_sq <= distAB_sq && distAC_sq <= distBC_sq {
-                pointPair = (ptA, ptC)
-                distanceSquared = distAC_sq
-            } else {
-                pointPair = (ptB, ptC)
-                distanceSquared = distBC_sq
+            if !keepRunning {
+                break
             }
-            result = PointPairAndDistance(pointPair: pointPair, distanceSquared: distanceSquared)
-            break
-        default:
-            // Use simple combinatorial search
-            for ptA_index in pointRegion.lower..<pointRegion.upper {
-                let ptA = points[ptA_index]
-                for ptB_index in (ptA_index+1)...pointRegion.upper {
-                    let ptB = points[ptB_index]
-                    let dist_sq = squaredEuclideanDistance(ptA, ptB)
-                    if result == nil {
-                        result = PointPairAndDistance(pointPair: (ptA, ptB),
-                                                      distanceSquared: dist_sq)
-                    } else if dist_sq < result!.distanceSquared {
-                        result!.pointPair = (ptA, ptB)
-                        result!.distanceSquared = dist_sq
-                    }
-                }
-            }
-            break
         }
 
         return result
     }
 
     // Recursive worker function to find closest points
-    internal func findClosestPointsInRegion(points: [Point], pointRegion: PointRegion, withCarryOn: SolutionCarryOn) -> PointPairAndDistance? {
+    internal func findClosestPointsInRegion(points: [Point],
+                                            pointRegion: PointRegion,
+                                            withCarryOn: SolutionCarryOn) -> PointPairAndDistance? {
         var result: PointPairAndDistance? = nil
 
         let count = pointRegion.upper - pointRegion.lower + 1
         if count <= maxSimpleRegionSize {
-            result = findClosestPointsInSimpleRegion(points: points, pointRegion: pointRegion)
+            result = findClosestPointsInSimpleRegion(points: points, pointRegion: pointRegion, withCarryOn: withCarryOn)
         } else {
             let regions = dividePointRegion(region: pointRegion)
             let lowerRegion = regions.0
@@ -201,7 +200,7 @@ class DivideAndConquerSolver: Solver {
             } else {
                 axisDistance = CGFloat.greatestFiniteMagnitude
             }
-            if let middleResult = findClosestPointInBorderRegions(points: points, lowerRegion: lowerRegion, upperRegion: upperRegion, withinAxisDistance: axisDistance) {
+            if let middleResult = findClosestPointInBorderRegions(points: points, lowerRegion: lowerRegion, upperRegion: upperRegion, withinAxisDistance: axisDistance, withCarryOn: withCarryOn) {
                 if result == nil {
                     result = middleResult
                 } else {

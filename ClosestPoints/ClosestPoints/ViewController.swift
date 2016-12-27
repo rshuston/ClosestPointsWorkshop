@@ -89,6 +89,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
 
     func requestPointDataSourceUpdate() {
         viewControllerLogic.updatePointDataSource()
+        o_PlotView.needsDisplay = true
     }
 
     func requestLiveSolutionIfConfigured() {
@@ -191,6 +192,8 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
 
         viewControllerLogic.activateGenerateButton()
         viewControllerLogic.activateControlButtonIfCanSolve()
+
+        requestPointDataSourceUpdate()
     }
 
     @IBAction func pushButtonSelected(_ sender: NSButton) {
