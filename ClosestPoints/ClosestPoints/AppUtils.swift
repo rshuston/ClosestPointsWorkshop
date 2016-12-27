@@ -29,14 +29,14 @@ class AppUtils: NSObject {
     }
 
     // Convert an NSPoint from main window coordinates to local view coordinates
-    class func convertWindowNSPoint(point: NSPoint, forView: NSView) -> NSPoint {
+    class func convertWindowNSPoint(_ point: NSPoint, forView: NSView) -> NSPoint {
         return forView.convert(point, from: nil)  // nil = convert from window coordinates
     }
 
     // MARK: - General utilities
 
     // Determine if an NSPoint is on another NSPoint within a given margin
-    class func IsNSPoint(point: NSPoint, onNSPoint: NSPoint, withMargin: CGFloat) -> Bool {
+    class func IsNSPoint(_ point: NSPoint, onNSPoint: NSPoint, withMargin: CGFloat) -> Bool {
         var result = false
 
         if withMargin >= 0 {
@@ -53,7 +53,7 @@ class AppUtils: NSObject {
     }
 
     // Pin an NSPoint to an NSRect with a given margin
-    class func PinNSPoint(point: NSPoint, toNSRect: NSRect, withMargin: CGFloat) -> NSPoint {
+    class func PinNSPoint(_ point: NSPoint, toNSRect: NSRect, withMargin: CGFloat) -> NSPoint {
         var pinnedPoint = point
 
         let insetRect = NSInsetRect(toNSRect, withMargin, withMargin)
@@ -76,7 +76,7 @@ class AppUtils: NSObject {
     }
 
     // Make an NSRect from two NSPoints
-    class func NSRectFromNSPoints(pt1: NSPoint, pt2: NSPoint) -> NSRect {
+    class func NSRectFromNSPoints(_ pt1: NSPoint, _ pt2: NSPoint) -> NSRect {
         let x = min(pt1.x, pt2.x)
         let y = min(pt1.y, pt2.y)
         let width = abs(pt2.x - pt1.x)

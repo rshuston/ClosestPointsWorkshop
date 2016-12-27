@@ -33,7 +33,7 @@ class DivideAndConquerSolver: Solver {
         func monitorPointPair(pointPair: (Point, Point), distanceSquared: CGFloat) -> Bool {
             var keepRunning = true
             if monitor != nil {
-                checkRect = AppUtils.NSRectFromNSPoints(pt1: pointPair.0.getAsNSPoint(), pt2: pointPair.1.getAsNSPoint())
+                checkRect = AppUtils.NSRectFromNSPoints(pointPair.0.getAsNSPoint(), pointPair.1.getAsNSPoint())
                 checkPoints = pointPair
                 if distanceSquared < closestDistanceSquared {
                     closestDistanceSquared = distanceSquared

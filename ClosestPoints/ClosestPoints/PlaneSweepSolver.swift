@@ -34,7 +34,7 @@ class PlaneSweepSolver: Solver {
             })
             let N = sortedPoints.count
             var distanceSquared = squaredEuclideanDistance(sortedPoints[0], sortedPoints[1])
-            solutionCarryOn.checkRect = AppUtils.NSRectFromNSPoints(pt1: sortedPoints[0].getAsNSPoint(), pt2: sortedPoints[1].getAsNSPoint())
+            solutionCarryOn.checkRect = AppUtils.NSRectFromNSPoints(sortedPoints[0].getAsNSPoint(), sortedPoints[1].getAsNSPoint())
             solutionCarryOn.checkPoints = (sortedPoints[0], sortedPoints[1])
             solutionCarryOn.closestPoints = (sortedPoints[0], sortedPoints[1])
             solutionCarryOn.monitor = monitor

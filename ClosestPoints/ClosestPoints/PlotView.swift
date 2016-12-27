@@ -103,14 +103,14 @@ class PlotView: NSView {
     }
 
     override func mouseDown(with event: NSEvent) {
-        let eventLocation = AppUtils.convertWindowNSPoint(point: event.locationInWindow, forView: self)
+        let eventLocation = AppUtils.convertWindowNSPoint(event.locationInWindow, forView: self)
 
         let canMovePoint = ((appViewController?.isFindingClosestPoints() ?? true) != true)
         if canMovePoint {
             if let pds = pointDataSource {
                 for point in pds.points {
                     let nsPoint = point.getAsNSPoint()
-                    if AppUtils.IsNSPoint(point: eventLocation, onNSPoint: nsPoint, withMargin: pointCaptureMargin) {
+                    if AppUtils.IsNSPoint(eventLocation, onNSPoint: nsPoint, withMargin: pointCaptureMargin) {
                         point.highlighted = true
                         selectedPoint = point
                         appViewController?.requestPointDataSourceUpdate()
@@ -124,10 +124,10 @@ class PlotView: NSView {
     }
 
     override func mouseDragged(with event: NSEvent) {
-        let eventLocation = AppUtils.convertWindowNSPoint(point: event.locationInWindow, forView: self)
+        let eventLocation = AppUtils.convertWindowNSPoint(event.locationInWindow, forView: self)
 
         if selectedPoint != nil {
-            let pinnedEventLocation = AppUtils.PinNSPoint(point: eventLocation, toNSRect: bounds, withMargin: pointRadius)
+            let pinnedEventLocation = AppUtils.PinNSPoint(eventLocation, toNSRect: bounds, withMargin: pointRadius)
             selectedPoint!.x = pinnedEventLocation.x
             selectedPoint!.y = pinnedEventLocation.y
             appViewController?.requestPointDataSourceUpdate()

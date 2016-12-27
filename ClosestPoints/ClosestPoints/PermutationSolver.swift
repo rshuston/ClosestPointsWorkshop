@@ -19,7 +19,7 @@ class PermutationSolver: Solver {
         if points.count == 2 {
             closestPoints = (points[0], points[1])
             if monitor != nil {
-                let checkRect = AppUtils.NSRectFromNSPoints(pt1: points[0].getAsNSPoint(), pt2: points[1].getAsNSPoint())
+                let checkRect = AppUtils.NSRectFromNSPoints(points[0].getAsNSPoint(), points[1].getAsNSPoint())
                 keepRunning = monitor!(checkRect, closestPoints!, closestPoints)
             }
         } else if points.count > 2 {
@@ -35,7 +35,7 @@ class PermutationSolver: Solver {
                             closestPoints = (ptA, ptB)
                         }
                         if monitor != nil {
-                            let checkRect = AppUtils.NSRectFromNSPoints(pt1: ptA.getAsNSPoint(), pt2: ptB.getAsNSPoint())
+                            let checkRect = AppUtils.NSRectFromNSPoints(ptA.getAsNSPoint(), ptB.getAsNSPoint())
                             keepRunning = monitor!(checkRect, (ptA, ptB), closestPoints)
                         }
                     }

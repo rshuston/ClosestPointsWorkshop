@@ -16,7 +16,7 @@ class AppUtilsTests: XCTestCase {
         let testPoint = NSPoint(x: 1, y: 2)
         let referencePoint = NSPoint(x: 1, y: 2)
 
-        let result = AppUtils.IsNSPoint(point: testPoint, onNSPoint: referencePoint, withMargin: -1)
+        let result = AppUtils.IsNSPoint(testPoint, onNSPoint: referencePoint, withMargin: -1)
 
         XCTAssertFalse(result)
     }
@@ -25,7 +25,7 @@ class AppUtilsTests: XCTestCase {
         let testPoint = NSPoint(x: 1, y: 2)
         let referencePoint = NSPoint(x: 1, y: 2)
 
-        let result = AppUtils.IsNSPoint(point: testPoint, onNSPoint: referencePoint, withMargin: 0)
+        let result = AppUtils.IsNSPoint(testPoint, onNSPoint: referencePoint, withMargin: 0)
 
         XCTAssertTrue(result)
     }
@@ -34,7 +34,7 @@ class AppUtilsTests: XCTestCase {
         let testPoint = NSPoint(x: 1, y: 2)
         let referencePoint = NSPoint(x: 1, y: 3)
 
-        let result = AppUtils.IsNSPoint(point: testPoint, onNSPoint: referencePoint, withMargin: 1)
+        let result = AppUtils.IsNSPoint(testPoint, onNSPoint: referencePoint, withMargin: 1)
 
         XCTAssertTrue(result)
     }
@@ -43,7 +43,7 @@ class AppUtilsTests: XCTestCase {
         let testPoint = NSPoint(x: 1, y: 2)
         let referencePoint = NSPoint(x: 2, y: 3)
 
-        let result = AppUtils.IsNSPoint(point: testPoint, onNSPoint: referencePoint, withMargin: sqrt(2))
+        let result = AppUtils.IsNSPoint(testPoint, onNSPoint: referencePoint, withMargin: sqrt(2))
 
         XCTAssertTrue(result)
     }
@@ -52,7 +52,7 @@ class AppUtilsTests: XCTestCase {
         let testPoint = NSPoint(x: -1, y: -2)
         let referencePoint = NSPoint(x: 2, y: 3)
 
-        let result = AppUtils.IsNSPoint(point: testPoint, onNSPoint: referencePoint, withMargin: 1)
+        let result = AppUtils.IsNSPoint(testPoint, onNSPoint: referencePoint, withMargin: 1)
 
         XCTAssertFalse(result)
     }
@@ -61,7 +61,7 @@ class AppUtilsTests: XCTestCase {
         let testPoint = NSPoint(x: 2, y: 2)
         let referenceRect = NSRect(x: 0, y: 0, width: 3, height: 3)
 
-        let pinnedPoint = AppUtils.PinNSPoint(point: testPoint, toNSRect: referenceRect, withMargin: 1)
+        let pinnedPoint = AppUtils.PinNSPoint(testPoint, toNSRect: referenceRect, withMargin: 1)
 
         XCTAssertEqual(pinnedPoint, testPoint)
     }
@@ -71,7 +71,7 @@ class AppUtilsTests: XCTestCase {
         let referenceRect = NSRect(x: -1, y: -1, width: 4, height: 4)
         let expectedPoint = NSPoint(x: -0.5, y: 2)
 
-        let pinnedPoint = AppUtils.PinNSPoint(point: testPoint, toNSRect: referenceRect, withMargin: 0.5)
+        let pinnedPoint = AppUtils.PinNSPoint(testPoint, toNSRect: referenceRect, withMargin: 0.5)
 
         XCTAssertEqual(pinnedPoint, expectedPoint)
     }
@@ -81,7 +81,7 @@ class AppUtilsTests: XCTestCase {
         let referenceRect = NSRect(x: -1, y: -1, width: 4, height: 4)
         let expectedPoint = NSPoint(x: -0.5, y: 2.5)
 
-        let pinnedPoint = AppUtils.PinNSPoint(point: testPoint, toNSRect: referenceRect, withMargin: 0.5)
+        let pinnedPoint = AppUtils.PinNSPoint(testPoint, toNSRect: referenceRect, withMargin: 0.5)
 
         XCTAssertEqual(pinnedPoint, expectedPoint)
     }
@@ -90,7 +90,7 @@ class AppUtilsTests: XCTestCase {
         let pt1 = NSPoint(x: 0, y: 0)
         let pt2 = NSPoint(x: 2, y: 0)
 
-        let rect = AppUtils.NSRectFromNSPoints(pt1: pt1, pt2: pt2)
+        let rect = AppUtils.NSRectFromNSPoints(pt1, pt2)
 
         XCTAssertEqual(rect.origin.x, 0)
         XCTAssertEqual(rect.origin.y, 0)
@@ -102,7 +102,7 @@ class AppUtilsTests: XCTestCase {
         let pt1 = NSPoint(x: 3, y: 0)
         let pt2 = NSPoint(x: 0, y: 0)
 
-        let rect = AppUtils.NSRectFromNSPoints(pt1: pt1, pt2: pt2)
+        let rect = AppUtils.NSRectFromNSPoints(pt1, pt2)
 
         XCTAssertEqual(rect.origin.x, 0)
         XCTAssertEqual(rect.origin.y, 0)
@@ -114,7 +114,7 @@ class AppUtilsTests: XCTestCase {
         let pt1 = NSPoint(x: -1, y: -1)
         let pt2 = NSPoint(x: -1, y: 1)
 
-        let rect = AppUtils.NSRectFromNSPoints(pt1: pt1, pt2: pt2)
+        let rect = AppUtils.NSRectFromNSPoints(pt1, pt2)
 
         XCTAssertEqual(rect.origin.x, -1)
         XCTAssertEqual(rect.origin.y, -1)
@@ -126,7 +126,7 @@ class AppUtilsTests: XCTestCase {
         let pt1 = NSPoint(x: -1, y: 1)
         let pt2 = NSPoint(x: -1, y: -2)
 
-        let rect = AppUtils.NSRectFromNSPoints(pt1: pt1, pt2: pt2)
+        let rect = AppUtils.NSRectFromNSPoints(pt1, pt2)
 
         XCTAssertEqual(rect.origin.x, -1)
         XCTAssertEqual(rect.origin.y, -2)
@@ -138,7 +138,7 @@ class AppUtilsTests: XCTestCase {
         let pt1 = NSPoint(x: 1, y: 1)
         let pt2 = NSPoint(x: 10, y: 10)
 
-        let rect = AppUtils.NSRectFromNSPoints(pt1: pt1, pt2: pt2)
+        let rect = AppUtils.NSRectFromNSPoints(pt1, pt2)
 
         XCTAssertEqual(rect.origin.x, 1)
         XCTAssertEqual(rect.origin.y, 1)
@@ -150,7 +150,7 @@ class AppUtilsTests: XCTestCase {
         let pt1 = NSPoint(x: 5, y: 0)
         let pt2 = NSPoint(x: -1, y: 6)
 
-        let rect = AppUtils.NSRectFromNSPoints(pt1: pt1, pt2: pt2)
+        let rect = AppUtils.NSRectFromNSPoints(pt1, pt2)
 
         XCTAssertEqual(rect.origin.x, -1)
         XCTAssertEqual(rect.origin.y, 0)
@@ -162,7 +162,7 @@ class AppUtilsTests: XCTestCase {
         let pt1 = NSPoint(x: 5, y: 5)
         let pt2 = NSPoint(x: 5, y: 5)
 
-        let rect = AppUtils.NSRectFromNSPoints(pt1: pt1, pt2: pt2)
+        let rect = AppUtils.NSRectFromNSPoints(pt1, pt2)
 
         XCTAssertEqual(rect.origin.x, 5)
         XCTAssertEqual(rect.origin.y, 5)
