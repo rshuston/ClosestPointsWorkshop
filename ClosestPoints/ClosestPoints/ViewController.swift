@@ -24,6 +24,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
     @IBOutlet weak var o_SolutionTypePopUp: NSPopUpButton!
     @IBOutlet weak var o_SolverOptionPopUp: NSPopUpButton!
     @IBOutlet weak var o_ControlButton: NSButton!
+    @IBOutlet weak var o_SolutionTimeLabel: NSTextField!
 
     // MARK: - Composition
 
@@ -79,6 +80,10 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
 
     func setControlButtonTitle(title: String) {
         o_ControlButton.title = title
+    }
+
+    func updateSolutionTime(time_ms: Float) {
+        o_SolutionTimeLabel.stringValue = String(format: "%.2f ms", time_ms)
     }
 
     // MARK: - Other commands

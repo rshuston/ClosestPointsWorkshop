@@ -26,6 +26,11 @@ class ViewControllerLogic: NSObject {
 
     var hostViewController: ViewController!
 
+    var lastSolutionTime_ms: Float = 0.0
+
+    var startSolutionTime: CFTimeInterval = 0.0
+    var endSolutionTime: CFTimeInterval = 0.0
+
     init(hostViewController: ViewController) {
         self.hostViewController = hostViewController
     }
@@ -39,6 +44,7 @@ class ViewControllerLogic: NSObject {
 
         hostViewController.setPlotViewPointCollectionDataSource(dataSource: pointCollection)
         hostViewController.setNumberOfPoints(numberOfPoints: definitionManager.numberOfPoints)
+        hostViewController.updateSolutionTime(time_ms: lastSolutionTime_ms)
 
         generatePoints()
 
@@ -169,7 +175,11 @@ class ViewControllerLogic: NSObject {
                 break
             }
 
+            startSolutionTime = 0.0
+            endSolutionTime = 0.0
+
             DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
+                self.startSolutionTime = CFAbsoluteTimeGetCurrent()
                 solver!.findClosestPoints(points: self.pointCollection.points,
                                           monitor: monitor,
                                           completion: self.completion)
@@ -210,7 +220,9 @@ class ViewControllerLogic: NSObject {
     }
 
     internal func completion(closestPoints: (Point, Point)?) {
-        if self.solutionEngine.solving {
+        endSolutionTime = CFAbsoluteTimeGetCurrent()
+        lastSolutionTime_ms = Float(endSolutionTime - startSolutionTime) * 1000.0
+        if solutionEngine.solving {
             pointCollection.closestPoints = closestPoints
             pointCollection.closestPointsColor = NSColor.blue
             pointCollection.checkPoints = nil
@@ -223,6 +235,7 @@ class ViewControllerLogic: NSObject {
             self.configureControlButtonForSolvingState()
             self.activateGenerateButton()
             self.activateControlButtonIfCanSolve()
+            self.hostViewController.updateSolutionTime(time_ms: self.lastSolutionTime_ms)
         }
     }
 

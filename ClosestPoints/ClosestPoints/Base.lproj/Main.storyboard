@@ -292,6 +292,22 @@
                                                 <action selector="popUpButtonSelected:" target="XfG-lQ-9wD" id="jJY-ca-UdD"/>
                                             </connections>
                                         </popUpButton>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vdh-g8-mro">
+                                            <rect key="frame" x="18" y="22" width="91" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Solution Time:" id="1Xz-QT-cbO">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7s-1K-PtG">
+                                            <rect key="frame" x="115" y="22" width="108" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="1000000.000 ms" id="cTC-bc-o93">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="m1m-Ki-6qY" firstAttribute="top" secondItem="hJA-Cw-d7e" secondAttribute="top" constant="20" id="4cd-74-OMn"/>
@@ -302,10 +318,14 @@
                                         <constraint firstAttribute="trailing" secondItem="m1m-Ki-6qY" secondAttribute="trailing" constant="20" id="KrL-Dp-r6V"/>
                                         <constraint firstItem="9Lj-oi-cP1" firstAttribute="leading" secondItem="hJA-Cw-d7e" secondAttribute="leading" constant="20" id="N7g-pZ-TZA"/>
                                         <constraint firstItem="z4F-Fd-lSn" firstAttribute="leading" secondItem="9Lj-oi-cP1" secondAttribute="trailing" constant="8" id="NxX-HD-4R1"/>
+                                        <constraint firstItem="Vdh-g8-mro" firstAttribute="trailing" secondItem="9Lj-oi-cP1" secondAttribute="trailing" id="RLa-4X-ZRW"/>
                                         <constraint firstItem="z4F-Fd-lSn" firstAttribute="top" secondItem="m1m-Ki-6qY" secondAttribute="bottom" constant="21" id="SAy-50-ANl"/>
+                                        <constraint firstItem="h7s-1K-PtG" firstAttribute="leading" secondItem="Vdh-g8-mro" secondAttribute="trailing" constant="10" id="bf7-A5-jUn"/>
                                         <constraint firstAttribute="trailing" secondItem="GKx-ce-V8e" secondAttribute="trailing" constant="20" id="cbj-Wq-rx8"/>
+                                        <constraint firstItem="GKx-ce-V8e" firstAttribute="centerY" secondItem="Vdh-g8-mro" secondAttribute="centerY" id="jHo-bj-CDe"/>
                                         <constraint firstItem="m1m-Ki-6qY" firstAttribute="leading" secondItem="1MV-RT-3bs" secondAttribute="trailing" constant="8" id="mgC-JP-UXD"/>
                                         <constraint firstAttribute="bottom" secondItem="GKx-ce-V8e" secondAttribute="bottom" constant="20" id="sVK-yn-cQc"/>
+                                        <constraint firstItem="h7s-1K-PtG" firstAttribute="centerY" secondItem="Vdh-g8-mro" secondAttribute="centerY" id="tvK-NR-atC"/>
                                     </constraints>
                                 </view>
                                 <constraints>
@@ -333,6 +353,7 @@
                         <outlet property="o_NumberOfPointsBox" destination="lH0-7J-0tc" id="HDq-Ly-gBP"/>
                         <outlet property="o_PlotView" destination="ZrH-qu-neQ" id="bh2-Uo-y3E"/>
                         <outlet property="o_PointDistributionPopUp" destination="JkB-LA-9DJ" id="oAT-PN-6vj"/>
+                        <outlet property="o_SolutionTimeLabel" destination="h7s-1K-PtG" id="sh6-fM-VN8"/>
                         <outlet property="o_SolutionTypePopUp" destination="m1m-Ki-6qY" id="SAm-OG-mfz"/>
                         <outlet property="o_SolverOptionPopUp" destination="z4F-Fd-lSn" id="7OZ-WN-Ouf"/>
                     </connections>

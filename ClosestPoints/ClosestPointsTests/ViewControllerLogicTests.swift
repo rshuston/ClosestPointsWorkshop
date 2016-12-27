@@ -72,6 +72,14 @@ class ViewControllerLogicTests: XCTestCase {
         XCTAssertEqual(mockViewController.o_NumberOfPointsBox.integerValue, 3)
     }
 
+    func test_viewDidLoad_SetsSolutionTimeLabelToZero() {
+        subject.viewDidLoad()
+
+        XCTAssertEqual(mockViewController.recorder.getCallCountFor("updateSolutionTime"), 1)
+        let callRecord = mockViewController.recorder.getCallRecordFor("updateSolutionTime")
+        XCTAssertEqual(callRecord?[0] as? Float, 0.0)
+    }
+
     func test_viewDidLoad_GeneratesThreePoints() {
         subject.viewDidLoad()
 
@@ -331,9 +339,13 @@ class ViewControllerLogicTests: XCTestCase {
     func test_findClosestPoints_FindsSolutionUsingPermutationSearchWithClosures() {
         let mockPermutationSolver = MockPermutationSolver()
         let mockCombinationSolver = MockCombinationSolver()
+        let mockPlaneSweepSolver = MockPlaneSweepSolver()
+        let mockDivideAndConquerSolver = MockDivideAndConquerSolver()
 
         subject.solutionEngine.permutationSolver = mockPermutationSolver
         subject.solutionEngine.combinationSolver = mockCombinationSolver
+        subject.solutionEngine.planeSweepSolver = mockPlaneSweepSolver
+        subject.solutionEngine.divideAndConquerSolver = mockDivideAndConquerSolver
 
         subject.controlManager.solutionType = ControlManager.SolutionType.PermutationSearch
         subject.controlManager.solverOption = ControlManager.SolverOption.OneShot
@@ -342,11 +354,18 @@ class ViewControllerLogicTests: XCTestCase {
 
         mockPermutationSolver.completionExpectation = expectation(description: "completion")
 
+        subject.lastSolutionTime_ms = 0.0
+        subject.startSolutionTime = 0.0
+        subject.endSolutionTime = 0.0
+
         subject.findClosestPoints()
 
         waitForExpectations(timeout: 1.0, handler: nil)
 
         XCTAssertEqual(mockPermutationSolver.recorder.getCallCountFor("findClosestPoints (P)"), 1)
+        XCTAssertEqual(mockCombinationSolver.recorder.getCallCountFor("findClosestPoints (C)"), 0)
+        XCTAssertEqual(mockPlaneSweepSolver.recorder.getCallCountFor("findClosestPoints (PS)"), 0)
+        XCTAssertEqual(mockDivideAndConquerSolver.recorder.getCallCountFor("findClosestPoints (DQ)"), 0)
 
         let record = mockPermutationSolver.recorder.getCallRecordFor("findClosestPoints (P)")
 
@@ -369,14 +388,22 @@ class ViewControllerLogicTests: XCTestCase {
         completionClosure?(pointPair2)
         XCTAssertNil(subject.pointCollection.checkPoints)
         XCTAssertNotNil(subject.pointCollection.closestPoints)
+
+        XCTAssertNotEqual(subject.startSolutionTime, 0.0)
+        XCTAssertNotEqual(subject.endSolutionTime, 0.0)
+        XCTAssertNotEqual(subject.lastSolutionTime_ms, 0.0)
     }
 
     func test_findClosestPoints_FindsSolutionUsingCombinationSearchWithClosures() {
         let mockPermutationSolver = MockPermutationSolver()
         let mockCombinationSolver = MockCombinationSolver()
+        let mockPlaneSweepSolver = MockPlaneSweepSolver()
+        let mockDivideAndConquerSolver = MockDivideAndConquerSolver()
 
         subject.solutionEngine.permutationSolver = mockPermutationSolver
         subject.solutionEngine.combinationSolver = mockCombinationSolver
+        subject.solutionEngine.planeSweepSolver = mockPlaneSweepSolver
+        subject.solutionEngine.divideAndConquerSolver = mockDivideAndConquerSolver
 
         subject.controlManager.solutionType = ControlManager.SolutionType.CombinationSearch
         subject.controlManager.solverOption = ControlManager.SolverOption.OneShot
@@ -385,11 +412,18 @@ class ViewControllerLogicTests: XCTestCase {
 
         mockCombinationSolver.completionExpectation = expectation(description: "completion")
 
+        subject.lastSolutionTime_ms = 0.0
+        subject.startSolutionTime = 0.0
+        subject.endSolutionTime = 0.0
+
         subject.findClosestPoints()
 
         waitForExpectations(timeout: 1.0, handler: nil)
 
+        XCTAssertEqual(mockPermutationSolver.recorder.getCallCountFor("findClosestPoints (P)"), 0)
         XCTAssertEqual(mockCombinationSolver.recorder.getCallCountFor("findClosestPoints (C)"), 1)
+        XCTAssertEqual(mockPlaneSweepSolver.recorder.getCallCountFor("findClosestPoints (PS)"), 0)
+        XCTAssertEqual(mockDivideAndConquerSolver.recorder.getCallCountFor("findClosestPoints (DQ)"), 0)
 
         let record = mockCombinationSolver.recorder.getCallRecordFor("findClosestPoints (C)")
 
@@ -412,6 +446,126 @@ class ViewControllerLogicTests: XCTestCase {
         completionClosure?(pointPair2)
         XCTAssertNil(subject.pointCollection.checkPoints)
         XCTAssertNotNil(subject.pointCollection.closestPoints)
+
+        XCTAssertNotEqual(subject.startSolutionTime, 0.0)
+        XCTAssertNotEqual(subject.endSolutionTime, 0.0)
+        XCTAssertNotEqual(subject.lastSolutionTime_ms, 0.0)
+    }
+
+    func test_findClosestPoints_FindsSolutionUsingPlaneSweepWithClosures() {
+        let mockPermutationSolver = MockPermutationSolver()
+        let mockCombinationSolver = MockCombinationSolver()
+        let mockPlaneSweepSolver = MockPlaneSweepSolver()
+        let mockDivideAndConquerSolver = MockDivideAndConquerSolver()
+
+        subject.solutionEngine.permutationSolver = mockPermutationSolver
+        subject.solutionEngine.combinationSolver = mockCombinationSolver
+        subject.solutionEngine.planeSweepSolver = mockPlaneSweepSolver
+        subject.solutionEngine.divideAndConquerSolver = mockDivideAndConquerSolver
+
+        subject.controlManager.solutionType = ControlManager.SolutionType.PlaneSweep
+        subject.controlManager.solverOption = ControlManager.SolverOption.OneShot
+
+        subject.pointCollection.points = [Point(x: 1, y: 2), Point(x: 3, y: 4)]
+
+        mockPlaneSweepSolver.completionExpectation = expectation(description: "completion")
+
+        subject.lastSolutionTime_ms = 0.0
+        subject.startSolutionTime = 0.0
+        subject.endSolutionTime = 0.0
+
+        subject.findClosestPoints()
+
+        waitForExpectations(timeout: 1.0, handler: nil)
+
+        XCTAssertEqual(mockPermutationSolver.recorder.getCallCountFor("findClosestPoints (P)"), 0)
+        XCTAssertEqual(mockCombinationSolver.recorder.getCallCountFor("findClosestPoints (C)"), 0)
+        XCTAssertEqual(mockPlaneSweepSolver.recorder.getCallCountFor("findClosestPoints (PS)"), 1)
+        XCTAssertEqual(mockDivideAndConquerSolver.recorder.getCallCountFor("findClosestPoints (DQ)"), 0)
+
+        let record = mockPlaneSweepSolver.recorder.getCallRecordFor("findClosestPoints (PS)")
+
+        XCTAssertEqual(3, record?.count)
+        let points = record?[0] as? [Point]
+        let monitorClosure = record?[1] as? ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)
+        let completionClosure = record?[2] as? (((Point, Point)?) -> Void)
+
+        XCTAssertNotNil(points)
+        XCTAssertEqual(points!, subject.pointCollection.points)
+
+        let pointPair1 = (subject.pointCollection.points[0], subject.pointCollection.points[1])
+        let pointPair2 = (subject.pointCollection.points[0], subject.pointCollection.points[1])
+        let dummyRect = NSRect(x: 0, y: 0, width: 1, height: 1)
+        let keepGoing = monitorClosure?(dummyRect, pointPair1, pointPair2)
+        XCTAssertTrue(keepGoing!)
+        XCTAssertNil(subject.pointCollection.checkPoints)
+        XCTAssertNil(subject.pointCollection.closestPoints)
+
+        completionClosure?(pointPair2)
+        XCTAssertNil(subject.pointCollection.checkPoints)
+        XCTAssertNotNil(subject.pointCollection.closestPoints)
+
+        XCTAssertNotEqual(subject.startSolutionTime, 0.0)
+        XCTAssertNotEqual(subject.endSolutionTime, 0.0)
+        XCTAssertNotEqual(subject.lastSolutionTime_ms, 0.0)
+    }
+
+    func test_findClosestPoints_FindsSolutionUsingDivideAndConquerWithClosures() {
+        let mockPermutationSolver = MockPermutationSolver()
+        let mockCombinationSolver = MockCombinationSolver()
+        let mockPlaneSweepSolver = MockPlaneSweepSolver()
+        let mockDivideAndConquerSolver = MockDivideAndConquerSolver()
+
+        subject.solutionEngine.permutationSolver = mockPermutationSolver
+        subject.solutionEngine.combinationSolver = mockCombinationSolver
+        subject.solutionEngine.planeSweepSolver = mockPlaneSweepSolver
+        subject.solutionEngine.divideAndConquerSolver = mockDivideAndConquerSolver
+
+        subject.controlManager.solutionType = ControlManager.SolutionType.DivideAndConquer
+        subject.controlManager.solverOption = ControlManager.SolverOption.OneShot
+
+        subject.pointCollection.points = [Point(x: 1, y: 2), Point(x: 3, y: 4)]
+
+        mockDivideAndConquerSolver.completionExpectation = expectation(description: "completion")
+
+        subject.lastSolutionTime_ms = 0.0
+        subject.startSolutionTime = 0.0
+        subject.endSolutionTime = 0.0
+
+        subject.findClosestPoints()
+
+        waitForExpectations(timeout: 1.0, handler: nil)
+
+        XCTAssertEqual(mockPermutationSolver.recorder.getCallCountFor("findClosestPoints (P)"), 0)
+        XCTAssertEqual(mockCombinationSolver.recorder.getCallCountFor("findClosestPoints (C)"), 0)
+        XCTAssertEqual(mockPlaneSweepSolver.recorder.getCallCountFor("findClosestPoints (PS)"), 0)
+        XCTAssertEqual(mockDivideAndConquerSolver.recorder.getCallCountFor("findClosestPoints (DQ)"), 1)
+
+        let record = mockDivideAndConquerSolver.recorder.getCallRecordFor("findClosestPoints (DQ)")
+
+        XCTAssertEqual(3, record?.count)
+        let points = record?[0] as? [Point]
+        let monitorClosure = record?[1] as? ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)
+        let completionClosure = record?[2] as? (((Point, Point)?) -> Void)
+
+        XCTAssertNotNil(points)
+        XCTAssertEqual(points!, subject.pointCollection.points)
+
+        let pointPair1 = (subject.pointCollection.points[0], subject.pointCollection.points[1])
+        let pointPair2 = (subject.pointCollection.points[0], subject.pointCollection.points[1])
+        let dummyRect = NSRect(x: 0, y: 0, width: 1, height: 1)
+        let keepGoing = monitorClosure?(dummyRect, pointPair1, pointPair2)
+        XCTAssertTrue(keepGoing!)
+        XCTAssertNil(subject.pointCollection.checkPoints)
+        XCTAssertNil(subject.pointCollection.closestPoints)
+
+        completionClosure?(pointPair2)
+        XCTAssertNil(subject.pointCollection.checkPoints)
+        XCTAssertNotNil(subject.pointCollection.closestPoints)
+
+        XCTAssertNotEqual(subject.startSolutionTime, 0.0)
+        XCTAssertNotEqual(subject.endSolutionTime, 0.0)
+        XCTAssertNotEqual(subject.lastSolutionTime_ms, 0.0)
     }
 
     // MARK: - isFindingClosestPoints()
@@ -509,6 +663,7 @@ class ViewControllerLogicTests: XCTestCase {
         var my_SolutionTypePopUp: NSPopUpButton!
         var my_SolverOptionPopUp: NSPopUpButton!
         var my_ControlButton: NSButton!
+        var my_SolutionTimeLabel: NSTextField!
 
         func createMockOutlets() {
             my_PlotView = PlotView(frame: NSRect(x: 0, y: 0, width: 100, height: 100))
@@ -518,6 +673,7 @@ class ViewControllerLogicTests: XCTestCase {
             my_SolutionTypePopUp = NSPopUpButton()
             my_SolverOptionPopUp = NSPopUpButton()
             my_ControlButton = NSButton()
+            my_SolutionTimeLabel = NSTextField()
 
             o_PlotView = my_PlotView
 
@@ -527,6 +683,7 @@ class ViewControllerLogicTests: XCTestCase {
             o_SolutionTypePopUp = my_SolutionTypePopUp
             o_SolverOptionPopUp = my_SolverOptionPopUp
             o_ControlButton = my_ControlButton
+            o_SolutionTimeLabel = my_SolutionTimeLabel
         }
 
         override func setGenerateButtonEnableState(enabled: Bool) {
@@ -562,6 +719,13 @@ class ViewControllerLogicTests: XCTestCase {
                 recorder.recordCallFor("setNumberOfPoints", params: [numberOfPoints])
             }
             super.setNumberOfPoints(numberOfPoints: numberOfPoints)
+        }
+
+        override func updateSolutionTime(time_ms: Float) {
+            if recorderEnabled {
+                recorder.recordCallFor("updateSolutionTime", params: [time_ms])
+            }
+            super.updateSolutionTime(time_ms: time_ms)
         }
 
         override func getNumberOfPoints() -> Int {
@@ -623,6 +787,36 @@ class ViewControllerLogicTests: XCTestCase {
                                         monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?,
                                         completion: (((Point, Point)?) -> Void)) {
             recorder.recordCallFor("findClosestPoints (C)", params: [points, monitor, completion])
+            completionExpectation?.fulfill()
+        }
+        
+    }
+
+    class MockPlaneSweepSolver: PlaneSweepSolver {
+
+        let recorder = FuncRecorder()
+
+        var completionExpectation: XCTestExpectation?
+
+        override func findClosestPoints(points: [Point],
+                                        monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?,
+                                        completion: (((Point, Point)?) -> Void)) {
+            recorder.recordCallFor("findClosestPoints (PS)", params: [points, monitor, completion])
+            completionExpectation?.fulfill()
+        }
+        
+    }
+
+    class MockDivideAndConquerSolver: DivideAndConquerSolver {
+
+        let recorder = FuncRecorder()
+
+        var completionExpectation: XCTestExpectation?
+
+        override func findClosestPoints(points: [Point],
+                                        monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?,
+                                        completion: (((Point, Point)?) -> Void)) {
+            recorder.recordCallFor("findClosestPoints (DQ)", params: [points, monitor, completion])
             completionExpectation?.fulfill()
         }
         
