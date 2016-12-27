@@ -83,7 +83,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
     }
 
     func updateSolutionTime(time_ms: Float) {
-        o_SolutionTimeLabel.stringValue = String(format: "%.2f ms", time_ms)
+        o_SolutionTimeLabel.stringValue = String(format: "%.3f ms", time_ms)
     }
 
     // MARK: - Other commands
