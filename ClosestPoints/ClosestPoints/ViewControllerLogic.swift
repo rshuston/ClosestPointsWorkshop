@@ -17,7 +17,7 @@ import Cocoa
 class ViewControllerLogic: NSObject {
 
     let minNumberOfPoints = 2
-    let maxNumberOfPoints = 1000
+    let maxNumberOfPoints = 10000
 
     var pointCollection: PointCollection! = PointCollection()
     var definitionManager: DefinitionManager! = DefinitionManager()

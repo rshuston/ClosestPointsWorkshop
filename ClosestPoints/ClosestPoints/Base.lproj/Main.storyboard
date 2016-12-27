@@ -180,6 +180,8 @@
                                                     <string>250</string>
                                                     <string>500</string>
                                                     <string>1000</string>
+                                                    <string>5000</string>
+                                                    <string>10000</string>
                                                 </objectValues>
                                             </comboBoxCell>
                                             <connections>
