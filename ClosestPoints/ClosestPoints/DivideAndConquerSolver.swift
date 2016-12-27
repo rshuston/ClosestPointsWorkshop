@@ -43,6 +43,19 @@ class DivideAndConquerSolver: Solver {
             }
             return keepRunning
         }
+
+        func monitorRectForPoint(point: Point, withAxisDistance: CGFloat) -> Bool {
+            var keepRunning = true
+            if monitor != nil {
+                checkRect = NSRect(x: point.x - withAxisDistance,
+                                   y: point.y - withAxisDistance,
+                                   width: withAxisDistance,
+                                   height: 2 * withAxisDistance)
+                checkPoints = nil
+                keepRunning = monitor!(checkRect, checkPoints, closestPoints)
+            }
+            return keepRunning
+        }
     }
     
     override func findClosestPoints(points: [Point],
@@ -155,6 +168,8 @@ class DivideAndConquerSolver: Solver {
                         result!.distanceSquared = distanceSquared
                     }
                     keepRunning = withCarryOn.monitorPointPair(pointPair: result!.pointPair, distanceSquared: distanceSquared)
+                } else {
+                    keepRunning = withCarryOn.monitorRectForPoint(point: leftPt, withAxisDistance: withinAxisDistance)
                 }
                 if !keepRunning {
                     break
