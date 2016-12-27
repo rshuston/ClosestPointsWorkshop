@@ -1,0 +1,11 @@
+Testing Types:
+
+• Fakes have working implementations, but usually take some shortcuts which makes them not suitable for production. A good example of this is an in-memory database in lieu of an actual file-based or server-based database.
+
+• Mocks are pre-programmed with expectations which form a specification of the calls they are expected to receive. They can throw an exception if they receive a call they don’t expect and are checked during verification to ensure they got all the calls they were expecting.
+
+• Spies record information based on how they were called and/or used. One form of this might be an email service that records how many messages it was sent.
+
+• Stubs provide canned answers to calls made during the test, usually not responding at all to anything outside what’s programmed in for the test.
+
+Many times, mocks also have spy abilities, allowing for a unified interface that both records and responds. All of these types fundamentally rely on having function interfaces that have the ability to "play" predefined function responses, and "record" function invocations and responses.

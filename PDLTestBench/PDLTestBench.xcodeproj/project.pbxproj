@@ -39,6 +39,7 @@
 		4E4341551DF3BC5D00A88DAE /* FuncRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuncRecorder.swift; sourceTree = "<group>"; };
 		4E4341581DF3BC7100A88DAE /* FuncPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuncPlayerTests.swift; sourceTree = "<group>"; };
 		4E4341591DF3BC7100A88DAE /* FuncRecorderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuncRecorderTests.swift; sourceTree = "<group>"; };
+		4E6DA9C91E12A8F600BFC21B /* NOTES */ = {isa = PBXFileReference; lastKnownFileType = text; path = NOTES; sourceTree = "<group>"; };
 		4E8DCA311DF3BDD0003139E1 /* PDLToolBox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDLToolBox.framework; path = "../../../../Library/Developer/Xcode/DerivedData/ClosestPointsWorkshop-bjbkadvdhujgxxhiwklajocqyepz/Build/Products/Debug/PDLToolBox.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,6 +67,7 @@
 		4E37DBAC1DF3BA4D0036E2AF = {
 			isa = PBXGroup;
 			children = (
+				4E6DA9C91E12A8F600BFC21B /* NOTES */,
 				4E37DBB81DF3BA4D0036E2AF /* PDLTestBench */,
 				4E37DBC31DF3BA4D0036E2AF /* PDLTestBenchTests */,
 				4E8DCA301DF3BDD0003139E1 /* Frameworks */,

@@ -30,7 +30,5 @@ so that I have the ability to explore the solution operations.
 
 As a nerd, I want to trace the execution paths of the closes-points solution, so that I can visually monitor the intermediate results of the solution process.
 
-As a nerd, I want to have the ability to suspend and resume the execution of the closes-points solution, so that I can view an intermediate solution.
-
 As a nerd, I want to have the ability to abort the execution of the closes-points solution, so that I can recover from inadvertently running "Slow Animation" for a large point set with an inefficient solution method.
 
