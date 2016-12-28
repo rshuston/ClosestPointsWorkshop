@@ -11,6 +11,7 @@ import Cocoa
 class PlotView: NSView {
 
     let pointRadius: CGFloat = 4
+    let closestPointRadius: CGFloat = 5
     let pointHighlightRadius: CGFloat = 6
     let pointCaptureMargin: CGFloat = 8
 
@@ -58,7 +59,7 @@ class PlotView: NSView {
             // Closest point pair
             if let closestPoints = pds.closestPoints {
                 drawPointPair(pointPair: (closestPoints.0.getAsNSPoint(), closestPoints.1.getAsNSPoint()),
-                              radius: pointRadius,
+                              radius: closestPointRadius,
                               lineWidth: 2,
                               color: pds.closestPointsColor ?? NSColor.black,
                               highlightPair: (closestPoints.0.highlighted, closestPoints.1.highlighted))
