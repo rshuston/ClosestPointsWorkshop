@@ -410,7 +410,7 @@ class DivideAndConquerSolverTests: XCTestCase {
         }
     }
 
-    func test_findClosestPointsInRegion_FindsClosestPointsForASixPointSet() {
+    func test_findClosestPointsInRegion_FindsClosestPointsForASixPointSetForThreePointSimpleThreshold() {
         let points = [ Point(x: 3, y: 15),
                        Point(x: 12, y: 26),
                        Point(x: 17, y: 21), // first of closest pair
@@ -422,6 +422,8 @@ class DivideAndConquerSolverTests: XCTestCase {
         let solutionCarryOn = DivideAndConquerSolver.SolutionCarryOn()
 
         let subject = SpyDivideAndConquerSolver()
+
+        subject.maxSimpleRegionSize = 3
 
         let result = subject.findClosestPointsInRegion(points: points, pointRegion: pointRegion, withCarryOn: solutionCarryOn)
 
@@ -461,7 +463,7 @@ class DivideAndConquerSolverTests: XCTestCase {
         XCTAssertEqual(borderReturn0?.pointPair.1, points[3])
     }
 
-    func test_findClosestPointsInRegion_FindsClosestPointsForASevenPointSet() {
+    func test_findClosestPointsInRegion_FindsClosestPointsForASevenPointSetForThreePointSimpleThreshold() {
         let points = [ Point(x: 3, y: 15),
                        Point(x: 15, y: 31),
                        Point(x: 17, y: 21), // first of closest pair
@@ -474,6 +476,8 @@ class DivideAndConquerSolverTests: XCTestCase {
         let solutionCarryOn = DivideAndConquerSolver.SolutionCarryOn()
 
         let subject = SpyDivideAndConquerSolver()
+
+        subject.maxSimpleRegionSize = 3
 
         let result = subject.findClosestPointsInRegion(points: points, pointRegion: pointRegion, withCarryOn: solutionCarryOn)
 
@@ -572,7 +576,7 @@ class DivideAndConquerSolverTests: XCTestCase {
         XCTAssertNil(borderReturn0)
     }
 
-    func test_findClosestPointsInRegion_FindsClosestPointsForAThirteenPointSet() {
+    func test_findClosestPointsInRegion_FindsClosestPointsForAThirteenPointSetForThreePointSimpleThreshold() {
         let points = [ Point(x: 3, y: 15),
                        Point(x: 5, y: 27),
                        Point(x: 7, y: 19),
@@ -591,6 +595,8 @@ class DivideAndConquerSolverTests: XCTestCase {
         let solutionCarryOn = DivideAndConquerSolver.SolutionCarryOn()
 
         let subject = SpyDivideAndConquerSolver()
+
+        subject.maxSimpleRegionSize = 3
 
         let result = subject.findClosestPointsInRegion(points: points, pointRegion: pointRegion, withCarryOn: solutionCarryOn)
 

@@ -10,7 +10,7 @@ import Cocoa
 
 class DivideAndConquerSolver: Solver {
 
-    var maxSimpleRegionSize = 3
+    var maxSimpleRegionSize = 7
 
     struct PointRegion {
         var lower: Int  // Lower index into points array, -1 if not defined
