@@ -11,6 +11,7 @@ import Cocoa
 class PlotView: NSView {
 
     let pointRadius: CGFloat = 4
+    let checkPointRadius: CGFloat = 5
     let closestPointRadius: CGFloat = 5
     let pointHighlightRadius: CGFloat = 6
     let pointCaptureMargin: CGFloat = 8
@@ -50,8 +51,8 @@ class PlotView: NSView {
             // Check point pair
             if let checkPoints = pds.checkPoints {
                 drawPointPair(pointPair: (checkPoints.0.getAsNSPoint(), checkPoints.1.getAsNSPoint()),
-                              radius: pointRadius,
-                              lineWidth: 2,
+                              radius: checkPointRadius,
+                              lineWidth: 3,
                               color: pds.checkPointsColor ?? NSColor.black,
                               highlightPair: (checkPoints.0.highlighted, checkPoints.1.highlighted))
             }
@@ -60,7 +61,7 @@ class PlotView: NSView {
             if let closestPoints = pds.closestPoints {
                 drawPointPair(pointPair: (closestPoints.0.getAsNSPoint(), closestPoints.1.getAsNSPoint()),
                               radius: closestPointRadius,
-                              lineWidth: 2,
+                              lineWidth: 3,
                               color: pds.closestPointsColor ?? NSColor.black,
                               highlightPair: (closestPoints.0.highlighted, closestPoints.1.highlighted))
             }

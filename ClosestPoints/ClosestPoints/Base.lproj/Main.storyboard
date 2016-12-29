@@ -256,7 +256,13 @@
                                                         <menuItem title="Plane Sweep" id="Mxl-AG-scy">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
                                                         </menuItem>
-                                                        <menuItem title="Divide and Conquer" id="Tv6-7r-8bV">
+                                                        <menuItem title="Divide and Conquer, 3-Point" id="Tv6-7r-8bV">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
+                                                        <menuItem title="Divide and Conquer, 5-Point" id="Vj9-z4-9fu">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
+                                                        <menuItem title="Divide and Conquer, 7-Point" id="toy-6j-n2L">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
                                                         </menuItem>
                                                     </items>

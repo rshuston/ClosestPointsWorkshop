@@ -78,20 +78,7 @@ class ViewControllerLogic: NSObject {
     }
 
     internal func activateControlButtonIfCanSolve() {
-        switch controlManager.solutionType {
-        case ControlManager.SolutionType.PermutationSearch:
-            hostViewController.setControlButtonEnableState(enabled: pointCollection.points.count >= 2)
-            break
-        case ControlManager.SolutionType.CombinationSearch:
-            hostViewController.setControlButtonEnableState(enabled: pointCollection.points.count >= 2)
-            break
-        case ControlManager.SolutionType.PlaneSweep:
-            hostViewController.setControlButtonEnableState(enabled: pointCollection.points.count >= 2)
-            break
-        case ControlManager.SolutionType.DivideAndConquer:
-            hostViewController.setControlButtonEnableState(enabled: pointCollection.points.count >= 2)
-            break
-        }
+        hostViewController.setControlButtonEnableState(enabled: pointCollection.points.count >= 2)
     }
 
     internal func configureControlButtonForSolvingState() {
@@ -147,7 +134,16 @@ class ViewControllerLogic: NSObject {
         case ControlManager.SolutionType.PlaneSweep:
             solver = solutionEngine.planeSweepSolver
             break
-        case ControlManager.SolutionType.DivideAndConquer:
+        case ControlManager.SolutionType.DivideAndConquer_3:
+            solutionEngine.divideAndConquerSolver.maxSimpleRegionSize = 3
+            solver = solutionEngine.divideAndConquerSolver
+            break
+        case ControlManager.SolutionType.DivideAndConquer_5:
+            solutionEngine.divideAndConquerSolver.maxSimpleRegionSize = 5
+            solver = solutionEngine.divideAndConquerSolver
+            break
+        case ControlManager.SolutionType.DivideAndConquer_7:
+            solutionEngine.divideAndConquerSolver.maxSimpleRegionSize = 7
             solver = solutionEngine.divideAndConquerSolver
             break
         }

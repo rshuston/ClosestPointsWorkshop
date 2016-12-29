@@ -14,7 +14,9 @@ class ControlManager: NSObject {
         case PermutationSearch
         case CombinationSearch
         case PlaneSweep
-        case DivideAndConquer
+        case DivideAndConquer_3
+        case DivideAndConquer_5
+        case DivideAndConquer_7
     }
 
     enum SolverOption {

@@ -165,8 +165,14 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
             case "Plane Sweep"?:
                 viewControllerLogic.controlManager.solutionType = ControlManager.SolutionType.PlaneSweep
                 break
-            case "Divide and Conquer"?:
-                viewControllerLogic.controlManager.solutionType = ControlManager.SolutionType.DivideAndConquer
+            case "Divide and Conquer, 3-Point"?:
+                viewControllerLogic.controlManager.solutionType = ControlManager.SolutionType.DivideAndConquer_3
+                break
+            case "Divide and Conquer, 5-Point"?:
+                viewControllerLogic.controlManager.solutionType = ControlManager.SolutionType.DivideAndConquer_5
+                break
+            case "Divide and Conquer, 7-Point"?:
+                viewControllerLogic.controlManager.solutionType = ControlManager.SolutionType.DivideAndConquer_7
                 break
             default:
                 break
