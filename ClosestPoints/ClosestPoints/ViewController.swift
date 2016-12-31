@@ -191,7 +191,6 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
                 break
             case "Live"?:
                 viewControllerLogic.controlManager.solverOption = ControlManager.SolverOption.Live
-                viewControllerLogic.requestLiveSolutionIfConfigured()
                 break
             default:
                 break
@@ -205,6 +204,8 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         viewControllerLogic.activateControlButtonIfCanSolve()
 
         requestPointDataSourceUpdate()
+
+        requestLiveSolutionIfConfigured()
     }
 
     @IBAction func pushButtonSelected(_ sender: NSButton) {
