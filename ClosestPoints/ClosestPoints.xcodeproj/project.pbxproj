@@ -32,6 +32,7 @@
 		4E84FFCC1DF81BD700F5E27F /* CombinationSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E84FFCB1DF81BD700F5E27F /* CombinationSolver.swift */; };
 		4E84FFCE1DF81BEF00F5E27F /* CombinationSolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E84FFCD1DF81BEF00F5E27F /* CombinationSolverTests.swift */; };
 		4E8DCA351DF3BE74003139E1 /* PDLTestBench.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DCA341DF3BE74003139E1 /* PDLTestBench.framework */; };
+		4EAD1C531E19FF7600399310 /* ClosestPointsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAD1C521E19FF7600399310 /* ClosestPointsUITests.swift */; };
 		4EB647571DF4B085004F10F7 /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB647561DF4B085004F10F7 /* AppUtils.swift */; };
 		4EC175FC1DFB647200BB1AF0 /* AppUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC175FB1DFB647200BB1AF0 /* AppUtilsTests.swift */; };
 		4EDEDF071DF241F100BDA336 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDEDF061DF241F100BDA336 /* Point.swift */; };
@@ -42,6 +43,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		4E0531441DD640EA006E9B8F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4E05312A1DD640EA006E9B8F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4E0531311DD640EA006E9B8F;
+			remoteInfo = ClosestPoints;
+		};
+		4EAD1C551E19FF7600399310 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4E05312A1DD640EA006E9B8F /* Project object */;
 			proxyType = 1;
@@ -81,6 +89,9 @@
 		4E84FFCD1DF81BEF00F5E27F /* CombinationSolverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinationSolverTests.swift; sourceTree = "<group>"; };
 		4E8DCA341DF3BE74003139E1 /* PDLTestBench.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDLTestBench.framework; path = "../../../../Library/Developer/Xcode/DerivedData/ClosestPointsWorkshop-bjbkadvdhujgxxhiwklajocqyepz/Build/Products/Debug/PDLTestBench.framework"; sourceTree = "<group>"; };
 		4E8DCA361DF3BE79003139E1 /* PDLToolBox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDLToolBox.framework; path = "../../../../Library/Developer/Xcode/DerivedData/ClosestPointsWorkshop-bjbkadvdhujgxxhiwklajocqyepz/Build/Products/Debug/PDLToolBox.framework"; sourceTree = "<group>"; };
+		4EAD1C501E19FF7600399310 /* ClosestPointsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClosestPointsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EAD1C521E19FF7600399310 /* ClosestPointsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosestPointsUITests.swift; sourceTree = "<group>"; };
+		4EAD1C541E19FF7600399310 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EB647561DF4B085004F10F7 /* AppUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtils.swift; sourceTree = "<group>"; };
 		4EC175FB1DFB647200BB1AF0 /* AppUtilsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtilsTests.swift; sourceTree = "<group>"; };
 		4EDEDF061DF241F100BDA336 /* Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
@@ -107,6 +118,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4EAD1C4D1E19FF7600399310 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -117,6 +135,7 @@
 				4E6F312B1DE5427E00221A9A /* User Stories.txt */,
 				4E0531341DD640EA006E9B8F /* ClosestPoints */,
 				4E0531461DD640EA006E9B8F /* ClosestPointsTests */,
+				4EAD1C511E19FF7600399310 /* ClosestPointsUITests */,
 				4E8DCA331DF3BE74003139E1 /* Frameworks */,
 				4E0531331DD640EA006E9B8F /* Products */,
 			);
@@ -127,6 +146,7 @@
 			children = (
 				4E0531321DD640EA006E9B8F /* ClosestPoints.app */,
 				4E0531431DD640EA006E9B8F /* ClosestPointsTests.xctest */,
+				4EAD1C501E19FF7600399310 /* ClosestPointsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -185,6 +205,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4EAD1C511E19FF7600399310 /* ClosestPointsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4EAD1C521E19FF7600399310 /* ClosestPointsUITests.swift */,
+				4EAD1C541E19FF7600399310 /* Info.plist */,
+			);
+			path = ClosestPointsUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -223,13 +252,31 @@
 			productReference = 4E0531431DD640EA006E9B8F /* ClosestPointsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		4EAD1C4F1E19FF7600399310 /* ClosestPointsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4EAD1C591E19FF7600399310 /* Build configuration list for PBXNativeTarget "ClosestPointsUITests" */;
+			buildPhases = (
+				4EAD1C4C1E19FF7600399310 /* Sources */,
+				4EAD1C4D1E19FF7600399310 /* Frameworks */,
+				4EAD1C4E1E19FF7600399310 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4EAD1C561E19FF7600399310 /* PBXTargetDependency */,
+			);
+			name = ClosestPointsUITests;
+			productName = ClosestPointsUITests;
+			productReference = 4EAD1C501E19FF7600399310 /* ClosestPointsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		4E05312A1DD640EA006E9B8F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0810;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Pinpoint Dynamics";
 				TargetAttributes = {
@@ -239,6 +286,11 @@
 					};
 					4E0531421DD640EA006E9B8F = {
 						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 4E0531311DD640EA006E9B8F;
+					};
+					4EAD1C4F1E19FF7600399310 = {
+						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 4E0531311DD640EA006E9B8F;
 					};
@@ -259,6 +311,7 @@
 			targets = (
 				4E0531311DD640EA006E9B8F /* ClosestPoints */,
 				4E0531421DD640EA006E9B8F /* ClosestPointsTests */,
+				4EAD1C4F1E19FF7600399310 /* ClosestPointsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -274,6 +327,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		4E0531411DD640EA006E9B8F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EAD1C4E1E19FF7600399310 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -324,6 +384,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4EAD1C4C1E19FF7600399310 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4EAD1C531E19FF7600399310 /* ClosestPointsUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -331,6 +399,11 @@
 			isa = PBXTargetDependency;
 			target = 4E0531311DD640EA006E9B8F /* ClosestPoints */;
 			targetProxy = 4E0531441DD640EA006E9B8F /* PBXContainerItemProxy */;
+		};
+		4EAD1C561E19FF7600399310 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4E0531311DD640EA006E9B8F /* ClosestPoints */;
+			targetProxy = 4EAD1C551E19FF7600399310 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -494,6 +567,34 @@
 			};
 			name = Release;
 		};
+		4EAD1C571E19FF7600399310 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ClosestPointsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pinpointdynamics.ClosestPointsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = ClosestPoints;
+			};
+			name = Debug;
+		};
+		4EAD1C581E19FF7600399310 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ClosestPointsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pinpointdynamics.ClosestPointsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = ClosestPoints;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -523,6 +624,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		4EAD1C591E19FF7600399310 /* Build configuration list for PBXNativeTarget "ClosestPointsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4EAD1C571E19FF7600399310 /* Debug */,
+				4EAD1C581E19FF7600399310 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

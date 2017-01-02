@@ -38,6 +38,16 @@
                ReferencedContainer = "container:ClosestPoints.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4EAD1C4F1E19FF7600399310"
+               BuildableName = "ClosestPointsUITests.xctest"
+               BlueprintName = "ClosestPointsUITests"
+               ReferencedContainer = "container:ClosestPoints.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
