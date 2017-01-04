@@ -632,6 +632,7 @@
 				4EAD1C581E19FF7600399310 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
