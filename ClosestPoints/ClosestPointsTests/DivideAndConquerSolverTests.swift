@@ -461,6 +461,8 @@ class DivideAndConquerSolverTests: XCTestCase {
         XCTAssertEqual(borderReturn0?.distanceSquared, 20)
         XCTAssertEqual(borderReturn0?.pointPair.0, points[2])
         XCTAssertEqual(borderReturn0?.pointPair.1, points[3])
+
+        XCTAssertEqual(subject.recorder.getCallCountFor("findClosestPointsInRegion"), 3)
     }
 
     func test_findClosestPointsInRegion_FindsClosestPointsForASevenPointSetForThreePointSimpleThreshold() {
@@ -525,6 +527,8 @@ class DivideAndConquerSolverTests: XCTestCase {
         XCTAssertEqual(axisDistance, sqrt(20))
         let borderReturn1 = subject.recorder.getReturnValueFor("findClosestPointInBorderRegions", forInvocation: 1) as? DivideAndConquerSolver.PointPairAndDistance
         XCTAssertNil(borderReturn1)
+
+        XCTAssertEqual(subject.recorder.getCallCountFor("findClosestPointsInRegion"), 5)
     }
 
     func test_findClosestPointsInRegion_FindsClosestPointsForASevenPointSetForFivePointSimpleThreshold() {
@@ -574,6 +578,8 @@ class DivideAndConquerSolverTests: XCTestCase {
         XCTAssertEqual(subject.recorder.getCallCountFor("findClosestPointInBorderRegions"), 1)
         let borderReturn0 = subject.recorder.getReturnValueFor("findClosestPointInBorderRegions", forInvocation: 0) as? DivideAndConquerSolver.PointPairAndDistance
         XCTAssertNil(borderReturn0)
+
+        XCTAssertEqual(subject.recorder.getCallCountFor("findClosestPointsInRegion"), 3)
     }
 
     func test_findClosestPointsInRegion_FindsClosestPointsForAThirteenPointSetForThreePointSimpleThreshold() {
@@ -622,6 +628,56 @@ class DivideAndConquerSolverTests: XCTestCase {
 
         XCTAssertEqual(subject.recorder.getCallCountFor("findClosestPointsInSimpleRegion"), 5)
         XCTAssertEqual(subject.recorder.getCallCountFor("findClosestPointInBorderRegions"), 4)
+        XCTAssertEqual(subject.recorder.getCallCountFor("findClosestPointsInRegion"), 9)
+    }
+
+    func test_findClosestPointsInRegion_DoesNotRecursivelyCallWhenNoLongerRunning() {
+        let points = [ Point(x: 3, y: 15),
+                       Point(x: 5, y: 27),
+                       Point(x: 7, y: 19),
+                       Point(x: 11, y: 9),
+                       Point(x: 13, y: 37),
+                       Point(x: 15, y: 31),
+                       Point(x: 17, y: 21),  // first of closest pair
+                       Point(x: 21, y: 23),  // second of closest pair
+                       Point(x: 25, y: 29),
+                       Point(x: 29, y: 11),
+                       Point(x: 31, y: 17),
+                       Point(x: 33, y: 5),
+                       Point(x: 35, y: 25) ]
+        let pointRegion = DivideAndConquerSolver.PointRegion(lower: 0, upper: 12)
+
+        let solutionCarryOn = DivideAndConquerSolver.SolutionCarryOn()
+
+        var monitorCount = 0
+        solutionCarryOn.monitor = { (checkRect: NSRect?, checkPoints: (Point, Point)?, closestPointsSoFar: (Point, Point)?) -> Bool in
+            monitorCount += 1
+            return monitorCount < 2
+        }
+
+        let subject = SpyDivideAndConquerSolver()
+
+        subject.maxSimpleRegionSize = 3
+
+        let result = subject.findClosestPointsInRegion(points: points, pointRegion: pointRegion, withCarryOn: solutionCarryOn)
+
+        XCTAssertNotNil(result)
+
+        // Expected solution breakdown:
+        //
+        // 1:          0 1 2 3 4 5 6 7 8 9 10 11 12
+        // 2:        0 1 2 3 4 5 6  :  7 8 9 10 11 12
+        // 3:    0 1 2 3  :  4 5 6     7 8 9  :  10 11 12
+        // 4:  0 1  :  2 3
+        // 5:    border
+        // 6:          border               border
+        // 7:                     border
+        //
+        // 5 calls to findClosestPointsInSimpleRegion()
+        // 4 calls to findClosestPointInBorderRegions()
+        XCTAssertNotEqual(subject.recorder.getCallCountFor("findClosestPointsInSimpleRegion"), 5)
+        XCTAssertNotEqual(subject.recorder.getCallCountFor("findClosestPointInBorderRegions"), 4)
+        XCTAssertNotEqual(subject.recorder.getCallCountFor("findClosestPointsInRegion"), 9)
     }
 
     // MARK: - findClosestPoints() tests
@@ -983,6 +1039,16 @@ class DivideAndConquerSolverTests: XCTestCase {
             let returnValue = super.findClosestPointsInSimpleRegion(points: points, pointRegion: pointRegion, withCarryOn: withCarryOn)
 
             recorder.recordReturnFor("findClosestPointsInSimpleRegion", value: returnValue)
+
+            return returnValue
+        }
+
+        internal override func findClosestPointsInRegion(points: [Point], pointRegion: DivideAndConquerSolver.PointRegion, withCarryOn: DivideAndConquerSolver.SolutionCarryOn) -> DivideAndConquerSolver.PointPairAndDistance? {
+            recorder.recordCallFor("findClosestPointsInRegion", params: [points, pointRegion, withCarryOn])
+
+            let returnValue = super.findClosestPointsInRegion(points: points, pointRegion: pointRegion, withCarryOn: withCarryOn)
+
+            recorder.recordReturnFor("findClosestPointsInRegion", value: returnValue)
 
             return returnValue
         }
