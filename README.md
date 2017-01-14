@@ -1,4 +1,4 @@
-# ClosestPointWorkshop
+# ClosestPointsWorkshop
 
 This project explores four solution types to the Closest Points problem. The project is written in Swift for macOS. The project is configured to target El Capitan or higher.
 
@@ -21,3 +21,5 @@ The application gives the user the ability to run the solution four ways:
 4. Live - Run the solution every time the point data set changes, either by genererating a new point set or by changing the position of one of the points.
 
 The performance of the Divide and Conquer algorithm is affected by the acceptable size of the "sufficiently small" point region that terminates the recursive bisection operation. The application allows for selecting 3-point, 5-point, and 7-point sizes as a means of comparing these performance differences.
+
+![Screen Capture](images/Screen_Capture.png)
