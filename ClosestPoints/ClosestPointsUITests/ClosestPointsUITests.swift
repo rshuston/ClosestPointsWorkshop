@@ -43,6 +43,8 @@ class ClosestPointsUITests: XCTestCase {
         numberOfPointsBox.children(matching: .button).element.click()
         numberOfPointsScrollView.element(boundBy: 0).click()
 
+        XCUIApplication().windows["Window"].buttons["Generate"].click()
+
         let pointsValue = numberOfPointsBox.value as! String
         XCTAssertEqual(pointsValue, "5")
     }
@@ -55,8 +57,9 @@ class ClosestPointsUITests: XCTestCase {
         numberOfPointsBox.children(matching: .button).element.click()
         numberOfPointsScrollView.element(boundBy: 4).click()
 
-        let pointsValue = numberOfPointsBox.value as! String
+        XCUIApplication().windows["Window"].buttons["Generate"].click()
 
+        let pointsValue = numberOfPointsBox.value as! String
         XCTAssertEqual(pointsValue, "100")
     }
 
@@ -68,8 +71,9 @@ class ClosestPointsUITests: XCTestCase {
         numberOfPointsBox.children(matching: .button).element.click()
         numberOfPointsScrollView.element(boundBy: 7).click()
 
-        let pointsValue = numberOfPointsBox.value as! String
+        XCUIApplication().windows["Window"].buttons["Generate"].click()
 
+        let pointsValue = numberOfPointsBox.value as! String
         XCTAssertEqual(pointsValue, "1000")
     }
 
@@ -79,8 +83,9 @@ class ClosestPointsUITests: XCTestCase {
 
         window.groups.containing(.button, identifier:"Generate").children(matching: .comboBox).element.typeText("1234\r")
 
-        let pointsValue = numberOfPointsBox.value as! String
+        XCUIApplication().windows["Window"].buttons["Generate"].click()
 
+        let pointsValue = numberOfPointsBox.value as! String
         XCTAssertEqual(pointsValue, "1234")
     }
 
@@ -90,8 +95,9 @@ class ClosestPointsUITests: XCTestCase {
 
         window.groups.containing(.button, identifier:"Generate").children(matching: .comboBox).element.typeText("1\r")
 
-        let pointsValue = numberOfPointsBox.value as! String
+        XCUIApplication().windows["Window"].buttons["Generate"].click()
 
+        let pointsValue = numberOfPointsBox.value as! String
         XCTAssertEqual(pointsValue, "2")
     }
 
@@ -101,8 +107,9 @@ class ClosestPointsUITests: XCTestCase {
 
         window.groups.containing(.button, identifier:"Generate").children(matching: .comboBox).element.typeText("12345\r")
 
-        let pointsValue = numberOfPointsBox.value as! String
+        XCUIApplication().windows["Window"].buttons["Generate"].click()
 
+        let pointsValue = numberOfPointsBox.value as! String
         XCTAssertEqual(pointsValue, "10000")
     }
 
