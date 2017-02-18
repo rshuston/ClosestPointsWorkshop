@@ -1,8 +1,8 @@
 # ClosestPointsWorkshop
 
-This project explores four solution types to the Closest Points problem. The project is written in Swift for macOS. The project is configured to target El Capitan or higher.
+This project explores four solution types to the "Closest Points" problem. The project is written in Swift for macOS, and it is composed as an Xcode 8 workspace and is configured to target El Capitan or higher. The ClosestPoints project implements the Closest Points application solution. The workspace also contains two frameworks projects to facilitate mocking in Swift: PDLTestBench and PDLToolBox. PDLTestBench defines "player" and "recorder" classes that enable one, respectively, to define expected events and behaviors for mock classes, and to capture actual events and behaviors for mock and spy classes. PDLToolBox defines some basic data structure classes that are used by PDLTestBench.
 
-Four solution types are explored:
+Four "Closest Points" solution types are explored:
 
 1. Permutation Search - A purely naive matching of all permutations with ordering (even though ordering doesn't really matter). This solution is the easiest to test-drive without knowing any algorithm. The permutation search is O(n!).
 2. Combination Search - A better naive matching of all combination regardless of ordering. This solution can be test-driven, provided the developer observes that the checking of points does not depend on order. The combination search is O(n!)/2 (i.e., "n choose 2").
