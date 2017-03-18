@@ -170,4 +170,58 @@ class AppUtilsTests: XCTestCase {
         XCTAssertEqual(rect.size.height, 0)
     }
 
+    func test_ScaleIntToCGFloat_ReturnsZeroForEmptyDomain() {
+        let y = AppUtils.ScaleIntToCGFloat(5, domain: (5, 5), range: (0.0, 10.0), margin: 0.0)
+
+        XCTAssertEqual(y, 0.0);
+    }
+
+    func test_ScaleIntToCGFloat_ReturnsZeroForIncorrectDomain() {
+        let y = AppUtils.ScaleIntToCGFloat(5, domain: (5, 0), range: (0.0, 10.0), margin: 0.0)
+
+        XCTAssertEqual(y, 0.0);
+    }
+
+    func test_ScaleIntToCGFloat_ReturnsZeroForEmptyRange() {
+        let y = AppUtils.ScaleIntToCGFloat(5, domain: (0, 5), range: (10.0, 10.0), margin: 0.0)
+
+        XCTAssertEqual(y, 0.0);
+    }
+
+    func test_ScaleIntToCGFloat_ReturnsZeroForIncorrectRange() {
+        let y = AppUtils.ScaleIntToCGFloat(5, domain: (0, 5), range: (10.0, 0.0), margin: 0.0)
+
+        XCTAssertEqual(y, 0.0);
+    }
+
+    func test_ScaleIntToCGFloat_ReturnsMidRangeForMidDomainAndZeroMargin() {
+        let y = AppUtils.ScaleIntToCGFloat(5, domain: (0, 10), range: (0.0, 100.0), margin: 0.0)
+
+        XCTAssertEqual(y, 50.0);
+    }
+
+    func test_ScaleIntToCGFloat_ReturnsMidRangeForMidDomainButNonZeroMargin() {
+        let y = AppUtils.ScaleIntToCGFloat(5, domain: (0, 10), range: (0.0, 100.0), margin: 10.0)
+
+        XCTAssertEqual(y, 50.0);
+    }
+
+    func test_ScaleIntToCGFloat_GeneralTest1() {
+        let y = AppUtils.ScaleIntToCGFloat(2, domain: (0, 10), range: (0.0, 100.0), margin: 10.0)
+
+        XCTAssertEqual(y, 26.0);
+    }
+
+    func test_ScaleIntToCGFloat_GeneralTest2() {
+        let y = AppUtils.ScaleIntToCGFloat(3, domain: (0, 4), range: (0.0, 42.0), margin: 1.0)
+
+        XCTAssertEqual(y, 31.0);
+    }
+
+    func test_ScaleIntToCGFloat_GeneralTest3() {
+        let y = AppUtils.ScaleIntToCGFloat(Int.max / 4, domain: (0, Int.max), range: (0.0, 102.0), margin: 1.0)
+
+        XCTAssertEqual(y, 26.0);
+    }
+
 }

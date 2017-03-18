@@ -84,4 +84,24 @@ class AppUtils: NSObject {
         return NSRect(x: x, y: y, width: width, height: height)
     }
 
+    // Scale an integer value to a CGFloat inset with margin
+    class func ScaleIntToCGFloat(_ i: Int, domain: (Int, Int), range: (CGFloat, CGFloat), margin: CGFloat) -> CGFloat {
+        var f: CGFloat = 0.0
+
+        let i_min = domain.0
+        let i_max = domain.1
+        let f_min = range.0
+        let f_max = range.1
+
+        let d_domain = CGFloat(i_max - i_min)
+        let d_range = f_max - f_min
+        
+        if (d_domain > 0 && d_range > 0) {
+            let d_i = CGFloat(i - i_min)
+            f = (d_range - 2 * margin) * d_i / d_domain + f_min + margin
+        }
+
+        return f
+    }
+
 }
