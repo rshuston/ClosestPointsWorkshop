@@ -306,7 +306,7 @@ class DivideAndConquerSolverTests: XCTestCase {
 
         XCTAssertNotNil(result)
         if result != nil {
-            XCTAssertEqualWithAccuracy(result!.distanceSquared, 0.0625, accuracy: 0.00001)
+            XCTAssertEqual(result!.distanceSquared, 0.0625, accuracy: 0.00001)
             XCTAssertEqual(result!.pointPair.0, points[3])
             XCTAssertEqual(result!.pointPair.1, points[4])
         }
@@ -363,7 +363,7 @@ class DivideAndConquerSolverTests: XCTestCase {
 
         XCTAssertNotNil(result)
         if result != nil {
-            XCTAssertEqualWithAccuracy(result!.distanceSquared, 1.04, accuracy: 0.00001)
+            XCTAssertEqual(result!.distanceSquared, 1.04, accuracy: 0.00001)
             XCTAssertEqual(result!.pointPair.0, points[3])
             XCTAssertEqual(result!.pointPair.1, points[5])
         }

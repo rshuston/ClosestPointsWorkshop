@@ -36,78 +36,85 @@ class ClosestPointsUITests: XCTestCase {
     }
 
     func test_CanSetNumberOfPointsToFive() {
-        let window = XCUIApplication().windows["Window"]
+        let window = app.windows["Window"]
+
         let numberOfPointsBox = window.comboBoxes.element(boundBy: 0)
         let numberOfPointsScrollView = window.scrollViews.otherElements.children(matching: .textField)
 
         numberOfPointsBox.children(matching: .button).element.click()
         numberOfPointsScrollView.element(boundBy: 0).click()
 
-        XCUIApplication().windows["Window"].buttons["Generate"].click()
+        window/*@START_MENU_TOKEN@*/.buttons["Generate"]/*[[".groups.buttons[\"Generate\"]",".buttons[\"Generate\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.click()
 
         let pointsValue = numberOfPointsBox.value as! String
         XCTAssertEqual(pointsValue, "5")
     }
 
     func test_CanSetNumberOfPointsToOneHundred() {
-        let window = XCUIApplication().windows["Window"]
+        let window = app.windows["Window"]
+
         let numberOfPointsBox = window.comboBoxes.element(boundBy: 0)
         let numberOfPointsScrollView = window.scrollViews.otherElements.children(matching: .textField)
 
         numberOfPointsBox.children(matching: .button).element.click()
         numberOfPointsScrollView.element(boundBy: 4).click()
 
-        XCUIApplication().windows["Window"].buttons["Generate"].click()
+        window/*@START_MENU_TOKEN@*/.buttons["Generate"]/*[[".groups.buttons[\"Generate\"]",".buttons[\"Generate\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.click()
 
         let pointsValue = numberOfPointsBox.value as! String
         XCTAssertEqual(pointsValue, "100")
     }
 
     func test_CanSetNumberOfPointsToOneThousand() {
-        let window = XCUIApplication().windows["Window"]
+        let window = app.windows["Window"]
+
+        // Bah! Stupid Apple keeps changing how we do UI testing. Make up yer minds!
+        
+        window/*@START_MENU_TOKEN@*/.comboBoxes/*[[".groups.comboBoxes",".comboBoxes"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.children(matching: .button).element.click()
+        window/*@START_MENU_TOKEN@*/.scrollBars/*[[".groups",".comboBoxes",".scrollViews.scrollBars",".scrollBars"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/.children(matching: .button).element(boundBy: 0).click()
+        window/*@START_MENU_TOKEN@*/.scrollViews/*[[".groups",".comboBoxes.scrollViews",".scrollViews"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.otherElements.children(matching: .textField).element(boundBy: 7).click()
+
+        window/*@START_MENU_TOKEN@*/.buttons["Generate"]/*[[".groups.buttons[\"Generate\"]",".buttons[\"Generate\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.click()
+
         let numberOfPointsBox = window.comboBoxes.element(boundBy: 0)
-        let numberOfPointsScrollView = window.scrollViews.otherElements.children(matching: .textField)
-
-        numberOfPointsBox.children(matching: .button).element.click()
-        numberOfPointsScrollView.element(boundBy: 7).click()
-
-        XCUIApplication().windows["Window"].buttons["Generate"].click()
-
         let pointsValue = numberOfPointsBox.value as! String
         XCTAssertEqual(pointsValue, "1000")
     }
 
     func test_CanSetNumberOfPointsTo1234() {
-        let window = XCUIApplication().windows["Window"]
+        let window = app.windows["Window"]
+
         let numberOfPointsBox = window.comboBoxes.element(boundBy: 0)
 
         window.groups.containing(.button, identifier:"Generate").children(matching: .comboBox).element.typeText("1234\r")
 
-        XCUIApplication().windows["Window"].buttons["Generate"].click()
+        window/*@START_MENU_TOKEN@*/.buttons["Generate"]/*[[".groups.buttons[\"Generate\"]",".buttons[\"Generate\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.click()
 
         let pointsValue = numberOfPointsBox.value as! String
         XCTAssertEqual(pointsValue, "1234")
     }
 
     func test_LimitsNumberOfPointsToNoLessThan2() {
-        let window = XCUIApplication().windows["Window"]
+        let window = app.windows["Window"]
+
         let numberOfPointsBox = window.comboBoxes.element(boundBy: 0)
 
         window.groups.containing(.button, identifier:"Generate").children(matching: .comboBox).element.typeText("1\r")
 
-        XCUIApplication().windows["Window"].buttons["Generate"].click()
+        window/*@START_MENU_TOKEN@*/.buttons["Generate"]/*[[".groups.buttons[\"Generate\"]",".buttons[\"Generate\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.click()
 
         let pointsValue = numberOfPointsBox.value as! String
         XCTAssertEqual(pointsValue, "2")
     }
 
     func test_LimitsNumberOfPointsToNoMoreThan10000() {
-        let window = XCUIApplication().windows["Window"]
+        let window = app.windows["Window"]
+
         let numberOfPointsBox = window.comboBoxes.element(boundBy: 0)
 
         window.groups.containing(.button, identifier:"Generate").children(matching: .comboBox).element.typeText("12345\r")
 
-        XCUIApplication().windows["Window"].buttons["Generate"].click()
+        window/*@START_MENU_TOKEN@*/.buttons["Generate"]/*[[".groups.buttons[\"Generate\"]",".buttons[\"Generate\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.click()
 
         let pointsValue = numberOfPointsBox.value as! String
         XCTAssertEqual(pointsValue, "10000")
