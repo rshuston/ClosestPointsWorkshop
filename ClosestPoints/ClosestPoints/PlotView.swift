@@ -31,7 +31,7 @@ class PlotView: NSView {
 
         // Black border
         NSColor.black.set()
-        NSFrameRect(bounds)
+        bounds.frame()
 
         // Point data
         if let pds = pointDataSource {

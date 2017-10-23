@@ -1,6 +1,6 @@
 # ClosestPointsWorkshop
 
-This project explores four solution types to the "Closest Points" problem. The project is written in Swift for macOS, and it is composed as an Xcode 8 workspace and is configured to target El Capitan or higher. The ClosestPoints project implements the Closest Points application solution. The workspace also contains two frameworks projects to facilitate mocking in Swift: PDLTestBench and PDLToolBox. PDLTestBench defines "player" and "recorder" classes that enable one, respectively, to define expected events and behaviors for mock classes, and to capture actual events and behaviors for mock and spy classes. PDLToolBox defines some basic data structure classes that are used by PDLTestBench.
+This project explores four solution types to the "Closest Points" problem. The project is written in Swift (originally 3.0 but migrated to 4.0) for macOS. It is composed as an Xcode 9 workspace and is configured to target El Capitan or higher. The ClosestPoints project implements the Closest Points application solution. The workspace also contains two frameworks projects to facilitate mocking in Swift: PDLTestBench and PDLToolBox. PDLTestBench defines "player" and "recorder" classes that enable one, respectively, to define expected events and behaviors for mock classes, and to capture actual events and behaviors for mock and spy classes. PDLToolBox defines some basic data structure classes that are used by PDLTestBench.
 
 Four "Closest Points" solution types are explored:
 

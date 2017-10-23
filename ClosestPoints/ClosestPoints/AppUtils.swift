@@ -14,7 +14,7 @@ class AppUtils: NSObject {
 
     // Return reference to the application delegate
     class func appDelegate() -> AppDelegate? {
-        return NSApplication.shared().delegate as? AppDelegate
+        return NSApplication.shared.delegate as? AppDelegate
     }
 
     // Return reference to the application's main view controller
@@ -25,7 +25,7 @@ class AppUtils: NSObject {
         // nil.
         //
         // (Eewww! A comment! How untrendy! The horror of it all! Whaah! What can it mean?)
-        return NSApplication.shared().mainWindow?.contentViewController as? ViewController
+        return NSApplication.shared.mainWindow?.contentViewController as? ViewController
     }
 
     // Convert an NSPoint from main window coordinates to local view coordinates
