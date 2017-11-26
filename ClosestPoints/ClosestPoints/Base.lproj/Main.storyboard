@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -89,6 +89,9 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="800" height="600"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <connections>
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="9G3-f2-kN1"/>
+                        </connections>
                     </window>
                     <connections>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
@@ -128,7 +131,7 @@
                                                 <action selector="pushButtonSelected:" target="XfG-lQ-9wD" id="mmD-8E-AHx"/>
                                             </connections>
                                         </button>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2LD-NY-p96">
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2LD-NY-p96">
                                             <rect key="frame" x="18" y="105" width="114" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Number of Points:" id="4dS-Rb-OES">
                                                 <font key="font" metaFont="system"/>
@@ -136,7 +139,7 @@
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hcy-CO-1MJ">
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hcy-CO-1MJ">
                                             <rect key="frame" x="19" y="63" width="113" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Point Distribution:" id="aB2-5G-Zy6">
                                                 <font key="font" metaFont="system"/>
@@ -164,7 +167,7 @@
                                                 <action selector="popUpButtonSelected:" target="XfG-lQ-9wD" id="K51-tv-qzp"/>
                                             </connections>
                                         </popUpButton>
-                                        <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lH0-7J-0tc">
+                                        <comboBox verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lH0-7J-0tc">
                                             <rect key="frame" x="138" y="100" width="221" height="26"/>
                                             <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="8y1-XD-ig8">
                                                 <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="b5W-NJ-1Mi"/>
@@ -196,6 +199,7 @@
                                         <constraint firstItem="hcy-CO-1MJ" firstAttribute="top" secondItem="2LD-NY-p96" secondAttribute="bottom" constant="25" id="9aF-ap-V2h"/>
                                         <constraint firstAttribute="trailing" secondItem="JkB-LA-9DJ" secondAttribute="trailing" constant="20" id="OT6-Yj-cUj"/>
                                         <constraint firstItem="lH0-7J-0tc" firstAttribute="top" secondItem="OHs-yZ-aGD" secondAttribute="top" constant="20" id="RMz-pb-RFb"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ji7-Mf-roE" secondAttribute="trailing" constant="20" symbolic="YES" id="TcY-Rv-Mf9"/>
                                         <constraint firstItem="JkB-LA-9DJ" firstAttribute="leading" secondItem="hcy-CO-1MJ" secondAttribute="trailing" constant="8" id="WWA-dp-rqd"/>
                                         <constraint firstItem="ji7-Mf-roE" firstAttribute="leading" secondItem="OHs-yZ-aGD" secondAttribute="leading" constant="20" id="Xdh-sJ-hCc"/>
                                         <constraint firstItem="hcy-CO-1MJ" firstAttribute="leading" secondItem="OHs-yZ-aGD" secondAttribute="leading" constant="21" id="bz1-g2-Mbc"/>
@@ -224,7 +228,7 @@
                                                 <action selector="pushButtonSelected:" target="XfG-lQ-9wD" id="zFf-oj-xsm"/>
                                             </connections>
                                         </button>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1MV-RT-3bs">
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1MV-RT-3bs">
                                             <rect key="frame" x="18" y="106" width="91" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Solution Type:" id="lwr-BU-boJ">
                                                 <font key="font" metaFont="system"/>
@@ -232,7 +236,7 @@
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Lj-oi-cP1">
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Lj-oi-cP1">
                                             <rect key="frame" x="18" y="63" width="91" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Solver Option:" id="KXb-ye-DKO">
                                                 <font key="font" metaFont="system"/>
@@ -298,7 +302,7 @@
                                                 <action selector="popUpButtonSelected:" target="XfG-lQ-9wD" id="jJY-ca-UdD"/>
                                             </connections>
                                         </popUpButton>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vdh-g8-mro">
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vdh-g8-mro">
                                             <rect key="frame" x="18" y="22" width="91" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Solution Time:" id="1Xz-QT-cbO">
                                                 <font key="font" metaFont="system"/>
@@ -306,8 +310,8 @@
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7s-1K-PtG">
-                                            <rect key="frame" x="115" y="22" width="108" height="17"/>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h7s-1K-PtG">
+                                            <rect key="frame" x="113" y="22" width="108" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="1000000.000 ms" id="cTC-bc-o93">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -320,14 +324,17 @@
                                         <constraint firstItem="1MV-RT-3bs" firstAttribute="top" secondItem="hJA-Cw-d7e" secondAttribute="top" constant="21" id="5vN-4b-RcO"/>
                                         <constraint firstItem="1MV-RT-3bs" firstAttribute="leading" secondItem="hJA-Cw-d7e" secondAttribute="leading" constant="20" id="6it-MQ-SMi"/>
                                         <constraint firstAttribute="trailing" secondItem="z4F-Fd-lSn" secondAttribute="trailing" constant="20" id="APS-dt-aIL"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="h7s-1K-PtG" secondAttribute="trailing" constant="20" symbolic="YES" id="BHj-AZ-oL6"/>
                                         <constraint firstItem="9Lj-oi-cP1" firstAttribute="top" secondItem="1MV-RT-3bs" secondAttribute="bottom" constant="26" id="BR5-9A-l3q"/>
                                         <constraint firstAttribute="trailing" secondItem="m1m-Ki-6qY" secondAttribute="trailing" constant="20" id="KrL-Dp-r6V"/>
+                                        <constraint firstItem="Vdh-g8-mro" firstAttribute="leading" secondItem="hJA-Cw-d7e" secondAttribute="leading" constant="20" id="M4p-nY-eSM"/>
                                         <constraint firstItem="9Lj-oi-cP1" firstAttribute="leading" secondItem="hJA-Cw-d7e" secondAttribute="leading" constant="20" id="N7g-pZ-TZA"/>
                                         <constraint firstItem="z4F-Fd-lSn" firstAttribute="leading" secondItem="9Lj-oi-cP1" secondAttribute="trailing" constant="8" id="NxX-HD-4R1"/>
                                         <constraint firstItem="Vdh-g8-mro" firstAttribute="trailing" secondItem="9Lj-oi-cP1" secondAttribute="trailing" id="RLa-4X-ZRW"/>
                                         <constraint firstItem="z4F-Fd-lSn" firstAttribute="top" secondItem="m1m-Ki-6qY" secondAttribute="bottom" constant="21" id="SAy-50-ANl"/>
-                                        <constraint firstItem="h7s-1K-PtG" firstAttribute="leading" secondItem="Vdh-g8-mro" secondAttribute="trailing" constant="10" id="bf7-A5-jUn"/>
+                                        <constraint firstItem="h7s-1K-PtG" firstAttribute="leading" secondItem="Vdh-g8-mro" secondAttribute="trailing" constant="8" symbolic="YES" id="bf7-A5-jUn"/>
                                         <constraint firstAttribute="trailing" secondItem="GKx-ce-V8e" secondAttribute="trailing" constant="20" id="cbj-Wq-rx8"/>
+                                        <constraint firstItem="GKx-ce-V8e" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hJA-Cw-d7e" secondAttribute="leading" constant="20" symbolic="YES" id="eH9-he-cka"/>
                                         <constraint firstItem="GKx-ce-V8e" firstAttribute="centerY" secondItem="Vdh-g8-mro" secondAttribute="centerY" id="jHo-bj-CDe"/>
                                         <constraint firstItem="m1m-Ki-6qY" firstAttribute="leading" secondItem="1MV-RT-3bs" secondAttribute="trailing" constant="8" id="mgC-JP-UXD"/>
                                         <constraint firstAttribute="bottom" secondItem="GKx-ce-V8e" secondAttribute="bottom" constant="20" id="sVK-yn-cQc"/>
