@@ -30,7 +30,19 @@ class DivideAndConquerSolver: Solver {
 
         var keepRunning = true
         var closestDistanceSquared: CGFloat = CGFloat.greatestFiniteMagnitude
-        
+
+        func monitorPointRegion(points: [Point], pointRegion: PointRegion) -> Bool {
+            // Note: This is a bit messy, but it's for monitoring so I don't care right now
+            let loPoint = points[pointRegion.lower]
+            let hiPoint = points[pointRegion.upper]
+            checkRect = AppUtils.NSRectFromNSPoints(loPoint.getAsNSPoint(), hiPoint.getAsNSPoint())
+            checkRect?.origin.y = 0
+            checkRect?.size.height = 512 // Not exact, but it's big enough and it'll clip anyway
+            checkPoints = (loPoint, hiPoint)
+            keepRunning = monitor?(checkRect, checkPoints, closestPoints) ?? true
+            return keepRunning
+        }
+
         func monitorPointPair(pointPair: (Point, Point), distanceSquared: CGFloat) -> Bool {
             checkRect = AppUtils.NSRectFromNSPoints(pointPair.0.getAsNSPoint(), pointPair.1.getAsNSPoint())
             checkPoints = pointPair
@@ -186,43 +198,46 @@ class DivideAndConquerSolver: Solver {
                                             withCarryOn: SolutionCarryOn) -> PointPairAndDistance? {
         var result: PointPairAndDistance? = nil
 
-        let count = pointRegion.upper - pointRegion.lower + 1
-        if count <= maxSimpleRegionSize {
-            result = findClosestPointsInSimpleRegion(points: points, pointRegion: pointRegion, withCarryOn: withCarryOn)
-        } else {
-            let regions = dividePointRegion(region: pointRegion)
-            let lowerRegion = regions.0
-            let upperRegion = regions.1
+        let keepRunning = withCarryOn.monitorPointRegion(points: points, pointRegion: pointRegion)
+        if keepRunning {
+            let count = pointRegion.upper - pointRegion.lower + 1
+            if count <= maxSimpleRegionSize {
+                result = findClosestPointsInSimpleRegion(points: points, pointRegion: pointRegion, withCarryOn: withCarryOn)
+            } else {
+                let regions = dividePointRegion(region: pointRegion)
+                let lowerRegion = regions.0
+                let upperRegion = regions.1
 
-            if withCarryOn.keepRunning {
-                if let lowerResult = findClosestPointsInRegion(points: points, pointRegion: lowerRegion, withCarryOn: withCarryOn) {
-                    result = lowerResult
+                if withCarryOn.keepRunning {
+                    if let lowerResult = findClosestPointsInRegion(points: points, pointRegion: lowerRegion, withCarryOn: withCarryOn) {
+                        result = lowerResult
+                    }
                 }
-            }
-            if withCarryOn.keepRunning {
-                if let upperResult = findClosestPointsInRegion(points: points, pointRegion: upperRegion, withCarryOn: withCarryOn) {
-                    if result == nil {
-                        result = upperResult
-                    } else {
-                        if upperResult.distanceSquared < result!.distanceSquared {
+                if withCarryOn.keepRunning {
+                    if let upperResult = findClosestPointsInRegion(points: points, pointRegion: upperRegion, withCarryOn: withCarryOn) {
+                        if result == nil {
                             result = upperResult
+                        } else {
+                            if upperResult.distanceSquared < result!.distanceSquared {
+                                result = upperResult
+                            }
                         }
                     }
                 }
-            }
-            if withCarryOn.keepRunning {
-                let axisDistance: CGFloat
-                if result != nil {
-                    axisDistance = sqrt(result!.distanceSquared)
-                } else {
-                    axisDistance = CGFloat.greatestFiniteMagnitude
-                }
-                if let middleResult = findClosestPointInBorderRegions(points: points, lowerRegion: lowerRegion, upperRegion: upperRegion, withinAxisDistance: axisDistance, withCarryOn: withCarryOn) {
-                    if result == nil {
-                        result = middleResult
+                if withCarryOn.keepRunning {
+                    let axisDistance: CGFloat
+                    if result != nil {
+                        axisDistance = sqrt(result!.distanceSquared)
                     } else {
-                        if middleResult.distanceSquared < result!.distanceSquared {
+                        axisDistance = CGFloat.greatestFiniteMagnitude
+                    }
+                    if let middleResult = findClosestPointInBorderRegions(points: points, lowerRegion: lowerRegion, upperRegion: upperRegion, withinAxisDistance: axisDistance, withCarryOn: withCarryOn) {
+                        if result == nil {
                             result = middleResult
+                        } else {
+                            if middleResult.distanceSquared < result!.distanceSquared {
+                                result = middleResult
+                            }
                         }
                     }
                 }
