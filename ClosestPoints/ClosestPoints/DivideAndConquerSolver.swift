@@ -38,7 +38,7 @@ class DivideAndConquerSolver: Solver {
             checkRect = AppUtils.NSRectFromNSPoints(loPoint.getAsNSPoint(), hiPoint.getAsNSPoint())
             checkRect?.origin.y = 0
             checkRect?.size.height = 512 // Not exact, but it's big enough and it'll clip anyway
-            checkPoints = (loPoint, hiPoint)
+            // Don't need to set checkPoints because we're doing the region
             keepRunning = monitor?(checkRect, checkPoints, closestPoints) ?? true
             return keepRunning
         }
