@@ -37,7 +37,7 @@ class PlotView: NSView {
         if let pds = pointDataSource {
             // Search rectangle
             if pds.searchRect != nil {
-                NSColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.25).set()
+                NSColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0).set()
                 NSBezierPath(rect: NSInsetRect(pds.searchRect!, -pointRadius, -pointRadius)).fill()
             }
 
