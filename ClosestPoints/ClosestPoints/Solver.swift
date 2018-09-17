@@ -28,7 +28,7 @@ class Solver: NSObject {
 
     func findClosestPoints(points: [Point],
                            monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?,
-                           completion: (((Point, Point)?) -> Void)) {
+                           completion: (((Point, Point)?) -> Void)?) {
     }
 
 }

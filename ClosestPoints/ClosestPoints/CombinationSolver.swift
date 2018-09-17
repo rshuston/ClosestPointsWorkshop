@@ -12,7 +12,7 @@ class CombinationSolver: Solver {
 
     override func findClosestPoints(points: [Point],
                                     monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?,
-                                    completion: (((Point, Point)?) -> Void)) {
+                                    completion: (((Point, Point)?) -> Void)?) {
         var closestPoints: (Point, Point)?
         var keepRunning = true
 
@@ -50,7 +50,7 @@ class CombinationSolver: Solver {
             }
         }
 
-        completion(closestPoints)
+        completion?(closestPoints)
     }
 
 }

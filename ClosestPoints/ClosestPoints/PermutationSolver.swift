@@ -12,7 +12,7 @@ class PermutationSolver: Solver {
 
     override func findClosestPoints(points: [Point],
                                     monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?,
-                                    completion: (((Point, Point)?) -> Void)) {
+                                    completion: (((Point, Point)?) -> Void)?) {
         var closestPoints: (Point, Point)?
         var keepRunning = true
 
@@ -49,7 +49,7 @@ class PermutationSolver: Solver {
             }
         }
 
-        completion(closestPoints)
+        completion?(closestPoints)
     }
 
 }

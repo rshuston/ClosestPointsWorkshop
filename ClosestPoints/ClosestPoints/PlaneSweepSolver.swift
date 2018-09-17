@@ -23,7 +23,7 @@ class PlaneSweepSolver: Solver {
 
     override func findClosestPoints(points: [Point],
                                     monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?,
-                                    completion: (((Point, Point)?) -> Void)) {
+                                    completion: (((Point, Point)?) -> Void)?) {
         let solutionCarryOn = SolutionCarryOn()
         
         var keepRunning = true
@@ -64,7 +64,7 @@ class PlaneSweepSolver: Solver {
             }
         }
 
-        completion(solutionCarryOn.closestPoints)
+        completion?(solutionCarryOn.closestPoints)
     }
 
     internal func squaredEuclideanDistance(_ pt1: Point, _ pt2: Point) -> CGFloat {

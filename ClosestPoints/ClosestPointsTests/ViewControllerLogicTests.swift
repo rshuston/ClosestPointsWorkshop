@@ -782,7 +782,7 @@ class ViewControllerLogicTests: XCTestCase {
 
         override func findClosestPoints(points: [Point],
                                         monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?,
-                                        completion: (((Point, Point)?) -> Void)) {
+                                        completion: (((Point, Point)?) -> Void)?) {
             recorder.recordCallFor("findClosestPoints (P)", params: [points, monitor, completion])
             completionExpectation?.fulfill()
         }
@@ -797,7 +797,7 @@ class ViewControllerLogicTests: XCTestCase {
 
         override func findClosestPoints(points: [Point],
                                         monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?,
-                                        completion: (((Point, Point)?) -> Void)) {
+                                        completion: (((Point, Point)?) -> Void)?) {
             recorder.recordCallFor("findClosestPoints (C)", params: [points, monitor, completion])
             completionExpectation?.fulfill()
         }
@@ -812,7 +812,7 @@ class ViewControllerLogicTests: XCTestCase {
 
         override func findClosestPoints(points: [Point],
                                         monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?,
-                                        completion: (((Point, Point)?) -> Void)) {
+                                        completion: (((Point, Point)?) -> Void)?) {
             recorder.recordCallFor("findClosestPoints (PS)", params: [points, monitor, completion])
             completionExpectation?.fulfill()
         }
@@ -827,7 +827,7 @@ class ViewControllerLogicTests: XCTestCase {
 
         override func findClosestPoints(points: [Point],
                                         monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?,
-                                        completion: (((Point, Point)?) -> Void)) {
+                                        completion: (((Point, Point)?) -> Void)?) {
             recorder.recordCallFor("findClosestPoints (DQ)", params: [points, monitor, completion])
             completionExpectation?.fulfill()
         }

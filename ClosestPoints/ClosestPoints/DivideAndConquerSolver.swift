@@ -67,7 +67,7 @@ class DivideAndConquerSolver: Solver {
     
     override func findClosestPoints(points: [Point],
                                     monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?,
-                                    completion: (((Point, Point)?) -> Void)) {
+                                    completion: (((Point, Point)?) -> Void)?) {
         var closestPoints: (Point, Point)?
 
         let solutionCarryOn = SolutionCarryOn()
@@ -86,7 +86,7 @@ class DivideAndConquerSolver: Solver {
             }
         }
 
-        completion(closestPoints)
+        completion?(closestPoints)
     }
 
     internal func squaredEuclideanDistance(_ pt1: Point, _ pt2: Point) -> CGFloat {
