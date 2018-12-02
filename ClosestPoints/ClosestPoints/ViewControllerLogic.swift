@@ -17,7 +17,7 @@ import Cocoa
 class ViewControllerLogic: NSObject {
 
     let minNumberOfPoints = 2
-    let maxNumberOfPoints = 10000
+    let maxNumberOfPoints = 100000
 
     var pointCollection: PointCollection! = PointCollection()
     var definitionManager: DefinitionManager! = DefinitionManager()
@@ -53,7 +53,7 @@ class ViewControllerLogic: NSObject {
         configureControlButtonForSolvingState()
     }
 
-    func constrainNumberOfPointsBox() {
+    func updateNumberOfPointsBox() {
         var value = hostViewController.getNumberOfPoints()
         if value < minNumberOfPoints {
             value = minNumberOfPoints
@@ -61,8 +61,8 @@ class ViewControllerLogic: NSObject {
         if value > maxNumberOfPoints {
             value = maxNumberOfPoints
         }
-        hostViewController.setNumberOfPoints(numberOfPoints: value)
         definitionManager.numberOfPoints = value
+        hostViewController.setNumberOfPoints(numberOfPoints: value)
     }
 
     internal func deactivateGenerateButton() {

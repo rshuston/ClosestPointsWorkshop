@@ -104,26 +104,28 @@ class ViewControllerLogicTests: XCTestCase {
         XCTAssertEqual(mockViewController.o_ControlButton.title, "Solve")
     }
 
-    // MARK: - constrainNumberOfPointsBox()
+    // MARK: - updateNumberOfPointsBox()
 
-    func test_constrainNumberOfPointsBox_ClampsLowValuesToMinimum() {
+    func test_updateNumberOfPointsBox_ClampsLowValuesToMinimum() {
         mockViewController.player.setReturnValue(subject.minNumberOfPoints - 1, forName: "getNumberOfPoints")
 
-        subject.constrainNumberOfPointsBox()
+        subject.updateNumberOfPointsBox()
 
         XCTAssertEqual(mockViewController.recorder.getCallCountFor("setNumberOfPoints"), 1)
         let callRecord = mockViewController.recorder.getCallRecordFor("setNumberOfPoints")
         XCTAssertEqual(callRecord?[0] as? Int, subject.minNumberOfPoints)
+        XCTAssertEqual(subject.definitionManager.numberOfPoints, subject.minNumberOfPoints)
     }
 
-    func test_constrainNumberOfPointsBox_ClampsHighValuesToMaximum() {
+    func test_updateNumberOfPointsBox_ClampsHighValuesToMaximum() {
         mockViewController.player.setReturnValue(subject.maxNumberOfPoints + 1, forName: "getNumberOfPoints")
 
-        subject.constrainNumberOfPointsBox()
+        subject.updateNumberOfPointsBox()
 
         XCTAssertEqual(mockViewController.recorder.getCallCountFor("setNumberOfPoints"), 1)
         let callRecord = mockViewController.recorder.getCallRecordFor("setNumberOfPoints")
         XCTAssertEqual(callRecord?[0] as? Int, subject.maxNumberOfPoints)
+        XCTAssertEqual(subject.definitionManager.numberOfPoints, subject.maxNumberOfPoints)
     }
 
     // MARK: - deactivateGenerateButton()

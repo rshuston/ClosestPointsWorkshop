@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate {
+class ViewController: NSViewController, NSComboBoxDelegate {
 
     // MARK: - IBOutlet references
 
@@ -57,7 +57,10 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
     }
 
     func setNumberOfPoints(numberOfPoints: Int) {
-        o_NumberOfPointsBox.integerValue = numberOfPoints
+        // Note: We're using String() so that we don't need to rely on a NumberFormatter.
+        // The NumberFormatter will get rid of the comma in 10,000 but it washes out the
+        // NSComboBox list in Mojave for some reason.
+        o_NumberOfPointsBox.stringValue = String(numberOfPoints)
     }
 
     func getPlotViewSize() -> CGSize {
@@ -111,7 +114,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
         // Called when value is directly entered into combo box
         if let comboBox: NSComboBox = (obj.object as? NSComboBox) {
             if comboBox == o_NumberOfPointsBox {
-                viewControllerLogic.constrainNumberOfPointsBox()
+                viewControllerLogic.updateNumberOfPointsBox()
                 viewControllerLogic.activateGenerateButton()
                 viewControllerLogic.activateControlButtonIfCanSolve()
             }
@@ -128,7 +131,7 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSComboBoxDelegate 
                     let index = o_NumberOfPointsBox.indexOfSelectedItem
                     o_NumberOfPointsBox.deselectItem(at: index)
                     if let value = Int(stringValue) {
-                        o_NumberOfPointsBox.integerValue = value
+                        setNumberOfPoints(numberOfPoints: value)
                         viewControllerLogic.definitionManager.numberOfPoints = value
                         viewControllerLogic.activateGenerateButton()
                         viewControllerLogic.activateControlButtonIfCanSolve()
