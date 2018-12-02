@@ -107,17 +107,17 @@ class ClosestPointsUITests: XCTestCase {
         XCTAssertEqual(pointsValue, "2")
     }
 
-    func test_LimitsNumberOfPointsToNoMoreThan10000() {
+    func test_LimitsNumberOfPointsToNoMoreThan100000() {
         let window = app.windows["Window"]
 
         let numberOfPointsBox = window.comboBoxes.element(boundBy: 0)
 
-        window.groups.containing(.button, identifier:"Generate").children(matching: .comboBox).element.typeText("12345\r")
+        window.groups.containing(.button, identifier:"Generate").children(matching: .comboBox).element.typeText("123456\r")
 
         window/*@START_MENU_TOKEN@*/.buttons["Generate"]/*[[".groups.buttons[\"Generate\"]",".buttons[\"Generate\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.click()
 
         let pointsValue = numberOfPointsBox.value as! String
-        XCTAssertEqual(pointsValue, "10000")
+        XCTAssertEqual(pointsValue, "100000")
     }
 
 }
