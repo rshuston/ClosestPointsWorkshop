@@ -23,9 +23,10 @@ class ViewController: NSViewController, NSComboBoxDelegate {
     // Control
     @IBOutlet weak var o_SolutionTypePopUp: NSPopUpButton!
     @IBOutlet weak var o_SolverOptionPopUp: NSPopUpButton!
-    @IBOutlet weak var o_ControlButton: NSButton!
     @IBOutlet weak var o_SolutionTimeLabel: NSTextField!
-
+    @IBOutlet weak var o_ControlButton: NSButton!
+    @IBOutlet weak var o_ProgressIndicator: NSProgressIndicator!
+    
     // MARK: - Composition
 
     var viewControllerLogic: ViewControllerLogic!
@@ -83,6 +84,16 @@ class ViewController: NSViewController, NSComboBoxDelegate {
 
     func setControlButtonTitle(title: String) {
         o_ControlButton.title = title
+    }
+
+    func setProgressIndicatorState(enabled: Bool) {
+        if enabled {
+            o_ProgressIndicator.isHidden = false
+            o_ProgressIndicator.startAnimation(nil)
+        } else {
+            o_ProgressIndicator.stopAnimation(nil)
+            o_ProgressIndicator.isHidden = true
+        }
     }
 
     func updateSolutionTime(time_ms: Float) {

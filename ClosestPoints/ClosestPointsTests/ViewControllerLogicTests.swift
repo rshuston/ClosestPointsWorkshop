@@ -180,26 +180,42 @@ class ViewControllerLogicTests: XCTestCase {
         XCTAssertEqual(callRecord?[0] as? Bool, true)
     }
 
-    // MARK: - configureControlButtonForSolvingState()
+    // MARK: - configureControlAndProgressForSolvingState()
 
-    func test_configureControlButtonForSolvingState_SetsTitleToSolveIfNotSolving() {
+    func test_configureControlAndProgressForSolvingState_SetsTitleToSolveIfNotSolving() {
         subject.solutionEngine.solving = false
 
-        subject.configureControlButtonForSolvingState()
+        subject.configureControlAndProgressForSolvingState()
 
         XCTAssertEqual(mockViewController.recorder.getCallCountFor("setControlButtonTitle"), 1)
         let callRecord = mockViewController.recorder.getCallRecordFor("setControlButtonTitle")
         XCTAssertEqual(callRecord?[0] as? String, "Solve")
     }
 
-    func test_configureControlButtonForSolvingState_SetsTitleToCancelIfSolving() {
+    func test_configureControlAndProgressForSolvingState_SetsTitleToCancelIfSolving() {
         subject.solutionEngine.solving = true
 
-        subject.configureControlButtonForSolvingState()
+        subject.configureControlAndProgressForSolvingState()
 
         XCTAssertEqual(mockViewController.recorder.getCallCountFor("setControlButtonTitle"), 1)
         let callRecord = mockViewController.recorder.getCallRecordFor("setControlButtonTitle")
         XCTAssertEqual(callRecord?[0] as? String, "Cancel")
+    }
+
+    func test_configureControlAndProgressForSolvingState_HidesProgressIndicatorIfNotSolving() {
+        subject.solutionEngine.solving = false
+
+        subject.configureControlAndProgressForSolvingState()
+
+        XCTAssertTrue(mockViewController.o_ProgressIndicator.isHidden)
+    }
+
+    func test_configureControlAndProgressForSolvingState_ShowsProgressIndicatorIfSolving() {
+        subject.solutionEngine.solving = true
+
+        subject.configureControlAndProgressForSolvingState()
+
+        XCTAssertFalse(mockViewController.o_ProgressIndicator.isHidden)
     }
 
     // MARK: - requestPlotViewRedraw()
@@ -676,8 +692,9 @@ class ViewControllerLogicTests: XCTestCase {
 
         var my_SolutionTypePopUp: NSPopUpButton!
         var my_SolverOptionPopUp: NSPopUpButton!
-        var my_ControlButton: NSButton!
         var my_SolutionTimeLabel: NSTextField!
+        var my_ControlButton: NSButton!
+        var my_ProgressIndicator: NSProgressIndicator!
 
         func createMockOutlets() {
             my_PlotView = PlotView(frame: NSRect(x: 0, y: 0, width: 100, height: 100))
@@ -686,8 +703,9 @@ class ViewControllerLogicTests: XCTestCase {
             my_GenerateButton = NSButton()
             my_SolutionTypePopUp = NSPopUpButton()
             my_SolverOptionPopUp = NSPopUpButton()
-            my_ControlButton = NSButton()
             my_SolutionTimeLabel = NSTextField()
+            my_ControlButton = NSButton()
+            my_ProgressIndicator = NSProgressIndicator()
 
             o_PlotView = my_PlotView
 
@@ -696,8 +714,9 @@ class ViewControllerLogicTests: XCTestCase {
             o_GenerateButton = my_GenerateButton
             o_SolutionTypePopUp = my_SolutionTypePopUp
             o_SolverOptionPopUp = my_SolverOptionPopUp
-            o_ControlButton = my_ControlButton
             o_SolutionTimeLabel = my_SolutionTimeLabel
+            o_ControlButton = my_ControlButton
+            o_ProgressIndicator = my_ProgressIndicator
         }
 
         override func setGenerateButtonEnableState(enabled: Bool) {

@@ -317,6 +317,13 @@
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
+                                        <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Kew-bb-kwg">
+                                            <rect key="frame" x="257" y="22" width="16" height="16"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="16" id="6pe-Jv-Nrn"/>
+                                                <constraint firstAttribute="height" constant="16" id="9gg-xY-umA"/>
+                                            </constraints>
+                                        </progressIndicator>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="m1m-Ki-6qY" firstAttribute="top" secondItem="hJA-Cw-d7e" secondAttribute="top" constant="20" id="4cd-74-OMn"/>
@@ -331,8 +338,10 @@
                                         <constraint firstItem="z4F-Fd-lSn" firstAttribute="leading" secondItem="9Lj-oi-cP1" secondAttribute="trailing" constant="8" id="NxX-HD-4R1"/>
                                         <constraint firstItem="Vdh-g8-mro" firstAttribute="trailing" secondItem="9Lj-oi-cP1" secondAttribute="trailing" id="RLa-4X-ZRW"/>
                                         <constraint firstItem="z4F-Fd-lSn" firstAttribute="top" secondItem="m1m-Ki-6qY" secondAttribute="bottom" constant="21" id="SAy-50-ANl"/>
+                                        <constraint firstAttribute="bottom" secondItem="Kew-bb-kwg" secondAttribute="bottom" constant="22" id="adW-2M-7WS"/>
                                         <constraint firstItem="h7s-1K-PtG" firstAttribute="leading" secondItem="Vdh-g8-mro" secondAttribute="trailing" constant="8" symbolic="YES" id="bf7-A5-jUn"/>
                                         <constraint firstAttribute="trailing" secondItem="GKx-ce-V8e" secondAttribute="trailing" constant="20" id="cbj-Wq-rx8"/>
+                                        <constraint firstItem="GKx-ce-V8e" firstAttribute="leading" secondItem="Kew-bb-kwg" secondAttribute="trailing" constant="8" id="duy-kn-jAa"/>
                                         <constraint firstItem="GKx-ce-V8e" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hJA-Cw-d7e" secondAttribute="leading" constant="20" symbolic="YES" id="eH9-he-cka"/>
                                         <constraint firstItem="GKx-ce-V8e" firstAttribute="centerY" secondItem="Vdh-g8-mro" secondAttribute="centerY" id="jHo-bj-CDe"/>
                                         <constraint firstItem="m1m-Ki-6qY" firstAttribute="leading" secondItem="1MV-RT-3bs" secondAttribute="trailing" constant="8" id="mgC-JP-UXD"/>
@@ -365,6 +374,7 @@
                         <outlet property="o_NumberOfPointsBox" destination="lH0-7J-0tc" id="HDq-Ly-gBP"/>
                         <outlet property="o_PlotView" destination="ZrH-qu-neQ" id="bh2-Uo-y3E"/>
                         <outlet property="o_PointDistributionPopUp" destination="JkB-LA-9DJ" id="oAT-PN-6vj"/>
+                        <outlet property="o_ProgressIndicator" destination="Kew-bb-kwg" id="SqF-Uz-cOR"/>
                         <outlet property="o_SolutionTimeLabel" destination="h7s-1K-PtG" id="sh6-fM-VN8"/>
                         <outlet property="o_SolutionTypePopUp" destination="m1m-Ki-6qY" id="SAm-OG-mfz"/>
                         <outlet property="o_SolverOptionPopUp" destination="z4F-Fd-lSn" id="7OZ-WN-Ouf"/>

@@ -50,7 +50,7 @@ class ViewControllerLogic: NSObject {
 
         activateGenerateButton()
         activateControlButtonIfCanSolve()
-        configureControlButtonForSolvingState()
+        configureControlAndProgressForSolvingState()
     }
 
     func updateNumberOfPointsBox() {
@@ -81,8 +81,9 @@ class ViewControllerLogic: NSObject {
         hostViewController.setControlButtonEnableState(enabled: pointCollection.points.count >= 2)
     }
 
-    internal func configureControlButtonForSolvingState() {
+    internal func configureControlAndProgressForSolvingState() {
         hostViewController.setControlButtonTitle(title: solutionEngine.solving ? "Cancel" : "Solve")
+        hostViewController.setProgressIndicatorState(enabled: solutionEngine.solving)
     }
 
     internal func requestPlotViewRedraw() {
@@ -153,7 +154,7 @@ class ViewControllerLogic: NSObject {
 
             pointCollection.clearAllDataExceptForPoints()
 
-            configureControlButtonForSolvingState()
+            configureControlAndProgressForSolvingState()
 
             let monitor: ((NSRect?, (Point, Point)?, (Point, Point)?) -> Bool)?
             switch controlManager.solverOption {
@@ -228,7 +229,7 @@ class ViewControllerLogic: NSObject {
         DispatchQueue.main.async {
             self.requestPlotViewRedraw()
             self.solutionEngine.solving = false
-            self.configureControlButtonForSolvingState()
+            self.configureControlAndProgressForSolvingState()
             self.activateGenerateButton()
             self.activateControlButtonIfCanSolve()
             self.hostViewController.updateSolutionTime(time_ms: self.lastSolutionTime_ms)
