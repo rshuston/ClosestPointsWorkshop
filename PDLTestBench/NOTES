@@ -1,11 +1,16 @@
-Testing Types:
+A Test Double is the generic term for any kind of pretend object used in place of a real object for testing purposes.
 
-• Fakes have working implementations, but usually take some shortcuts which makes them not suitable for production. A good example of this is an in-memory database in lieu of an actual file-based or server-based database.
+Test Double Types:
 
-• Mocks are pre-programmed with expectations which form a specification of the calls they are expected to receive. They can throw an exception if they receive a call they don’t expect and are checked during verification to ensure they got all the calls they were expecting.
+• Dummy objects are passed around but never actually used. Usually they are just used to fill parameter lists.
+• Fake objects actually have working implementations, but usually take some shortcut which makes them not suitable for production (an in memory database is a good example).
+• Stubs provide canned answers to calls made during the test, usually not responding at all to anything outside what's programmed in for the test.
+• Spies are stubs that also record some information based on how they were called. One form of this might be an email service that records how many messages it was sent.
+• Mocks are objects pre-programmed with expectations which form a specification of the calls they are expected to receive.
 
-• Spies record information based on how they were called and/or used. One form of this might be an email service that records how many messages it was sent.
+Of these kinds of doubles, only mocks insist upon behavior verification. The other doubles can, and usually do, use state verification. Mocks actually do behave like other doubles during the exercise phase, as they need to make the SUT believe it's talking with its real collaborators - but mocks differ in the setup and the verification phases.
 
-• Stubs provide canned answers to calls made during the test, usually not responding at all to anything outside what’s programmed in for the test.
+Many times, our mocks also have spy abilities, allowing for a unified interface that both records and responds. All of these types fundamentally rely on having function interfaces that have the ability to "play" predefined function responses, and "record" function invocations and responses.
 
-Many times, mocks also have spy abilities, allowing for a unified interface that both records and responds. All of these types fundamentally rely on having function interfaces that have the ability to "play" predefined function responses, and "record" function invocations and responses.
+Reference:
+https://martinfowler.com/articles/mocksArentStubs.html
