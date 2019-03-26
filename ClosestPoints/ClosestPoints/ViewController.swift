@@ -121,7 +121,7 @@ class ViewController: NSViewController, NSComboBoxDelegate {
 
     // MARK: - NSObject notification methods
 
-    override func controlTextDidEndEditing(_ obj: Notification) {
+    func controlTextDidEndEditing(_ obj: Notification) {
         // Called when value is directly entered into combo box
         if let comboBox: NSComboBox = (obj.object as? NSComboBox) {
             if comboBox == o_NumberOfPointsBox {
