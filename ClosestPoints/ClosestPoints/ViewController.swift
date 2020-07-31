@@ -40,6 +40,11 @@ class ViewController: NSViewController, NSComboBoxDelegate {
         viewControllerLogic.viewDidLoad()
     }
 
+    override func viewDidDisappear() {
+        viewControllerLogic.hostViewController = nil
+        viewControllerLogic = nil
+    }
+
     // NOTE: Do we still need to keep this?
     override var representedObject: Any? {
         didSet {
